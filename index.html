@@ -3,23 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZMPLabs | AI Security & Privacy Suite</title>
+    <title>ZMPLabs - Security by Invisibility</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
-        body { background-color: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .logo-box { border: 2px solid #00ff00; padding: 40px; box-shadow: 0 0 20px #00ff00; margin-bottom: 20px; }
-        h1 { font-size: 2.5rem; margin: 0; text-transform: uppercase; letter-spacing: 5px; }
-        p { color: #fff; font-size: 1.2rem; margin: 20px 0; }
-        .btn { color: #000; background-color: #00ff00; text-decoration: none; padding: 15px 30px; font-weight: bold; border-radius: 5px; transition: 0.3s; }
-        .btn:hover { background-color: #fff; box-shadow: 0 0 30px #fff; }
+        body { font-family: 'Inter', sans-serif; background-color: #0b0c10; color: #ffffff; }
+        .navbar-custom { background-color: rgba(11, 12, 16, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
+        .nav-link-custom { color: #aaaaaa !important; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 15px !important; transition: color 0.2s ease; }
+        .nav-link-custom:hover, .nav-link-custom.active { color: #0dcaf0 !important; }
+        
+        .hero-section-premium { 
+            position: relative; 
+            min-height: 75vh; 
+            display: flex; 
+            align-items: center; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            overflow: hidden;
+            background-color: #0b0c10;
+        }
+        .bg-video-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            opacity: 0.12;
+            object-fit: cover;
+        }
+        .hero-overlay-dark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(11,12,16,0.2) 0%, #0b0c10 100%);
+            z-index: 2;
+        }
+        .hero-content-layer { position: relative; z-index: 3; }
+        
+        .tagline-accent { font-size: 1.1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+        .hero-title-bold { font-size: 3.5rem; font-weight: 700; letter-spacing: -1px; }
+        .btn-outline-premium { color: #ffffff; border: 1px solid #ffffff; background: transparent; padding: 12px 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; }
+        .btn-outline-premium:hover { background: #0dcaf0; color: #0b0c10; border-color: #0dcaf0; }
+        
+        .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .text-high-contrast { color: #c5cbd3 !important; }
+        .roadmap-list-item { background: transparent !important; color: #ffffff !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; padding: 20px 0; }
     </style>
 </head>
 <body>
-    <div class="logo-box">
-        <h1>ZMPLabs</h1>
-    </div>
-    <p>FIND. VISUALIZE. NEUTRALIZE.</p>
-    <p style="font-size: 0.9rem; color: #888;">Air-Gapped AI Security & Privacy Suite</p>
-    <br>
-    <a href="https://zmplabsfounder.gumroad.com/" class="btn">ACCESS STEALTH SUITE</a>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white fs-4" href="index.html">ZMPLabs</a>
+            <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon navbar-dark"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="education.html">Education</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="workflows.html">Workflows</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="newsletter.html">Newsletter</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="partners.html">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="sponsors.html">Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="d-none d-lg-flex align-items-center text-white gap-4">
+                <i class="bi bi-search"></i><i class="bi bi-shield-lock"></i><i class="bi bi-person"></i>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section-premium">
+        <video autoplay loop muted playsinline class="bg-video-element">
+            <source src="images/matrix-loop.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay-dark"></div>
+        
+        <div class="container hero-content-layer">
+            <div class="row">
+                <div class="col-lg-7 text-start">
+                    <p class="tagline-accent mb-3">Security by Invisibility</p> <h1 class="hero-title-bold text-uppercase mb-4">The ZMPLabs<br>Stealth Suite</h1> <p class="text-high-contrast fs-5 mb-5">We build air-gapped, local-first security tools for the modern DevSecOps workflow.</p> <a href="workflows.html" class="btn btn-outline-premium">Explore Workflows</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container py-5 my-5">
+        <div class="text-center mb-5">
+            <p class="tagline-accent mb-2">Operational Architecture</p>
+            <h2 class="fw-semibold text-uppercase">Find. Visualize. Neutralize.</h2> </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="product-card-premium h-100">
+                    <h4 class="text-info">ZMP Auditor (Free Edition)</h4> <p class="text-high-contrast small mb-0">Identify leaks instantly with zero cloud exposure.</p> </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-card-premium h-100">
+                    <h4 class="text-info">SecureLog Viewer (Lite)</h4> <p class="text-high-contrast small mb-0">Visualize risks in high contrast with local-first rendering.</p> </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-card-premium h-100">
+                    <h4 class="text-info">Scrubber Pro v6.0</h4> <p class="text-high-contrast small mb-0">Neutralize threats using synthetic scrambling.</p> </div>
+            </div>
+        </div>
+        
+        <div class="row text-center mt-5 pt-4 justify-content-center g-3">
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">ZERO-METADATA</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">LOCAL-FIRST</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">AIR-GAPPED</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO TELEMETRY</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO EXTERNAL CALLS</span></div> </div>
+
+        <div class="text-center mt-5">
+            <p class="fs-5 text-high-contrast"><strong>Our tools run 100% locally.</strong> Your proprietary code and sensitive data never touch the cloud.</p> </div>
+    </section>
+
+    <section class="container py-5 my-5 border-top border-secondary border-opacity-10">
+        <div class="text-center mb-5">
+            <p class="tagline-accent mb-2">Operational Protocol</p>
+            <h2 class="fw-semibold text-uppercase">The Safe Data Pipeline</h2>
+        </div>
+        <div class="row text-center g-4 justify-content-center">
+            <div class="col-md-3">
+                <h5 class="text-info fw-bold">01. AUDIT</h5>
+                <p class="text-high-contrast small">Run ZMP Auditor to identify leaks.</p> </div>
+            <div class="col-md-3">
+                <h5 class="text-info fw-bold">02. MAP</h5>
+                <p class="text-high-contrast small">Visualize risks using SecureLog Viewer.</p> </div>
+            <div class="col-md-3">
+                <h5 class="text-info fw-bold">03. SANITIZE</h5>
+                <p class="text-high-contrast small">Scramble sensitive data with Scrubber Pro.</p> </div>
+            <div class="col-md-3">
+                <h5 class="text-info fw-bold">04. DEPLOY</h5>
+                <p class="text-high-contrast small">Export sanitized logs for safe use.</p> </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5 bg-black bg-opacity-40 border-top border-bottom border-secondary border-opacity-10">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h2 class="fw-semibold text-uppercase mb-3">2026 Transparency Roadmap</h2> <p class="text-high-contrast small">Review our development cycles and core open-source software release commitments.</p>
+                </div>
+                <div class="col-lg-8">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
+                            <span><strong>Q1 (Completed):</strong> Release of ZMP Heuristic Engine + Auditor Core.</span> <span class="badge bg-success rounded-0 text-dark px-3 py-2">DONE</span>
+                        </div>
+                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
+                            <span><strong>Q2 (Current):</strong> Stealth Suite launch + open-source Auditor Core.</span> <span class="badge bg-warning rounded-0 text-dark px-3 py-2">LIVE</span>
+                        </div>
+                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
+                            <span><strong>Q3 (Development):</strong> QR-Secure Scanner + ZMP File Organizer.</span> <span class="badge bg-secondary rounded-0 text-white px-3 py-2">BUILDING</span>
+                        </div>
+                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
+                            <span><strong>Q4 (Expansion):</strong> Honey-token decoys + MacOS native builds.</span> <span class="badge bg-dark rounded-0 text-secondary border border-secondary px-3 py-2">PIPELINE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-start mb-5 mb-lg-0 pe-lg-5">
+                    <p class="tagline-accent mb-2">Espresso Shot Briefings</p> <h3 class="fw-semibold text-uppercase mb-4">Inside the Executive Intelligence Archive</h3>
+                    <ul class="list-unstyled text-high-contrast small">
+                        <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> Your High-Performers Have Already Outrun Your AI Policy</li> <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> Espresso Shot: Did a New “AI Button” Quietly Pop Up?</li> <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> The Shadow AI Lockdown Guide & The Cost of "Free" AI</li> </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="fw-semibold text-uppercase mb-3">Subscribe for Updates</h3> <div class="input-group mb-3">
+                        <input type="email" placeholder="Your email address" class="form-control rounded-0 bg-transparent text-white border-secondary px-4 py-3 text-center"> </div>
+                    <button class="btn btn-outline-premium w-100 py-3">Subscribe</button> </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
