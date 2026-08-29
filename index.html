@@ -10,9 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b0c10; color: #ffffff; }
@@ -22,7 +19,7 @@
         
         .hero-section-premium { 
             position: relative; 
-            min-height: 75vh; 
+            min-height: 80vh; 
             display: flex; 
             align-items: center; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
@@ -48,19 +45,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(11,12,16,0.2) 0%, #0b0c10 100%);
+            background: linear-gradient(180deg, rgba(11,12,16,0.3) 0%, #0b0c10 100%);
             z-index: 2;
         }
         .hero-content-layer { position: relative; z-index: 3; }
         
         .tagline-accent { font-size: 1.1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
-        .hero-title-bold { font-size: 3.5rem; font-weight: 700; letter-spacing: -1px; }
-        .btn-outline-premium { color: #ffffff; border: 1px solid #ffffff; background: transparent; padding: 12px 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; }
+        .hero-title-bold { font-size: 3.2rem; font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
+        .btn-outline-premium { color: #ffffff; border: 1px solid #ffffff; background: transparent; padding: 12px 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; text-decoration: none; display: inline-block; }
         .btn-outline-premium:hover { background: #0dcaf0; color: #0b0c10; border-color: #0dcaf0; }
+        .btn-cyan-solid { background: #0dcaf0; color: #0b0c10; border: 1px solid #0dcaf0; padding: 14px 30px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; text-decoration: none; }
+        .btn-cyan-solid:hover { background: #00b8e6; border-color: #00b8e6; color: #0b0c10; }
         
         .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .text-high-contrast { color: #c5cbd3 !important; }
-        .roadmap-list-item { background: transparent !important; color: #ffffff !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; padding: 20px 0; }
+        
+        /* Accordion Dark Theme for FAQ Section */
+        .accordion-dark .accordion-item { background-color: #12141c; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 15px; border-radius: 0; }
+        .accordion-dark .accordion-button { background-color: #12141c; color: #ffffff; font-weight: 600; font-size: 1.1rem; padding: 22px 25px; border-radius: 0 !important; box-shadow: none; }
+        .accordion-dark .accordion-button:not(.collapsed) { background-color: #181b26; color: #0dcaf0; border-bottom: 1px solid rgba(13, 202, 240, 0.2); }
+        .accordion-dark .accordion-button::after { filter: invert(1); }
+        .accordion-dark .accordion-body { background-color: #12141c; color: #c5cbd3; font-size: 0.95rem; line-height: 1.7; padding: 25px; }
+
+        .link-subtle-teal { color: #0dcaf0; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; font-family: monospace; }
+        .link-subtle-teal:hover { text-decoration: underline; color: #ffffff; }
     </style>
 </head>
 <body>
@@ -74,15 +82,13 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link nav-link-custom active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="education.html">Education</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="workflows.html">Workflows</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="newsletter.html">Newsletter</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="d-none d-lg-flex align-items-center text-white gap-4">
-                <i class="bi bi-search"></i><i class="bi bi-shield-lock"></i><i class="bi bi-person"></i>
+                <i class="bi bi-shield-lock text-info fs-5"></i>
             </div>
         </div>
     </nav>
@@ -93,103 +99,197 @@
         </video>
         <div class="hero-overlay-dark"></div>
         
-        <div class="container hero-content-layer">
-            <div class="row">
-                <div class="col-lg-7 text-start">
-                    <p class="tagline-accent mb-3">Security by Invisibility</p> <h1 class="hero-title-bold text-uppercase mb-4">The ZMPLabs<br>Stealth Suite</h1> <p class="text-high-contrast fs-5 mb-5">We build air-gapped, local-first security tools for the modern DevSecOps workflow.</p> <a href="workflows.html" class="btn btn-outline-premium">Explore Workflows</a>
+        <div class="container hero-content-layer py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-start">
+                    <p class="tagline-accent mb-3">Security by Invisibility</p>
+                    <h1 class="hero-title-bold text-uppercase mb-4">
+                        Want to use AI on client data, but terrified of risking your <span class="text-info">license?</span>
+                    </h1>
+                    <p class="text-high-contrast fs-5 mb-4">
+                        Stop pasting PHI, legal files, or sensitive financial records into public cloud AI tools. Process client data safely with fully private, local AI built for regulated industries.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 align-items-sm-center">
+                        <a href="#contact" class="btn btn-cyan-solid">Request Install Slot <i class="bi bi-arrow-up-right ms-2"></i></a>
+                        <a href="whitepaper.pdf" target="_blank" class="link-subtle-teal ms-sm-3">[ Read Technical Whitepaper ]</a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="container py-5 my-5">
+    <section id="about" class="container py-5 my-5">
         <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Operational Architecture</p>
-            <h2 class="fw-semibold text-uppercase">Find. Visualize. Neutralize.</h2> </div>
+            <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
+            <h2 class="fw-semibold text-uppercase">Build a Compliance-Proof Workflow</h2>
+        </div>
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="product-card-premium h-100">
-                    <h4 class="text-info">ZMP Auditor (Free Edition)</h4> <p class="text-high-contrast small mb-0">Identify leaks instantly with zero cloud exposure.</p> </div>
+                    <div class="mb-3"><i class="bi bi-cpu text-info fs-3"></i></div>
+                    <h4 class="text-info mb-3">Unblock Insights</h4>
+                    <p class="text-high-contrast small mb-0">Safely process PHI, financial data, and legal discovery locally without fear of third-party cloud data breaches.</p>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="product-card-premium h-100">
-                    <h4 class="text-info">SecureLog Viewer (Lite)</h4> <p class="text-high-contrast small mb-0">Visualize risks in high contrast with local-first rendering.</p> </div>
+                    <div class="mb-3"><i class="bi bi-shield-check text-info fs-3"></i></div>
+                    <h4 class="text-info mb-3">Zero Cloud Exposure</h4>
+                    <p class="text-high-contrast small mb-0">Keep 100% of your clients' data on your machine. Your work never touches external servers or public APIs.</p>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="product-card-premium h-100">
-                    <h4 class="text-info">Scrubber Pro v6.0</h4> <p class="text-high-contrast small mb-0">Neutralize threats using synthetic scrambling.</p> </div>
+                    <div class="mb-3"><i class="bi bi-file-earmark-lock text-info fs-3"></i></div>
+                    <h4 class="text-info mb-3">Absolute Compliance</h4>
+                    <p class="text-high-contrast small mb-0">Leverage local LLMs while strictly adhering to HIPAA, SEC Reg S-P, ABA Model Rule 1.6, and client NDAs.</p>
+                </div>
             </div>
         </div>
         
         <div class="row text-center mt-5 pt-4 justify-content-center g-3">
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">ZERO-METADATA</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">LOCAL-FIRST</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">AIR-GAPPED</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO TELEMETRY</span></div> <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO EXTERNAL CALLS</span></div> </div>
-
-        <div class="text-center mt-5">
-            <p class="fs-5 text-high-contrast"><strong>Our tools run 100% locally.</strong> Your proprietary code and sensitive data never touch the cloud.</p> </div>
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">ZERO-METADATA</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">LOCAL-FIRST</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">AIR-GAPPED</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO TELEMETRY</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO EXTERNAL CALLS</span></div>
+        </div>
     </section>
 
     <section class="container py-5 my-5 border-top border-secondary border-opacity-10">
         <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Operational Protocol</p>
-            <h2 class="fw-semibold text-uppercase">The Safe Data Pipeline</h2>
+            <p class="tagline-accent mb-2">Guided Setup Protocol</p>
+            <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Deployment</h2>
         </div>
         <div class="row text-center g-4 justify-content-center">
             <div class="col-md-3">
-                <h5 class="text-info fw-bold">01. AUDIT</h5>
-                <p class="text-high-contrast small">Run ZMP Auditor to identify leaks.</p> </div>
+                <h5 class="text-info fw-bold">01. ASSESS</h5>
+                <p class="text-high-contrast small">We audit your current vulnerable cloud AI workflows and compliance parameters.</p>
+            </div>
             <div class="col-md-3">
-                <h5 class="text-info fw-bold">02. MAP</h5>
-                <p class="text-high-contrast small">Visualize risks using SecureLog Viewer.</p> </div>
+                <h5 class="text-info fw-bold">02. INSTALL</h5>
+                <p class="text-high-contrast small">Containerized setup of open-weight models running natively on your hardware.</p>
+            </div>
             <div class="col-md-3">
-                <h5 class="text-info fw-bold">03. SANITIZE</h5>
-                <p class="text-high-contrast small">Scramble sensitive data with Scrubber Pro.</p> </div>
+                <h5 class="text-info fw-bold">03. VERIFY</h5>
+                <p class="text-high-contrast small">We test memory-only execution to confirm zero outbound network telemetry.</p>
+            </div>
             <div class="col-md-3">
-                <h5 class="text-info fw-bold">04. DEPLOY</h5>
-                <p class="text-high-contrast small">Export sanitized logs for safe use.</p> </div>
+                <h5 class="text-info fw-bold">04. HANDOFF</h5>
+                <p class="text-high-contrast small">Receive a custom IT & Compliance Governance Policy ready for internal review.</p>
+            </div>
         </div>
     </section>
 
-    <section class="py-5 my-5 bg-black bg-opacity-40 border-top border-bottom border-secondary border-opacity-10">
+    <section id="faq" class="py-5 my-5 bg-black bg-opacity-40 border-top border-bottom border-secondary border-opacity-10">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h2 class="fw-semibold text-uppercase mb-3">2026 Transparency Roadmap</h2> <p class="text-high-contrast small">Review our development cycles and core open-source software release commitments.</p>
-                </div>
-                <div class="col-lg-8">
-                    <div class="list-group list-group-flush">
-                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
-                            <span><strong>Q1 (Completed):</strong> Release of ZMP Heuristic Engine + Auditor Core.</span> <span class="badge bg-success rounded-0 text-dark px-3 py-2">DONE</span>
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Objection Buster</p>
+                <h2 class="fw-semibold text-uppercase">Common Questions Addressed</h2>
+                <p class="text-high-contrast small">Everything you and your IT department need to know about local AI installation.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion accordion-dark" id="faqAccordion">
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1-heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                    Does my laptop or desktop need expensive custom GPUs to run this?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faq1-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No. Modern executive hardware—such as Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or modern Windows laptops with dedicated GPUs—can run high-performance local open-weight models effortlessly. During our setup call, we benchmark and configure the exact model size optimized for your specific hardware.
+                                </div>
+                            </div>
                         </div>
-                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
-                            <span><strong>Q2 (Current):</strong> Stealth Suite launch + open-source Auditor Core.</span> <span class="badge bg-warning rounded-0 text-dark px-3 py-2">LIVE</span>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    How can I prove to my IT or Compliance Officer that data never leaves my machine?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our deployment operates under the Zero-Metadata Protocol (ZMP). Prompts and outputs are processed strictly in system RAM and destroyed upon session closure, completely bypassing persistent disk logging. You can literally disconnect your Wi-Fi or run the tool in an air-gapped environment to verify that no outbound API calls or telemetry exist.
+                                </div>
+                            </div>
                         </div>
-                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
-                            <span><strong>Q3 (Development):</strong> QR-Secure Scanner + ZMP File Organizer.</span> <span class="badge bg-secondary rounded-0 text-white px-3 py-2">BUILDING</span>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    Do I or my team need coding or technical expertise to operate this?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Zero technical expertise is required. We handle the entire containerized installation on a guided 30-minute setup call. You are left with an intuitive desktop interface that feels as familiar and simple to use as ChatGPT or Claude.
+                                </div>
+                            </div>
                         </div>
-                        <div class="list-group-item roadmap-list-item d-flex justify-content-between align-items-center">
-                            <span><strong>Q4 (Expansion):</strong> Honey-token decoys + MacOS native builds.</span> <span class="badge bg-dark rounded-0 text-secondary border border-secondary px-3 py-2">PIPELINE</span>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                    Why not just use ChatGPT Team or Enterprise cloud subscriptions?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Even "Enterprise" cloud tiers route your unredacted client files through remote third-party servers, retaining metadata for operational monitoring. For legal, medical, or financial professionals, remote transmission alone breaks strict data residency rules, HIPAA regulations, and attorney-client privilege. Local execution eliminates third-party transmission entirely.
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                    What happens after installation? Included compliance governance policy.
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Alongside local software deployment, we hand off a pre-formulated AI Governance & Security Policy document tailored to your industry. This provides your compliance officer or managing partner with immediate documentation proving your firm's adherence to regulatory standards.
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 my-5">
+    <section id="contact" class="py-5 my-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-start mb-5 mb-lg-0 pe-lg-5">
-                    <p class="tagline-accent mb-2">Espresso Shot Briefings</p> <h3 class="fw-semibold text-uppercase mb-4">Inside the Executive Intelligence Archive</h3>
-                    <ul class="list-unstyled text-high-contrast small">
-                        <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> Your High-Performers Have Already Outrun Your AI Policy</li> <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> Espresso Shot: Did a New “AI Button” Quietly Pop Up?</li> <li class="mb-3"><i class="bi bi-arrow-right text-info me-2"></i> The Shadow AI Lockdown Guide & The Cost of "Free" AI</li> </ul>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="tagline-accent mb-2">Private Setup Slot</p>
+                    <h3 class="fw-semibold text-uppercase mb-3">Request Your 30-Minute Install Call</h3>
+                    <p class="text-high-contrast small mb-4">Your email. Nothing else. We will reach out to schedule your local container deployment.</p>
+                    
+                    <form class="row g-2 justify-content-center max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Request received. We will be in touch shortly.');">
+                        <div class="col-md-8">
+                            <input type="email" required placeholder="you@company.com" class="form-control rounded-0 bg-transparent text-white border-secondary px-4 py-3 text-center">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-cyan-solid w-100 h-100 py-3">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-lg-6">
-                    <h3 class="fw-semibold text-uppercase mb-3">Subscribe for Updates</h3> <div class="input-group mb-3">
-                        <input type="email" placeholder="Your email address" class="form-control rounded-0 bg-transparent text-white border-secondary px-4 py-3 text-center"> </div>
-                    <button class="btn btn-outline-premium w-100 py-3">Subscribe</button> </div>
             </div>
         </div>
     </section>
+
+    <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small">
+        <div class="container">
+            <p class="mb-0">ZMPLabs &copy; 2026 | Zero Metadata. Your data stays local. | <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a></p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
