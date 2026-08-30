@@ -47,80 +47,50 @@
             transition: width 0.1s ease;
         }
         
-        /* PARALLAX BACKGROUND SYSTEM */
-        .parallax-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Each section gets a fixed background layer */
-        .parallax-background {
+        /* CONTINUOUS BACKGROUND VIDEO */
+        .video-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.25;
-            z-index: -1;
-            transition: opacity 0.5s ease;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
         }
         
-        .parallax-background.layer-1 {
-            /* Executive boardroom at night - cityscape visible through windows */
-            background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop');
-        }
-        
-        .parallax-background.layer-2 {
-            /* Dark tech abstract - network/circuit pattern */
-            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
-        }
-        
-        .parallax-background.layer-3 {
-            /* Modern minimalist workspace */
-            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop');
-        }
-        
-        .parallax-background.layer-4 {
-            /* Dark geometric/tech pattern */
-            background-image: url('https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2070&auto=format&fit=crop');
-        }
-        
-        /* Overlay gradient for better readability */
-        .parallax-background::before {
-            content: '';
+        .video-background video {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.18;
+        }
+        
+        /* Dark overlay on top of video */
+        .video-overlay {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(5, 5, 8, 0.85) 0%, rgba(7, 10, 14, 0.92) 100%);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 5, 8, 0.92) 0%, rgba(7, 10, 14, 0.88) 100%);
+            z-index: -1;
         }
         
-        /* Content sections that scroll OVER the fixed backgrounds */
+        /* Content sections - semi-transparent so video shows through */
         .content-section {
             position: relative;
             z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
             padding: 100px 40px;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(3px);
         }
         
-        /* Section backgrounds - solid/black with slight transparency */
-        .section-bg-dark {
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.95) 50%, rgba(5, 5, 5, 0.98) 100%);
-        }
-        
-        .section-bg-gradient {
-            background: linear-gradient(135deg, rgba(11, 12, 16, 0.92) 0%, rgba(7, 10, 14, 0.88) 100%);
-            backdrop-filter: blur(5px);
-        }
-        
-        .section-bg-solid {
-            background-color: #050505;
+        .content-section.transparent-bg {
+            background: transparent;
         }
         
         /* Fade-in animation for content */
@@ -137,10 +107,10 @@
         
         /* Floating Panels (for card grids) */
         .floating-panel {
-            background-color: rgba(11, 12, 16, 0.85);
+            background-color: rgba(11, 12, 16, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(13, 202, 240, 0.15);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(13, 202, 240, 0.03);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             padding: 60px 40px;
             border-radius: 4px;
             margin: 0 auto;
@@ -148,7 +118,7 @@
         
         /* Navbar */
         .navbar-custom { 
-            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.98) 0%, rgba(11, 12, 16, 0.85) 100%);
+            background: rgba(11, 12, 16, 0.95);
             border-bottom: 1px solid rgba(13, 202, 240, 0.1); 
             padding: 20px 0;
             transition: all 0.3s ease;
@@ -176,17 +146,16 @@
         /* Split Screen Hero */
         .hero-split { 
             display: flex; 
-            min-height: 100vh; 
+            min-height: 90vh; 
             background-color: transparent; 
+            padding: 40px;
         }
         
         .hero-left { 
             flex: 1; 
             display: flex; 
             align-items: center; 
-            padding: 5% 8%; 
-            background: transparent;
-            z-index: 2; 
+            padding: 5% 4%; 
         }
         
         .hero-right { 
@@ -217,12 +186,12 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background: linear-gradient(90deg, rgba(5, 5, 5, 0.95) 0%, transparent 100%); 
+            background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, transparent 100%); 
         }
         
         /* Typography & Buttons */
         .tagline-accent { 
-            font-size: 1rem; 
+            font-size: 0.9rem; 
             color: #0dcaf0; 
             letter-spacing: 3px; 
             text-transform: uppercase; 
@@ -230,14 +199,14 @@
         }
         
         .hero-title-bold { 
-            font-size: 2.8rem; 
+            font-size: 2.5rem; 
             font-weight: 700; 
             letter-spacing: -1px; 
             line-height: 1.15; 
         }
         
         @media (min-width: 992px) {
-            .hero-title-bold { font-size: 3.5rem; }
+            .hero-title-bold { font-size: 3.2rem; }
         }
         
         .text-high-contrast { 
@@ -295,7 +264,7 @@
         
         /* Product Cards */
         .product-card-premium { 
-            background: rgba(18, 20, 28, 0.6); 
+            background: rgba(18, 20, 28, 0.5); 
             border: 1px solid rgba(13,202,240,0.1); 
             padding: 40px 30px; 
             border-radius: 0; 
@@ -311,7 +280,7 @@
         
         /* Accordion Dark Theme */
         .accordion-dark .accordion-item { 
-            background-color: rgba(18, 20, 28, 0.6); 
+            background-color: rgba(18, 20, 28, 0.5); 
             border: 1px solid rgba(13, 202, 240, 0.1); 
             margin-bottom: 15px; 
             border-radius: 0; 
@@ -346,51 +315,24 @@
             padding: 25px; 
         }
 
-        /* Modal Styling */
-        .modal-content { 
-            background-color: #12141c; 
-            border: 1px solid rgba(13,202,240,0.4); 
-            border-radius: 0; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        
-        .modal-header { 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-        }
-        
-        .btn-close-custom { 
-            filter: invert(1); 
-            opacity: 0.5;
-        }
-        
-        .form-control {
-            border-radius: 0;
-        }
-        
-        .form-control:focus {
-            border-color: #0dcaf0;
-            box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
-            background-color: #0b0c10;
-        }
-        
         /* Footer */
         footer {
             border-top: 1px solid rgba(13, 202, 240, 0.1);
-            background: #050505;
+            background: rgba(5, 5, 5, 0.95);
         }
         
         footer a:hover {
             color: #0dcaf0 !important;
         }
         
-        /* Right-side diagnostic modal styles */
+        /* RIGHT-SIDE DIAGNOSTIC MODAL - OPTIMIZED FOR ALL QUESTIONS VISIBLE */
         .diagnostic-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
@@ -408,7 +350,7 @@
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             height: 100vh;
             background: rgba(11, 12, 16, 0.98);
             backdrop-filter: blur(15px);
@@ -417,7 +359,9 @@
             z-index: 9999;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            padding: 30px;
+            padding: 40px 35px;
+            display: flex;
+            flex-direction: column;
         }
         
         .diagnostic-modal.active {
@@ -426,12 +370,12 @@
         
         .diagnostic-close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             background: transparent;
             border: none;
             color: #aaaaaa;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             padding: 5px;
             line-height: 1;
@@ -443,41 +387,83 @@
             color: #0dcaf0;
         }
         
-        .diagnostic-progress-bar {
-            width: 100%;
+        .diagnostic-content {
+            flex: 1;
+            padding-right: 10px;
+        }
+        
+        /* Progress bar at top */
+        .diagnostic-header {
+            margin-bottom: 35px;
+        }
+        
+        .diagnostic-progress-line {
+            width: 60px;
             height: 3px;
-            background: rgba(13, 202, 240, 0.2);
-            margin-bottom: 30px;
-        }
-        
-        .diagnostic-progress-fill {
-            height: 100%;
             background: #0dcaf0;
-            transition: width 0.3s ease;
+            margin-bottom: 20px;
         }
         
-        .diagnostic-step-counter {
-            font-size: 0.85rem;
-            color: #0dcaf0;
+        .diagnostic-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .diagnostic-subtitle {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Question Cards - all visible at once */
+        .diagnostic-question-card {
+            background: rgba(18, 20, 28, 0.5);
+            border: 1px solid rgba(13, 202, 240, 0.15);
+            padding: 25px;
             margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .diagnostic-question-card:hover {
+            border-color: rgba(13, 202, 240, 0.25);
+        }
+        
+        .question-number {
+            color: #0dcaf0;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .question-text {
             font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .rating-options-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
         }
         
         .rating-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 18px;
-            background: rgba(18, 20, 28, 0.7);
+            padding: 18px 8px;
+            background: rgba(11, 12, 16, 0.7);
             border: 2px solid rgba(13, 202, 240, 0.2);
             cursor: pointer;
             transition: all 0.2s ease;
-            min-width: 55px;
             text-align: center;
+            min-height: 70px;
         }
         
         .rating-option:hover {
             border-color: #0dcaf0;
+            background: rgba(13, 202, 240, 0.1);
         }
         
         .rating-option.selected {
@@ -489,24 +475,24 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #0dcaf0;
+            margin-bottom: 4px;
         }
         
         .rating-label {
-            font-size: 0.7rem;
-            color: #aaaaaa;
-            margin-top: 6px;
+            font-size: 0.65rem;
+            color: #888888;
+            line-height: 1.2;
         }
         
-        .rating-options-row {
-            display: flex;
-            gap: 8px;
-            justify-content: space-between;
-            margin-top: 12px;
+        .analyze-btn-container {
+            margin-top: 25px;
+            text-align: right;
         }
         
+        /* Results View */
         .risk-badge {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 10px 20px;
             font-weight: 700;
             letter-spacing: 1px;
             margin-bottom: 20px;
@@ -531,18 +517,22 @@
         }
         
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
+            .hero-split {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .hero-right {
+                display: none !important;
+            }
+            
+            .hero-left {
+                padding: 40px 20px;
+            }
+            
             .diagnostic-modal {
                 max-width: 100%;
-            }
-            
-            .rating-options-row {
-                flex-wrap: wrap;
-            }
-            
-            .rating-option {
-                min-width: 18%;
-                flex: 1;
             }
             
             .hero-title-bold {
@@ -559,13 +549,14 @@
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <!-- PARALLAX BACKGROUNDS (Fixed Layers) -->
-    <div class="parallax-wrapper">
-        <div class="parallax-background layer-1" aria-hidden="true"></div>
-        <div class="parallax-background layer-2" aria-hidden="true"></div>
-        <div class="parallax-background layer-3" aria-hidden="true"></div>
-        <div class="parallax-background layer-4" aria-hidden="true"></div>
+    <!-- CONTINUOUS BACKGROUND VIDEO -->
+    <div class="video-background" aria-hidden="true">
+        <video autoplay loop muted playsinline>
+            <!-- Professional office/corporate setting video -->
+            <source src="https://videos.pexels.com/video-files/3196324/3196324-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
     </div>
+    <div class="video-overlay"></div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-custom" aria-label="Main navigation">
@@ -577,7 +568,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link-custom active" href="index.html" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a class="nav-link-custom" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#process">Process</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#contact">Contact</a></li>
@@ -586,40 +577,33 @@
         </div>
     </nav>
 
-    <!-- SECTION 1: HERO (Over Layer 1 - Executive Boardroom) -->
-    <section class="content-section section-bg-transparent hero-split" id="heroSection">
+    <!-- HERO SECTION -->
+    <section class="content-section transparent-bg hero-split" id="heroSection">
         <div class="hero-left container-fluid">
             <div>
                 <p class="tagline-accent mb-3">Security by Invisibility</p>
                 <h1 class="hero-title-bold text-uppercase mb-4">
-                    Processing Client Data Without <span class="text-info">Risking Confidentiality?</span>
+                    Want to Use AI on Client Data, But Terrified of <span class="text-info">Risking Your License?</span>
                 </h1>
-                <p class="fs-5 text-high-contrast mb-5" style="max-width: 540px;">
-                    Stop pasting PHI, legal discovery materials, or sensitive financial records into public cloud AI tools. Process client data safely with fully private, local AI built for regulated industries.
+                <p class="fs-5 text-high-contrast mb-5" style="max-width: 580px;">
+                    Stop pasting PHI, legal files, or sensitive records into public AI tools. Process client data safely with fully private, local AI built for regulated industries.
                 </p>
                 
-                <div class="d-flex flex-column flex-md-row gap-3 mb-5">
+                <div class="d-flex flex-column flex-md-row gap-3 mb-4">
                     <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
                         Start Free Assessment <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                     </button>
-                    <a href="#about" class="btn-outline-cyan">
-                        See How It Works
+                    <a href="#features" class="btn-outline-cyan">
+                        Read Architecture Brief
                     </a>
                 </div>
                 
                 <!-- Social Proof -->
                 <div class="pt-4 border-top border-secondary border-opacity-25">
-                    <p class="small text-secondary mb-3">Trusted by compliance teams at:</p>
-                    <div class="d-flex gap-4 flex-wrap align-items-center">
-                        <span class="text-secondary small">Legal Firms</span>
-                        <span class="text-secondary small">•</span>
-                        <span class="text-secondary small">Healthcare Providers</span>
-                        <span class="text-secondary small">•</span>
-                        <span class="text-secondary small">Financial Advisors</span>
-                        <span class="text-secondary small">•</span>
-                        <span class="text-secondary small">HR Professionals</span>
-                        <span class="text-secondary small">•</span>
-                        <span class="text-secondary small">Academic Researchers</span>
+                    <p class="small text-secondary mb-2">On a 30-minute setup call, we replace your vulnerable workflow:</p>
+                    <div class="d-flex gap-3 flex-wrap align-items-center">
+                        <span class="text-secondary small">• Zero metadata</span>
+                        <span class="text-secondary small">• Your data stays local</span>
                     </div>
                 </div>
             </div>
@@ -632,8 +616,8 @@
         </div>
     </section>
 
-    <!-- SECTION 2: FEATURES (Over Layer 2 - Tech Abstract) -->
-    <section class="content-section section-bg-dark" id="about">
+    <!-- FEATURES SECTION (formerly About) -->
+    <section class="content-section" id="features">
         <div class="container">
             <div class="text-center mb-5">
                 <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
@@ -665,8 +649,8 @@
         </div>
     </section>
 
-    <!-- SECTION 3: PROCESS (Over Layer 3 - Workspace) -->
-    <section class="content-section section-bg-gradient" id="process">
+    <!-- PROCESS SECTION -->
+    <section class="content-section" id="process">
         <div class="container">
             <div class="text-center mb-5">
                 <p class="tagline-accent mb-2">Guided Deployment Protocol</p>
@@ -697,8 +681,8 @@
         </div>
     </section>
 
-    <!-- SECTION 4: FAQ (Over Layer 4 - Geometric) -->
-    <section class="content-section section-bg-dark" id="faq">
+    <!-- FAQ SECTION -->
+    <section class="content-section" id="faq">
         <div class="container">
             <div class="text-center mb-5">
                 <p class="tagline-accent mb-2">Technical Questions Addressed</p>
@@ -753,8 +737,8 @@
         </div>
     </section>
 
-    <!-- SECTION 5: FOUNDERS NOTE + CONTACT (Over Layer 1 Again - bookend) -->
-    <section class="content-section section-bg-solid" id="contact">
+    <!-- CONTACT SECTION WITH FOUNDERS NOTE -->
+    <section class="content-section" id="contact">
         <div class="container">
             <!-- Founder's Note -->
             <div class="row justify-content-center mb-5">
@@ -781,7 +765,7 @@
                 </div>
             </div>
 
-            <!-- Contact CTA -->
+            <!-- Contact CTA - WITH TWO BUTTONS SIDE BY SIDE -->
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
@@ -789,19 +773,20 @@
                         Book your free 30-minute deployment consultation. We'll assess your current setup and walk through the installation process live.
                     </p>
                     <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <!-- SECOND START FREE ASSESSMENT BUTTON ADDED HERE -->
                         <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
-                            Request Installation Call
+                            Start Free Assessment
                         </button>
-                        <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan">
-                            <i class="bi bi-envelope me-2" aria-hidden="true"></i>Email Us Directly
-                        </a>
+                        <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
+                            Request Installation Call <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RIGHT-SIDE DIAGNOSTIC MODAL -->
+    <!-- RIGHT-SIDE DIAGNOSTIC MODAL - ALL QUESTIONS VISIBLE AT ONCE -->
     <div class="diagnostic-modal-overlay" id="diagnosticOverlay" onclick="closeDiagnosticModal()"></div>
     
     <div class="diagnostic-modal" id="diagnosticModal">
@@ -809,20 +794,18 @@
             <i class="bi bi-x-lg"></i>
         </button>
         
-        <div id="questionnaireView">
-            <div class="mb-4">
-                <div class="diagnostic-progress-bar">
-                    <div class="diagnostic-progress-fill" style="width: 0%;" id="progressFill"></div>
-                </div>
-                <p class="diagnostic-step-counter" id="stepCounter">Question 1 / 3</p>
+        <div id="questionnaireView" class="diagnostic-content">
+            <div class="diagnostic-header">
+                <div class="diagnostic-progress-line"></div>
+                <h2 class="diagnostic-title">Compliance Risk Diagnostic</h2>
+                <p class="diagnostic-subtitle">Answer 3 quick questions to assess your current exposure risk.</p>
             </div>
-            
-            <h2 class="fw-bold text-uppercase mb-4">Compliance Risk Diagnostic</h2>
-            <p class="text-high-contrast mb-4">Answer 3 quick questions to assess your current exposure risk.</p>
 
-            <div class="floating-panel p-4" style="margin: 0 0 20px 0;" id="q1">
-                <p class="fw-semibold mb-3">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
-                <div class="rating-options-row">
+            <!-- Question 1 -->
+            <div class="diagnostic-question-card" id="q1">
+                <p class="question-number">QUESTION 1</p>
+                <p class="question-text">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
+                <div class="rating-options-grid">
                     <div class="rating-option" onclick="selectRating(1, 1)">
                         <span class="rating-number">1</span>
                         <span class="rating-label">Very Easy</span>
@@ -843,9 +826,11 @@
                 </div>
             </div>
 
-            <div class="floating-panel p-4" style="margin: 0 0 20px 0;" id="q2">
-                <p class="fw-semibold mb-3">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
-                <div class="rating-options-row">
+            <!-- Question 2 -->
+            <div class="diagnostic-question-card" id="q2">
+                <p class="question-number">QUESTION 2</p>
+                <p class="question-text">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
+                <div class="rating-options-grid">
                     <div class="rating-option" onclick="selectRating(2, 1)">
                         <span class="rating-number">1</span>
                         <span class="rating-label">Very Easy</span>
@@ -866,9 +851,11 @@
                 </div>
             </div>
 
-            <div class="floating-panel p-4" style="margin: 0;" id="q3">
-                <p class="fw-semibold mb-3">3. How concerned are you that AI-generated errors might slip past manual review?</p>
-                <div class="rating-options-row">
+            <!-- Question 3 -->
+            <div class="diagnostic-question-card" id="q3">
+                <p class="question-number">QUESTION 3</p>
+                <p class="question-text">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
+                <div class="rating-options-grid">
                     <div class="rating-option" onclick="selectRating(3, 1)">
                         <span class="rating-number">1</span>
                         <span class="rating-label">Not Concerned</span>
@@ -889,48 +876,44 @@
                 </div>
             </div>
 
-            <div class="mt-4 text-end">
+            <div class="analyze-btn-container">
                 <button class="btn-cyan-solid" onclick="analyzeRisk()" id="analyzeBtn" disabled>
                     Analyze Risk <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
 
-        <div id="resultsView" style="display: none;">
-            <div class="mb-4">
-                <div class="diagnostic-progress-bar" style="background: rgba(13, 202, 240, 0.3);">
-                    <div class="diagnostic-progress-fill" style="width: 100%;"></div>
-                </div>
-                <p class="diagnostic-step-counter">Assessment Complete</p>
+        <div id="resultsView" class="diagnostic-content" style="display: none;">
+            <div class="diagnostic-header">
+                <div class="diagnostic-progress-line" style="width: 100%;"></div>
+                <h2 class="diagnostic-title">Assessment Complete</h2>
             </div>
             
-            <h2 class="fw-bold text-uppercase mb-2">Your Status:</h2>
+            <h2 class="fw-bold text-uppercase mb-3">Your Status:</h2>
             <span id="riskBadge" class="risk-badge risk-badge-high"></span>
             
-            <div class="floating-panel p-4 text-start mt-4" style="margin: 0;">
-                <p id="riskExplanation" class="text-high-contrast fs-6 mb-4" style="line-height: 1.8;"></p>
+            <div style="background: rgba(18, 20, 28, 0.5); border: 1px solid rgba(13, 202, 240, 0.15); padding: 25px; margin: 25px 0;">
+                <p id="riskExplanation" class="text-high-contrast mb-4" style="line-height: 1.7;"></p>
                 
-                <hr class="border-secondary border-opacity-25 mb-4">
+                <hr class="border-secondary border-opacity-25 mb-3">
                 
-                <div class="mb-4">
-                    <p class="text-info fw-semibold mb-2">Next Steps:</p>
-                    <p class="text-high-contrast small">
-                        Request a 30-minute vulnerability discussion. We'll audit your current workflow and demonstrate how a local deployment closes exposure gaps.
-                    </p>
-                </div>
-                
-                <form id="resultEmailForm" onsubmit="handleResultSubmit(event)" class="mb-3">
-                    <div class="input-group">
-                        <input type="email" id="resultEmail" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary" aria-required="true">
-                        <button type="submit" class="btn-cyan-solid px-4">Request Install Slot</button>
-                    </div>
-                    <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only.</p>
-                </form>
-                
-                <button class="btn-outline-cyan w-100 mt-3" onclick="resetDiagnostic()">
-                    Retake Assessment
-                </button>
+                <p class="text-info fw-semibold mb-2">Next Steps:</p>
+                <p class="text-high-contrast small">
+                    Request a 30-minute vulnerability discussion. We'll audit your current workflow and demonstrate how a local deployment closes exposure gaps.
+                </p>
             </div>
+            
+            <form id="resultEmailForm" onsubmit="handleResultSubmit(event)" class="mb-3">
+                <div class="input-group">
+                    <input type="email" id="resultEmail" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary" aria-required="true">
+                    <button type="submit" class="btn-cyan-solid px-4">Request Install Slot</button>
+                </div>
+                <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only. Nothing else.</p>
+            </form>
+            
+            <button class="btn-outline-cyan w-100 mt-3" onclick="resetDiagnostic()">
+                Retake Assessment
+            </button>
         </div>
     </div>
     <!-- END MODAL -->
@@ -956,7 +939,7 @@
         // Diagnostic state
         const diagnosticState = { q1: 0, q2: 0, q3: 0 };
 
-        // Open/Close Modal
+        // Open Modal
         function openDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.add('active');
             document.getElementById('diagnosticOverlay').classList.add('active');
@@ -968,35 +951,32 @@
             diagnosticState.q3 = 0;
             document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
             document.getElementById('analyzeBtn').disabled = true;
-            updateProgress();
         }
 
+        // Close Modal
         function closeDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.remove('active');
             document.getElementById('diagnosticOverlay').classList.remove('active');
             document.body.style.overflow = '';
         }
 
+        // Select Rating
         function selectRating(questionNum, value) {
             diagnosticState['q' + questionNum] = value;
             const questionDiv = document.getElementById('q' + questionNum);
             const options = questionDiv.querySelectorAll('.rating-option');
             options.forEach(opt => opt.classList.remove('selected'));
             options[value - 1].classList.add('selected');
-            updateProgress();
             checkAnalysisReady();
         }
 
-        function updateProgress() {
-            const answered = Object.values(diagnosticState).filter(v => v > 0).length;
-            document.getElementById('progressFill').style.width = ((answered / 3) * 100) + '%';
-        }
-
+        // Check If Ready
         function checkAnalysisReady() {
             const allAnswered = Object.values(diagnosticState).every(v => v > 0);
             document.getElementById('analyzeBtn').disabled = !allAnswered;
         }
 
+        // Analyze Risk
         function analyzeRisk() {
             const totalScore = diagnosticState.q1 + diagnosticState.q2 + diagnosticState.q3;
             document.getElementById('questionnaireView').style.display = 'none';
@@ -1033,34 +1013,21 @@
             diagnosticState.q3 = 0;
             document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
             document.getElementById('analyzeBtn').disabled = true;
-            updateProgress();
             document.getElementById('questionnaireView').style.display = 'block';
             document.getElementById('resultsView').style.display = 'none';
         }
 
-        // Parallax background visibility based on scroll position
+        // Scroll animations
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             const progressBar = document.querySelector('.scroll-progress');
             if (progressBar) progressBar.style.width = scrollPercent + '%';
 
-            // Show/hide parallax layers based on viewport position
-            const windowHeight = window.innerHeight;
             const sections = document.querySelectorAll('.content-section');
-            
-            sections.forEach((section, index) => {
+            sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
-                const isVisible = rect.top < windowHeight && rect.bottom > 0;
-                
-                if (isVisible) {
+                if (rect.top < window.innerHeight * 0.7) {
                     section.classList.add('visible');
-                    
-                    // Activate corresponding background layer
-                    const layers = document.querySelectorAll('.parallax-background');
-                    layers.forEach(layer => layer.style.opacity = '0.25');
-                    if (layers[index]) {
-                        layers[index].style.opacity = '0.35';
-                    }
                 }
             });
         });
@@ -1070,7 +1037,7 @@
             if (e.key === 'Escape') closeDiagnosticModal();
         });
 
-        // Smooth scroll for nav links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
