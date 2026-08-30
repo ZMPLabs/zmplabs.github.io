@@ -15,7 +15,6 @@
             font-family: 'Inter', sans-serif; 
             color: #ffffff; 
             background-color: #050505;
-            /* Using a dark, high-tech network nodes background */
             background-image: linear-gradient(rgba(7, 10, 14, 0.88), rgba(7, 10, 14, 0.88)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
             background-attachment: fixed;
             background-position: center;
@@ -34,10 +33,11 @@
             border-radius: 4px;
         }
         
-        /* Navbar */
-        .navbar-custom { background-color: #0b0c10; border-bottom: 1px solid rgba(13, 202, 240, 0.1); padding: 20px 0; }
-        .nav-link-custom { color: #aaaaaa !important; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 15px !important; transition: color 0.2s ease; }
-        .nav-link-custom:hover, .nav-link-custom.active { color: #0dcaf0 !important; }
+        /* Full Website Navbar */
+        .navbar-custom { background-color: rgba(11, 12, 16, 0.98); border-bottom: 1px solid rgba(13, 202, 240, 0.1); padding: 15px 0; }
+        .nav-link-custom { color: #aaaaaa !important; font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px !important; transition: color 0.2s ease; }
+        .nav-link-custom:hover { color: #0dcaf0 !important; }
+        .navbar-brand { letter-spacing: 1px; }
         
         /* Split Screen Hero */
         .hero-split { display: flex; min-height: 85vh; background-color: transparent; border-bottom: 1px solid rgba(13, 202, 240, 0.1); margin-bottom: 80px;}
@@ -51,8 +51,11 @@
         .tagline-accent { font-size: 1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
         .hero-title-bold { font-size: 3.2rem; font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
         .text-high-contrast { color: #c5cbd3 !important; }
-        .btn-cyan-solid { background: #0dcaf0; color: #0b0c10; border: none; padding: 15px 30px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 0; display: inline-block; text-decoration: none; }
+        
+        .btn-cyan-solid { background: #0dcaf0; color: #0b0c10; border: none; padding: 15px 30px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 0; display: inline-block; text-decoration: none; transition: background 0.2s; }
         .btn-cyan-solid:hover { background: #00b8e6; color: #0b0c10; }
+        .btn-cyan-outline { background: transparent; color: #0dcaf0; border: 1px solid #0dcaf0; padding: 10px 20px; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+        .btn-cyan-outline:hover { background: #0dcaf0; color: #0b0c10; }
         
         /* Product Cards */
         .product-card-premium { background: rgba(18, 20, 28, 0.7); border: 1px solid rgba(13,202,240,0.1); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
@@ -68,26 +71,36 @@
         .modal-content { background-color: #12141c; border: 1px solid rgba(13,202,240,0.4); border-radius: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); }
         .btn-close-custom { filter: invert(1); opacity: 0.5; }
+        
+        /* Full Corporate Footer */
+        .corporate-footer { background-color: rgba(7, 10, 14, 0.98); border-top: 1px solid rgba(13, 202, 240, 0.15); padding: 60px 0 20px 0; }
+        .footer-heading { color: #ffffff; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; font-size: 1rem; }
+        .footer-link { color: #888888; text-decoration: none; font-size: 0.9rem; display: block; margin-bottom: 10px; transition: color 0.2s; }
+        .footer-link:hover { color: #0dcaf0; }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Full Website Navigation -->
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-white fs-4" href="index.html">ZMPLabs</a>
             <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon navbar-dark"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="index.html">Home</a></li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#platform">Platform</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#compliance">Compliance</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-custom" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
                 </ul>
-            </div>
-            <div class="d-none d-lg-flex align-items-center text-white gap-4">
-                <i class="bi bi-shield-lock text-info fs-5"></i>
+                <div class="d-none d-lg-block">
+                    <!-- Nav Funnel CTA -->
+                    <button type="button" class="btn-cyan-outline" data-bs-toggle="modal" data-bs-target="#installModal">
+                        Request Install
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -117,10 +130,10 @@
         </div>
     </header>
 
-    <!-- Features Section (Floating Panel) -->
-    <section id="about" class="container floating-panel">
+    <!-- Platform Architecture (Floating Panel) -->
+    <section id="platform" class="container floating-panel">
         <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
+            <p class="tagline-accent mb-2">Platform Architecture</p>
             <h2 class="fw-semibold text-uppercase">Build a Compliance-Proof Workflow</h2>
         </div>
         <div class="row g-4">
@@ -149,7 +162,7 @@
     </section>
 
     <!-- Setup Timeline (Floating Panel) -->
-    <section class="container floating-panel">
+    <section id="compliance" class="container floating-panel">
         <div class="text-center mb-5">
             <p class="tagline-accent mb-2">Guided Setup Protocol</p>
             <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Deployment</h2>
@@ -229,7 +242,7 @@
     </section>
 
     <!-- Founder's Note Section (Floating Panel) -->
-    <section class="container floating-panel">
+    <section id="about" class="container floating-panel">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0;">
@@ -243,7 +256,7 @@
                     </p>
                     
                     <p class="text-high-contrast mb-3" style="line-height: 1.8;">
-                        My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people[cite: 1]. 
+                        My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I earned my Ph.D. in Public Policy and Administration[cite: 1]. I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. That research taught me how deeply systemic vulnerabilities can impact real people. 
                     </p>
 
                     <p class="text-high-contrast mb-4" style="line-height: 1.8;">
@@ -259,7 +272,7 @@
         </div>
     </section>
 
-    <!-- Modal for Email Capture -->
+    <!-- Modal for Email Capture (The Funnel Feature) -->
     <div class="modal fade" id="installModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -279,10 +292,42 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-4 border-top border-info border-opacity-10 text-center text-secondary small" style="background-color: rgba(5, 5, 5, 0.95);">
+    <!-- Corporate Footer -->
+    <footer class="corporate-footer">
         <div class="container">
-            <p class="mb-0">ZMPLabs &copy; 2026 | Zero Metadata. Your data stays local. | <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a></p>
+            <div class="row mb-5">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="fw-bold text-white mb-3">ZMPLabs</h4>
+                    <p class="text-secondary small mb-4 pe-lg-4">Zero Metadata. Your data stays local. We provide air-gapped, local AI workflows for professionals in highly regulated industries.</p>
+                </div>
+                <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                    <h5 class="footer-heading">Platform</h5>
+                    <a href="#platform" class="footer-link">Architecture</a>
+                    <a href="#compliance" class="footer-link">Deployment</a>
+                    <a href="#faq" class="footer-link">Security FAQ</a>
+                </div>
+                <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                    <h5 class="footer-heading">Company</h5>
+                    <a href="#about" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="mailto:founder@zmplabs.com" class="footer-link">Support</a>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="footer-heading">Ready to secure your workflow?</h5>
+                    <p class="text-secondary small mb-3">Ensure absolute compliance with a local AI deployment.</p>
+                    <button type="button" class="btn-cyan-outline w-100" data-bs-toggle="modal" data-bs-target="#installModal">
+                        Request Install Slot
+                    </button>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary border-opacity-25 pt-4 text-center text-md-start d-md-flex justify-content-between align-items-center">
+                <p class="text-secondary small mb-0">&copy; 2026 ZMPLabs. All rights reserved.</p>
+                <div class="mt-3 mt-md-0">
+                    <a href="#" class="text-secondary small text-decoration-none me-3 hover-info">Privacy Policy</a>
+                    <a href="#" class="text-secondary small text-decoration-none hover-info">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 
