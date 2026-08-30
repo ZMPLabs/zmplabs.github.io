@@ -206,20 +206,106 @@
             transform: translateY(0);
         }
         
-        .btn-outline-secondary {
-            border-radius: 0;
-            padding: 14px 28px;
+        /* FIXED: Second button with proper visibility */
+        .btn-outline-cyan {
+            background: transparent;
             border: 2px solid #0dcaf0;
             color: #0dcaf0;
+            padding: 15px 30px;
             font-weight: 600;
-            text-transform: uppercase;
             letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 0;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
         
-        .btn-outline-secondary:hover {
+        .btn-outline-cyan:hover {
             background: rgba(13, 202, 240, 0.1);
             color: #0dcaf0;
             border-color: #0dcaf0;
+        }
+        
+        /* Diagnostic Box Styles */
+        .diagnostic-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .diagnostic-question {
+            margin-bottom: 40px;
+        }
+        
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(18, 20, 28, 0.7);
+            border: 2px solid rgba(13, 202, 240, 0.2);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .rating-option:hover {
+            border-color: #0dcaf0;
+            transform: translateY(-2px);
+        }
+        
+        .rating-option.selected {
+            border-color: #0dcaf0;
+            background: rgba(13, 202, 240, 0.2);
+        }
+        
+        .rating-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0dcaf0;
+        }
+        
+        .rating-label {
+            font-size: 0.75rem;
+            color: #aaaaaa;
+            margin-top: 8px;
+        }
+        
+        .rating-options-row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .risk-status-low {
+            color: #28a745;
+        }
+        
+        .risk-status-medium {
+            color: #ffc107;
+        }
+        
+        .risk-status-high {
+            color: #dc3545;
+        }
+        
+        .diagnostic-section {
+            display: none;
+            padding: 80px 40px;
+        }
+        
+        .diagnostic-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Product Cards */
@@ -360,15 +446,16 @@
                 </p>
                 
                 <div class="d-flex flex-column flex-md-row gap-3">
-                    <button type="button" class="btn-cyan-solid" data-bs-toggle="modal" data-bs-target="#installModal">
+                    <button type="button" class="btn-cyan-solid" onclick="startDiagnostic()">
                         Start Free Assessment <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                     </button>
-                    <a href="#process" class="btn-cyan-solid btn-outline-secondary">
+                    <!-- FIXED: Now uses btn-outline-cyan class -->
+                    <a href="#process" class="btn-outline-cyan">
                         See How It Works
                     </a>
                 </div>
                 
-                <!-- Social Proof -->
+                <!-- Social Proof - UPDATED with HR & Academic Research -->
                 <div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
                     <p class="small text-secondary mb-3">Trusted by compliance teams at:</p>
                     <div class="d-flex gap-4 flex-wrap align-items-center">
@@ -377,6 +464,10 @@
                         <span class="text-secondary small">Healthcare Providers</span>
                         <span class="text-secondary small">•</span>
                         <span class="text-secondary small">Financial Advisors</span>
+                        <span class="text-secondary small">•</span>
+                        <span class="text-secondary small">HR Professionals</span>
+                        <span class="text-secondary small">•</span>
+                        <span class="text-secondary small">Academic Researchers</span>
                     </div>
                 </div>
             </div>
@@ -388,6 +479,161 @@
             <div class="hero-fade"></div>
         </div>
     </header>
+
+    <!-- COMPLIANCE RISK DIAGNOSTIC SECTION -->
+    <div id="diagnosticSection" class="diagnostic-section">
+        <div class="container">
+            <div class="diagnostic-container">
+                
+                <!-- Questionnaire View -->
+                <div id="questionnaireView">
+                    <div class="text-center mb-5">
+                        <p class="tagline-accent mb-2">Compliance Risk Diagnostic</p>
+                        <h2 class="fw-semibold text-uppercase mb-4">Build a Compliance-Proof Workflow</h2>
+                        <p class="text-high-contrast">Answer 3 quick questions to assess your current exposure risk.</p>
+                    </div>
+
+                    <div class="floating-panel p-4" style="opacity: 1; transform: translateY(0);">
+                        <!-- Question 1 -->
+                        <div class="diagnostic-question" id="q1">
+                            <p class="fw-semibold mb-3">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
+                            <div class="rating-options-row">
+                                <div class="rating-option" onclick="selectRating(1, 1)">
+                                    <span class="rating-number">1</span>
+                                    <span class="rating-label">Very Easy</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(1, 2)">
+                                    <span class="rating-number">2</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(1, 3)">
+                                    <span class="rating-number">3</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(1, 4)">
+                                    <span class="rating-number">4</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(1, 5)">
+                                    <span class="rating-number">5</span>
+                                    <span class="rating-label">Nearly Impossible</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="diagnostic-question" id="q2">
+                            <p class="fw-semibold mb-3">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
+                            <div class="rating-options-row">
+                                <div class="rating-option" onclick="selectRating(2, 1)">
+                                    <span class="rating-number">1</span>
+                                    <span class="rating-label">Very Easy</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(2, 2)">
+                                    <span class="rating-number">2</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(2, 3)">
+                                    <span class="rating-number">3</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(2, 4)">
+                                    <span class="rating-number">4</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(2, 5)">
+                                    <span class="rating-number">5</span>
+                                    <span class="rating-label">Highly Challenging</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="diagnostic-question" id="q3">
+                            <p class="fw-semibold mb-3">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
+                            <div class="rating-options-row">
+                                <div class="rating-option" onclick="selectRating(3, 1)">
+                                    <span class="rating-number">1</span>
+                                    <span class="rating-label">Not Concerned</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(3, 2)">
+                                    <span class="rating-number">2</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(3, 3)">
+                                    <span class="rating-number">3</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(3, 4)">
+                                    <span class="rating-number">4</span>
+                                </div>
+                                <div class="rating-option" onclick="selectRating(3, 5)">
+                                    <span class="rating-number">5</span>
+                                    <span class="rating-label">Very Concerned</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn-cyan-solid" onclick="analyzeRisk()" id="analyzeBtn" disabled>
+                                Analyze Risk <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results View -->
+                <div id="resultsView" style="display: none;">
+                    <div class="text-center mb-5">
+                        <p class="tagline-accent mb-2">Your Assessment</p>
+                        <h2 class="fw-semibold text-uppercase mb-4">Status: <span id="riskStatusText" style="color: #dc3545;">High Exposure Risk</span></h2>
+                        
+                        <div class="floating-panel p-4 text-start" style="opacity: 1; transform: translateY(0);">
+                            <p id="riskExplanation" class="text-high-contrast fs-5 mb-4">
+                                Based on your responses, your current workflow carries a high risk of exposing sensitive data and triggering compliance violations. You are a prime candidate for a local, air-gapped AI deployment to immediately secure your pipeline.
+                            </p>
+                            
+                            <hr class="border-secondary border-opacity-25 mb-4">
+                            
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h5 class="text-info mb-3">Why a Free Scheduled Meeting Would Be Ideal:</h5>
+                                    <ul class="text-high-contrast">
+                                        <li class="mb-2">We'll conduct a personalized vulnerability audit of your current AI workflows</li>
+                                        <li class="mb-2">Map your data flows against HIPAA/SEC/ABA compliance requirements</li>
+                                        <li class="mb-2">Demonstrate local deployment setup live on your hardware during the call</li>
+                                        <li class="mb-2">Provide a customized threat model and governance documentation for your IT team</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center p-3" style="background: rgba(13, 202, 240, 0.1); border-left: 3px solid #0dcaf0;">
+                                        <p class="small text-info mb-1">Time Investment</p>
+                                        <h4 class="fw-bold text-white mb-1">30 Minutes</h4>
+                                        <p class="small text-secondary mb-0">Free consultation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <button class="btn-cyan-solid" onclick="openEmailModal()">
+                                    Request Install Slot <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn-outline-cyan ms-2" onclick="resetDiagnostic()">
+                                    Start Over
+                                </button>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <form id="resultEmailForm" onsubmit="handleResultSubmit(event)">
+                                    <div class="input-group">
+                                        <input type="email" id="resultEmail" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary" aria-required="true">
+                                        <button type="submit" class="btn-cyan-solid px-4">Request Install Slot</button>
+                                    </div>
+                                    <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only. Nothing else.</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3 text-secondary small">
+                    <span id="progressIndicator">01 / 01</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Features Section (Floating Panel) -->
     <section id="about" class="container floating-panel">
@@ -570,10 +816,11 @@
                     Book your free 30-minute deployment consultation. We'll assess your current setup and walk through the installation process live.
                 </p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                    <button type="button" class="btn-cyan-solid" data-bs-toggle="modal" data-bs-target="#installModal">
+                    <button type="button" class="btn-cyan-solid" onclick="startDiagnostic()">
                         Request Installation Call
                     </button>
-                    <a href="mailto:founder@zmplabs.com" class="btn-cyan-solid btn-outline-secondary">
+                    <!-- FIXED: Uses btn-outline-cyan class -->
+                    <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan">
                         <i class="bi bi-envelope me-2" aria-hidden="true"></i>Email Us Directly
                     </a>
                 </div>
@@ -581,7 +828,7 @@
         </div>
     </section>
 
-    <!-- Modal for Email Capture -->
+    <!-- Legacy Email Modal (kept for backward compatibility) -->
     <div class="modal fade" id="installModal" tabindex="-1" aria-labelledby="installModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -592,10 +839,10 @@
                 <div class="modal-body text-center py-4">
                     <h4 class="mb-3">Schedule Your 30-Minute Install Call</h4>
                     <p class="text-secondary small mb-4">We only need your email. We'll respond within 24 business hours to coordinate your local deployment.</p>
-                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <form id="contactForm" onsubmit="handleLegacySubmit(event)">
                         <div class="mb-3">
-                            <label for="emailInput" class="visually-hidden">Email address</label>
-                            <input type="email" id="emailInput" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary text-center py-3" aria-required="true">
+                            <label for="legacyEmailInput" class="visually-hidden">Email address</label>
+                            <input type="email" id="legacyEmailInput" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary text-center py-3" aria-required="true">
                         </div>
                         <button type="submit" class="btn-cyan-solid w-100 py-3">Submit Request</button>
                     </form>
@@ -623,7 +870,110 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Intersection Observer for fade-in animations
+        // Diagnostic state
+        const diagnosticState = {
+            q1: 0,
+            q2: 0,
+            q3: 0
+        };
+
+        // START DIAGNOSTIC - scrolls to diagnostic section
+        function startDiagnostic() {
+            document.getElementById('diagnosticSection').classList.add('active');
+            window.location.hash = 'diagnosticSection';
+            setTimeout(() => {
+                document.getElementById('diagnosticSection').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // SELECT RATING
+        function selectRating(questionNum, value) {
+            diagnosticState['q' + questionNum] = value;
+            
+            // Visual feedback
+            const questionDiv = document.getElementById('q' + questionNum);
+            const options = questionDiv.querySelectorAll('.rating-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[value - 1].classList.add('selected');
+            
+            // Enable analyze button if all answered
+            checkAnalysisReady();
+        }
+
+        // CHECK IF READY TO ANALYZE
+        function checkAnalysisReady() {
+            const allAnswered = Object.values(diagnosticState).every(v => v > 0);
+            document.getElementById('analyzeBtn').disabled = !allAnswered;
+        }
+
+        // ANALYZE RISK
+        function analyzeRisk() {
+            const totalScore = diagnosticState.q1 + diagnosticState.q2 + diagnosticState.q3;
+            const avgScore = totalScore / 3;
+            
+            // Hide questionnaire, show results
+            document.getElementById('questionnaireView').style.display = 'none';
+            document.getElementById('resultsView').style.display = 'block';
+            
+            // Set status based on score
+            const statusEl = document.getElementById('riskStatusText');
+            const expEl = document.getElementById('riskExplanation');
+            
+            if (avgScore >= 4) {
+                statusEl.textContent = 'High Exposure Risk';
+                statusEl.className = 'risk-status-high';
+                expEl.innerHTML = 'Based on your responses, your current workflow carries a <strong>high risk</strong> of exposing sensitive data and triggering compliance violations. You are a prime candidate for a local, air-gapped AI deployment to immediately secure your pipeline.';
+            } else if (avgScore >= 2.5) {
+                statusEl.textContent = 'Moderate Exposure Risk';
+                statusEl.className = 'risk-status-medium';
+                expEl.innerHTML = 'Based on your responses, your workflow has <strong>moderate compliance exposure</strong>. While some safeguards may be in place, a local deployment would significantly reduce risk and strengthen your defensibility in audits.';
+            } else {
+                statusEl.textContent = 'Low Exposure Risk';
+                statusEl.className = 'risk-status-low';
+                expEl.innerHTML = 'Your responses suggest <strong>relatively controlled exposure</strong>, though improvements remain possible. A free consultation can help you optimize your current setup and prepare for scaling AI use securely.';
+            }
+        }
+
+        // OPEN EMAIL MODAL FROM RESULTS
+        function openEmailModal() {
+            const modal = new bootstrap.Modal(document.getElementById('installModal'));
+            modal.show();
+        }
+
+        // RESET DIAGNOSTIC
+        function resetDiagnostic() {
+            diagnosticState.q1 = 0;
+            diagnosticState.q2 = 0;
+            diagnosticState.q3 = 0;
+            
+            document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('questionnaireView').style.display = 'block';
+            document.getElementById('resultsView').style.display = 'none';
+        }
+
+        // HANDLE RESULT SUBMIT (from diagnostic)
+        function handleResultSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('resultEmail').value;
+            
+            alert(`Thank you! We've received your request at ${email}. We'll contact you within 24 business hours.`);
+            document.getElementById('resultEmailForm').reset();
+        }
+
+        // HANDLE LEGACY MODAL SUBMIT
+        function handleLegacySubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('legacyEmailInput').value;
+            
+            alert(`Thank you! We've received your request at ${email}. We'll contact you within 24 business hours.`);
+            document.getElementById('contactForm').reset();
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('installModal'));
+            modal.hide();
+        }
+
+        // SCROLL ANIMATIONS & PROGRESS
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -642,7 +992,6 @@
             observer.observe(panel);
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar-custom');
             if (window.scrollY > 50) {
@@ -651,7 +1000,6 @@
                 navbar.classList.remove('scrolled');
             }
             
-            // Scroll progress bar
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
@@ -661,7 +1009,7 @@
             }
         });
 
-        // Smooth scroll for anchor links
+        // SMOOTH SCROLL FOR ANCHORS
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -677,7 +1025,6 @@
                         behavior: 'smooth'
                     });
                     
-                    // Close mobile menu if open
                     const navbarCollapse = document.querySelector('.navbar-collapse');
                     if (navbarCollapse.classList.contains('show')) {
                         const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
@@ -687,29 +1034,12 @@
             });
         });
 
-        // Form submission handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const email = document.getElementById('emailInput').value;
-            
-            // Show success message
-            alert(`Thank you! We've received your request at ${email}. We'll contact you within 24 business hours.`);
-            
-            // Reset form and close modal
-            document.getElementById('contactForm').reset();
-            const modal = bootstrap.Modal.getInstance(document.getElementById('installModal'));
-            modal.hide();
-            
-            // Log for analytics (replace with actual analytics integration)
-            console.log('Lead captured:', email);
-        }
-
-        // Initialize first panel as visible on load
+        // INIT FIRST PANEL VISIBLE
         window.addEventListener('load', () => {
             document.querySelector('.floating-panel')?.classList.add('visible');
         });
 
-        // Keyboard navigation for accordion
+        // KEYBOARD NAVIGATION
         document.querySelectorAll('.accordion-button').forEach(button => {
             button.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
