@@ -5,60 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZMPLabs - Security by Invisibility</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b0c10; color: #ffffff; }
-        .navbar-custom { background-color: rgba(11, 12, 16, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
+        
+        /* Navbar */
+        .navbar-custom { background-color: #0b0c10; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
         .nav-link-custom { color: #aaaaaa !important; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 15px !important; transition: color 0.2s ease; }
         .nav-link-custom:hover, .nav-link-custom.active { color: #0dcaf0 !important; }
         
-        .hero-section-premium { 
-            position: relative; 
-            min-height: 80vh; 
-            display: flex; 
-            align-items: center; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-            overflow: hidden;
-            background-color: #0b0c10;
-        }
-        .bg-video-element {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 1;
-            transform: translate(-50%, -50%);
-            opacity: 0.12;
-            object-fit: cover;
-        }
-        .hero-overlay-dark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(11,12,16,0.3) 0%, #0b0c10 100%);
-            z-index: 2;
-        }
-        .hero-content-layer { position: relative; z-index: 3; }
+        /* Split Screen Hero */
+        .hero-split { display: flex; min-height: 85vh; background-color: #0b0c10; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .hero-left { flex: 1; display: flex; align-items: center; padding: 5% 8%; background-color: #0b0c10; z-index: 2; }
+        .hero-right { flex: 1; position: relative; overflow: hidden; display: none; }
+        @media (min-width: 992px) { .hero-right { display: block; } }
+        .bg-video-element { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); opacity: 0.3; object-fit: cover; }
+        .hero-fade { position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, #0b0c10 0%, transparent 100%); }
         
-        .tagline-accent { font-size: 1.1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+        /* Typography & Buttons */
+        .tagline-accent { font-size: 1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
         .hero-title-bold { font-size: 3.2rem; font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
-        .btn-outline-premium { color: #ffffff; border: 1px solid #ffffff; background: transparent; padding: 12px 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; text-decoration: none; display: inline-block; }
-        .btn-outline-premium:hover { background: #0dcaf0; color: #0b0c10; border-color: #0dcaf0; }
-        .btn-cyan-solid { background: #0dcaf0; color: #0b0c10; border: 1px solid #0dcaf0; padding: 14px 30px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 0; text-decoration: none; }
-        .btn-cyan-solid:hover { background: #00b8e6; border-color: #00b8e6; color: #0b0c10; }
-        
-        .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .text-high-contrast { color: #c5cbd3 !important; }
+        .btn-cyan-solid { background: #0dcaf0; color: #0b0c10; border: none; padding: 15px 30px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 0; display: inline-block; text-decoration: none; }
+        .btn-cyan-solid:hover { background: #00b8e6; color: #0b0c10; }
+        
+        /* Product Cards */
+        .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         
         /* Accordion Dark Theme for FAQ Section */
         .accordion-dark .accordion-item { background-color: #12141c; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 15px; border-radius: 0; }
@@ -67,12 +42,15 @@
         .accordion-dark .accordion-button::after { filter: invert(1); }
         .accordion-dark .accordion-body { background-color: #12141c; color: #c5cbd3; font-size: 0.95rem; line-height: 1.7; padding: 25px; }
 
-        .link-subtle-teal { color: #0dcaf0; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; font-family: monospace; }
-        .link-subtle-teal:hover { text-decoration: underline; color: #ffffff; }
+        /* Modal Styling */
+        .modal-content { background-color: #12141c; border: 1px solid rgba(13,202,240,0.3); border-radius: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .btn-close-custom { filter: invert(1); opacity: 0.5; }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-white fs-4" href="index.html">ZMPLabs</a>
@@ -84,7 +62,6 @@
                     <li class="nav-item"><a class="nav-link nav-link-custom active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-custom" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="d-none d-lg-flex align-items-center text-white gap-4">
@@ -93,31 +70,32 @@
         </div>
     </nav>
 
-    <header class="hero-section-premium">
-        <video autoplay loop muted playsinline class="bg-video-element">
-            <source src="images/matrix-loop.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay-dark"></div>
-        
-        <div class="container hero-content-layer py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-8 text-start">
-                    <p class="tagline-accent mb-3">Security by Invisibility</p>
-                    <h1 class="hero-title-bold text-uppercase mb-4">
-                        Want to use AI on client data, but terrified of risking your <span class="text-info">license?</span>
-                    </h1>
-                    <p class="text-high-contrast fs-5 mb-4">
-                        Stop pasting PHI, legal files, or sensitive financial records into public cloud AI tools. Process client data safely with fully private, local AI built for regulated industries.
-                    </p>
-                    <div class="d-flex flex-column flex-sm-row gap-3 align-items-sm-center">
-                        <a href="#contact" class="btn btn-cyan-solid">Request Install Slot <i class="bi bi-arrow-up-right ms-2"></i></a>
-                        <a href="whitepaper.pdf" target="_blank" class="link-subtle-teal ms-sm-3">[ Read Technical Whitepaper ]</a>
-                    </div>
-                </div>
+    <!-- Split Hero Section -->
+    <header class="hero-split">
+        <div class="hero-left">
+            <div>
+                <p class="tagline-accent mb-3">Security by Invisibility</p>
+                <h1 class="hero-title-bold text-uppercase mb-4">
+                    Want to use AI on client data, but terrified of risking your <span class="text-info">license?</span>
+                </h1>
+                <p class="fs-5 text-high-contrast mb-5">
+                    Stop pasting PHI, legal files, or sensitive financial records into public cloud AI tools. Process client data safely with fully private, local AI built for regulated industries.
+                </p>
+                
+                <button type="button" class="btn-cyan-solid" data-bs-toggle="modal" data-bs-target="#installModal">
+                    Request Install Slot <i class="bi bi-arrow-up-right ms-2"></i>
+                </button>
             </div>
+        </div>
+        <div class="hero-right">
+            <video autoplay loop muted playsinline class="bg-video-element">
+                <source src="images/matrix-loop.mp4" type="video/mp4">
+            </video>
+            <div class="hero-fade"></div>
         </div>
     </header>
 
+    <!-- Features Section -->
     <section id="about" class="container py-5 my-5">
         <div class="text-center mb-5">
             <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
@@ -146,16 +124,9 @@
                 </div>
             </div>
         </div>
-        
-        <div class="row text-center mt-5 pt-4 justify-content-center g-3">
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">ZERO-METADATA</span></div>
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">LOCAL-FIRST</span></div>
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">AIR-GAPPED</span></div>
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO TELEMETRY</span></div>
-            <div class="col-6 col-md-2"><span class="badge bg-transparent border border-secondary text-secondary w-100 py-3">NO EXTERNAL CALLS</span></div>
-        </div>
     </section>
 
+    <!-- Setup Timeline -->
     <section class="container py-5 my-5 border-top border-secondary border-opacity-10">
         <div class="text-center mb-5">
             <p class="tagline-accent mb-2">Guided Setup Protocol</p>
@@ -181,6 +152,7 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section id="faq" class="py-5 my-5 bg-black bg-opacity-40 border-top border-bottom border-secondary border-opacity-10">
         <div class="container">
             <div class="text-center mb-5">
@@ -192,14 +164,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="accordion accordion-dark" id="faqAccordion">
-                        
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq1-heading">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
                                     Does my laptop or desktop need expensive custom GPUs to run this?
                                 </button>
                             </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faq1-heading" data-bs-parent="#faqAccordion">
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
                                     No. Modern executive hardware—such as Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or modern Windows laptops with dedicated GPUs—can run high-performance local open-weight models effortlessly. During our setup call, we benchmark and configure the exact model size optimized for your specific hardware.
                                 </div>
@@ -208,11 +179,11 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq2-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
                                     How can I prove to my IT or Compliance Officer that data never leaves my machine?
                                 </button>
                             </h2>
-                            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-heading" data-bs-parent="#faqAccordion">
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
                                     Our deployment operates under the Zero-Metadata Protocol (ZMP). Prompts and outputs are processed strictly in system RAM and destroyed upon session closure, completely bypassing persistent disk logging. You can literally disconnect your Wi-Fi or run the tool in an air-gapped environment to verify that no outbound API calls or telemetry exist.
                                 </div>
@@ -221,70 +192,74 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq3-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
                                     Do I or my team need coding or technical expertise to operate this?
                                 </button>
                             </h2>
-                            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-heading" data-bs-parent="#faqAccordion">
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
                                     Zero technical expertise is required. We handle the entire containerized installation on a guided 30-minute setup call. You are left with an intuitive desktop interface that feels as familiar and simple to use as ChatGPT or Claude.
                                 </div>
                             </div>
                         </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faq4-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                                    Why not just use ChatGPT Team or Enterprise cloud subscriptions?
-                                </button>
-                            </h2>
-                            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-heading" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Even "Enterprise" cloud tiers route your unredacted client files through remote third-party servers, retaining metadata for operational monitoring. For legal, medical, or financial professionals, remote transmission alone breaks strict data residency rules, HIPAA regulations, and attorney-client privilege. Local execution eliminates third-party transmission entirely.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faq5-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                                    What happens after installation? Included compliance governance policy.
-                                </button>
-                            </h2>
-                            <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faq5-heading" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Alongside local software deployment, we hand off a pre-formulated AI Governance & Security Policy document tailored to your industry. This provides your compliance officer or managing partner with immediate documentation proving your firm's adherence to regulatory standards.
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-5 my-5">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <p class="tagline-accent mb-2">Private Setup Slot</p>
-                    <h3 class="fw-semibold text-uppercase mb-3">Request Your 30-Minute Install Call</h3>
-                    <p class="text-high-contrast small mb-4">Your email. Nothing else. We will reach out to schedule your local container deployment.</p>
+    <!-- Founder's Note Section -->
+    <section class="container py-5 my-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div style="background-color: #12141c; border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                    <div class="mb-4">
+                        <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
+                        <p class="text-info small mb-0 text-uppercase tracking-wide" style="letter-spacing: 2px;">From the Founder</p>
+                    </div>
                     
-                    <form class="row g-2 justify-content-center max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Request received. We will be in touch shortly.');">
-                        <div class="col-md-8">
-                            <input type="email" required placeholder="you@company.com" class="form-control rounded-0 bg-transparent text-white border-secondary px-4 py-3 text-center">
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-cyan-solid w-100 h-100 py-3">Submit</button>
-                        </div>
-                    </form>
+                    <p class="text-high-contrast mb-3" style="line-height: 1.8;">
+                        Like many of you, I grew tired of having my personal information exposed in multiple corporate data leaks. I experienced the frustration of receiving vague notices about joining class-action lawsuits—never knowing if they were actually legitimate—and being offered a "free year of credit monitoring" as a hollow apology from the very companies that were supposed to protect my data.
+                    </p>
+                    
+                    <p class="text-high-contrast mb-3" style="line-height: 1.8;">
+                        My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people[cite: 1]. 
+                    </p>
+
+                    <p class="text-high-contrast mb-4" style="line-height: 1.8;">
+                        I built ZMPLabs because I realized those same systemic vulnerabilities exist in how the modern workforce handles sensitive client data with cloud AI. You shouldn't have to choose between leveraging modern technology and keeping your clients' data secure. We built this local-first architecture so you never have to send another apology letter for a breach you couldn't control.
+                    </p>
+                    
+                    <div>
+                        <h6 class="fw-bold text-white mb-1">Dr. C. Alan Jones, Ph.D.</h6>
+                        <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Modal for Email Capture -->
+    <div class="modal fade" id="installModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header">
+                    <h5 class="modal-title text-info fw-bold text-uppercase">Private Setup Slot</h5>
+                    <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <h4 class="mb-3">Request Your 30-Minute Install Call</h4>
+                    <p class="text-secondary small mb-4">Your email. Nothing else. We will reach out to schedule your local container deployment.</p>
+                    <form onsubmit="event.preventDefault(); alert('Request received! We will be in touch shortly.');">
+                        <input type="email" required placeholder="you@company.com" class="form-control rounded-0 bg-transparent text-white border-secondary text-center mb-3 py-3">
+                        <button type="submit" class="btn-cyan-solid w-100 py-3">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small">
         <div class="container">
             <p class="mb-0">ZMPLabs &copy; 2026 | Zero Metadata. Your data stays local. | <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a></p>
