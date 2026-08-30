@@ -24,19 +24,15 @@
         /* Scroll behavior */
         html { 
             scroll-behavior: smooth; 
-            scroll-padding-top: 80px;
         }
 
-        /* Shadow Network Parallax Background */
         body { 
             font-family: 'Inter', sans-serif; 
             color: #ffffff; 
             background-color: #050505;
-            background-image: linear-gradient(rgba(7, 10, 14, 0.88), rgba(7, 10, 14, 0.88)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
         
         /* Scroll Progress Bar */
@@ -46,23 +42,360 @@
             left: 0;
             height: 3px;
             background: #0dcaf0;
-            z-index: 9999;
+            z-index: 10000;
             width: 0%;
             transition: width 0.1s ease;
         }
         
-        /* RIGHT-SIDE DIAGNOSTIC POP-OUT MODAL */
+        /* PARALLAX BACKGROUND SYSTEM */
+        .parallax-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Each section gets a fixed background layer */
+        .parallax-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.25;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .parallax-background.layer-1 {
+            /* Executive boardroom at night - cityscape visible through windows */
+            background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop');
+        }
+        
+        .parallax-background.layer-2 {
+            /* Dark tech abstract - network/circuit pattern */
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
+        }
+        
+        .parallax-background.layer-3 {
+            /* Modern minimalist workspace */
+            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop');
+        }
+        
+        .parallax-background.layer-4 {
+            /* Dark geometric/tech pattern */
+            background-image: url('https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2070&auto=format&fit=crop');
+        }
+        
+        /* Overlay gradient for better readability */
+        .parallax-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(5, 5, 8, 0.85) 0%, rgba(7, 10, 14, 0.92) 100%);
+        }
+        
+        /* Content sections that scroll OVER the fixed backgrounds */
+        .content-section {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 40px;
+        }
+        
+        /* Section backgrounds - solid/black with slight transparency */
+        .section-bg-dark {
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.95) 50%, rgba(5, 5, 5, 0.98) 100%);
+        }
+        
+        .section-bg-gradient {
+            background: linear-gradient(135deg, rgba(11, 12, 16, 0.92) 0%, rgba(7, 10, 14, 0.88) 100%);
+            backdrop-filter: blur(5px);
+        }
+        
+        .section-bg-solid {
+            background-color: #050505;
+        }
+        
+        /* Fade-in animation for content */
+        .content-section .container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .content-section.visible .container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Floating Panels (for card grids) */
+        .floating-panel {
+            background-color: rgba(11, 12, 16, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 202, 240, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(13, 202, 240, 0.03);
+            padding: 60px 40px;
+            border-radius: 4px;
+            margin: 0 auto;
+        }
+        
+        /* Navbar */
+        .navbar-custom { 
+            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.98) 0%, rgba(11, 12, 16, 0.85) 100%);
+            border-bottom: 1px solid rgba(13, 202, 240, 0.1); 
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link-custom { 
+            color: #aaaaaa !important; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            padding: 0 15px !important; 
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .nav-link-custom:hover, .nav-link-custom.active { 
+            color: #0dcaf0 !important; 
+        }
+        
+        /* Split Screen Hero */
+        .hero-split { 
+            display: flex; 
+            min-height: 100vh; 
+            background-color: transparent; 
+        }
+        
+        .hero-left { 
+            flex: 1; 
+            display: flex; 
+            align-items: center; 
+            padding: 5% 8%; 
+            background: transparent;
+            z-index: 2; 
+        }
+        
+        .hero-right { 
+            flex: 1; 
+            position: relative; 
+            overflow: hidden; 
+            display: none; 
+        }
+        
+        @media (min-width: 992px) { 
+            .hero-right { display: block; } 
+        }
+        
+        .bg-video-element { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            min-width: 100%; 
+            min-height: 100%; 
+            transform: translate(-50%, -50%); 
+            opacity: 0.25; 
+            object-fit: cover; 
+        }
+        
+        .hero-fade { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(90deg, rgba(5, 5, 5, 0.95) 0%, transparent 100%); 
+        }
+        
+        /* Typography & Buttons */
+        .tagline-accent { 
+            font-size: 1rem; 
+            color: #0dcaf0; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+        }
+        
+        .hero-title-bold { 
+            font-size: 2.8rem; 
+            font-weight: 700; 
+            letter-spacing: -1px; 
+            line-height: 1.15; 
+        }
+        
+        @media (min-width: 992px) {
+            .hero-title-bold { font-size: 3.5rem; }
+        }
+        
+        .text-high-contrast { 
+            color: #c5cbd3 !important; 
+        }
+        
+        .btn-cyan-solid { 
+            background: #0dcaf0; 
+            color: #0b0c10; 
+            border: none; 
+            padding: 15px 30px; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            border-radius: 0; 
+            display: inline-block; 
+            text-decoration: none;
+            transform: translateY(0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .btn-cyan-solid:hover { 
+            background: #00b8e6; 
+            color: #0b0c10;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 202, 240, 0.4);
+        }
+        
+        .btn-cyan-solid:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-outline-cyan {
+            background: transparent;
+            border: 2px solid #0dcaf0;
+            color: #0dcaf0;
+            padding: 15px 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 0;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline-cyan:hover {
+            background: rgba(13, 202, 240, 0.1);
+            color: #0dcaf0;
+            border-color: #0dcaf0;
+        }
+        
+        /* Product Cards */
+        .product-card-premium { 
+            background: rgba(18, 20, 28, 0.6); 
+            border: 1px solid rgba(13,202,240,0.1); 
+            padding: 40px 30px; 
+            border-radius: 0; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            height: 100%;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .product-card-premium:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 202, 240, 0.3);
+        }
+        
+        /* Accordion Dark Theme */
+        .accordion-dark .accordion-item { 
+            background-color: rgba(18, 20, 28, 0.6); 
+            border: 1px solid rgba(13, 202, 240, 0.1); 
+            margin-bottom: 15px; 
+            border-radius: 0; 
+        }
+        
+        .accordion-dark .accordion-button { 
+            background-color: transparent; 
+            color: #ffffff; 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            padding: 22px 25px; 
+            border-radius: 0 !important; 
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .accordion-dark .accordion-button:not(.collapsed) { 
+            background-color: rgba(24, 27, 38, 0.9); 
+            color: #0dcaf0; 
+            border-bottom: 1px solid rgba(13, 202, 240, 0.2);
+        }
+        
+        .accordion-dark .accordion-button::after { 
+            filter: invert(1); 
+        }
+        
+        .accordion-dark .accordion-body { 
+            background-color: transparent; 
+            color: #c5cbd3; 
+            font-size: 0.95rem; 
+            line-height: 1.7; 
+            padding: 25px; 
+        }
+
+        /* Modal Styling */
+        .modal-content { 
+            background-color: #12141c; 
+            border: 1px solid rgba(13,202,240,0.4); 
+            border-radius: 0; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        .modal-header { 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        }
+        
+        .btn-close-custom { 
+            filter: invert(1); 
+            opacity: 0.5;
+        }
+        
+        .form-control {
+            border-radius: 0;
+        }
+        
+        .form-control:focus {
+            border-color: #0dcaf0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+            background-color: #0b0c10;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(13, 202, 240, 0.1);
+            background: #050505;
+        }
+        
+        footer a:hover {
+            color: #0dcaf0 !important;
+        }
+        
+        /* Right-side diagnostic modal styles */
         .diagnostic-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
         .diagnostic-modal-overlay.active {
@@ -115,7 +448,6 @@
             height: 3px;
             background: rgba(13, 202, 240, 0.2);
             margin-bottom: 30px;
-            border-radius: 2px;
         }
         
         .diagnostic-progress-fill {
@@ -131,207 +463,21 @@
             font-weight: 600;
         }
         
-        .floating-panel {
-            background-color: rgba(11, 12, 16, 0.93);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(13, 202, 240, 0.15);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(13, 202, 240, 0.03);
-            margin-bottom: 80px;
-            padding: 60px 40px;
-            border-radius: 4px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .floating-panel.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Navbar */
-        .navbar-custom { 
-            background-color: #0b0c10; 
-            border-bottom: 1px solid rgba(13, 202, 240, 0.1); 
-            padding: 20px 0;
-            transition: all 0.3s ease;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar-custom.scrolled {
-            background-color: rgba(11, 12, 16, 0.98);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
-            backdrop-filter: blur(15px);
-            padding: 15px 0;
-        }
-        
-        .nav-link-custom { 
-            color: #aaaaaa !important; 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            padding: 0 15px !important; 
-            transition: color 0.2s ease;
-            text-decoration: none;
-        }
-        
-        .nav-link-custom:hover, .nav-link-custom.active { 
-            color: #0dcaf0 !important; 
-        }
-        
-        .nav-link-custom:focus {
-            outline: 2px solid #0dcaf0;
-            outline-offset: 2px;
-        }
-        
-        /* Split Screen Hero */
-        .hero-split { 
-            display: flex; 
-            min-height: 85vh; 
-            background-color: transparent; 
-            border-bottom: 1px solid rgba(13, 202, 240, 0.1); 
-            margin-bottom: 80px;
-        }
-        
-        .hero-left { 
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            padding: 5% 8%; 
-            background-color: rgba(11, 12, 16, 0.95); 
-            z-index: 2; 
-        }
-        
-        .hero-right { 
-            flex: 1; 
-            position: relative; 
-            overflow: hidden; 
-            display: none; 
-        }
-        
-        @media (min-width: 992px) { 
-            .hero-right { display: block; } 
-        }
-        
-        .bg-video-element { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            min-width: 100%; 
-            min-height: 100%; 
-            transform: translate(-50%, -50%); 
-            opacity: 0.25; 
-            object-fit: cover; 
-        }
-        
-        .hero-fade { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: linear-gradient(90deg, rgba(11, 12, 16, 0.95) 0%, transparent 100%); 
-        }
-        
-        /* Typography & Buttons */
-        .tagline-accent { 
-            font-size: 1rem; 
-            color: #0dcaf0; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-            font-weight: 600; 
-        }
-        
-        .hero-title-bold { 
-            font-size: 2.8rem; 
-            font-weight: 700; 
-            letter-spacing: -1px; 
-            line-height: 1.15; 
-        }
-        
-        @media (min-width: 992px) {
-            .hero-title-bold { font-size: 3.2rem; }
-        }
-        
-        .text-high-contrast { 
-            color: #c5cbd3 !important; 
-        }
-        
-        .btn-cyan-solid { 
-            background: #0dcaf0; 
-            color: #0b0c10; 
-            border: none; 
-            padding: 15px 30px; 
-            font-weight: 700; 
-            letter-spacing: 1px; 
-            text-transform: uppercase; 
-            border-radius: 0; 
-            display: inline-block; 
-            text-decoration: none;
-            transform: translateY(0);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
-        }
-        
-        .btn-cyan-solid:hover { 
-            background: #00b8e6; 
-            color: #0b0c10;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(13, 202, 240, 0.4);
-        }
-        
-        .btn-cyan-solid:active {
-            transform: translateY(0);
-        }
-        
-        .btn-cyan-solid:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-outline-cyan {
-            background: transparent;
-            border: 2px solid #0dcaf0;
-            color: #0dcaf0;
-            padding: 15px 30px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 0;
-            display: inline-block;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .btn-outline-cyan:hover {
-            background: rgba(13, 202, 240, 0.1);
-            color: #0dcaf0;
-            border-color: #0dcaf0;
-        }
-        
-        /* Rating Options */
         .rating-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 18px;
             background: rgba(18, 20, 28, 0.7);
             border: 2px solid rgba(13, 202, 240, 0.2);
-            border-radius: 0;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-width: 60px;
+            min-width: 55px;
             text-align: center;
         }
         
         .rating-option:hover {
             border-color: #0dcaf0;
-            transform: translateY(-2px);
         }
         
         .rating-option.selected {
@@ -346,28 +492,16 @@
         }
         
         .rating-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #aaaaaa;
-            margin-top: 8px;
+            margin-top: 6px;
         }
         
         .rating-options-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: space-between;
-            margin-top: 15px;
-        }
-        
-        .risk-status-low {
-            color: #28a745 !important;
-        }
-        
-        .risk-status-medium {
-            color: #ffc107 !important;
-        }
-        
-        .risk-status-high {
-            color: #dc3545 !important;
+            margin-top: 12px;
         }
         
         .risk-badge {
@@ -396,104 +530,6 @@
             color: #28a745;
         }
         
-        /* Product Cards */
-        .product-card-premium { 
-            background: rgba(18, 20, 28, 0.7); 
-            border: 1px solid rgba(13,202,240,0.1); 
-            padding: 40px 30px; 
-            border-radius: 0; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            height: 100%;
-            transition: transform 0.2s ease;
-        }
-        
-        .product-card-premium:hover {
-            transform: translateY(-5px);
-            border-color: rgba(13, 202, 240, 0.3);
-        }
-        
-        /* Accordion Dark Theme */
-        .accordion-dark .accordion-item { 
-            background-color: rgba(18, 20, 28, 0.7); 
-            border: 1px solid rgba(13, 202, 240, 0.1); 
-            margin-bottom: 15px; 
-            border-radius: 0; 
-        }
-        
-        .accordion-dark .accordion-button { 
-            background-color: transparent; 
-            color: #ffffff; 
-            font-weight: 600; 
-            font-size: 1.1rem; 
-            padding: 22px 25px; 
-            border-radius: 0 !important; 
-            box-shadow: none;
-            outline: none;
-        }
-        
-        .accordion-dark .accordion-button:not(.collapsed) { 
-            background-color: rgba(24, 27, 38, 0.9); 
-            color: #0dcaf0; 
-            border-bottom: 1px solid rgba(13, 202, 240, 0.2);
-        }
-        
-        .accordion-dark .accordion-button::after { 
-            filter: invert(1); 
-        }
-        
-        .accordion-dark .accordion-body { 
-            background-color: transparent; 
-            color: #c5cbd3; 
-            font-size: 0.95rem; 
-            line-height: 1.7; 
-            padding: 25px; 
-        }
-
-        /* Modal Styling */
-        .modal-content { 
-            background-color: #12141c; 
-            border: 1px solid rgba(13,202,240,0.4); 
-            border-radius: 0; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        
-        .modal-header { 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-        }
-        
-        .btn-close-custom { 
-            filter: invert(1); 
-            opacity: 0.5;
-        }
-        
-        .btn-close-custom:hover {
-            opacity: 1;
-        }
-        
-        .form-control {
-            border-radius: 0;
-        }
-        
-        .form-control:focus {
-            border-color: #0dcaf0;
-            box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
-            background-color: #0b0c10;
-        }
-        
-        /* Section spacing */
-        section {
-            scroll-margin-top: 80px;
-        }
-        
-        /* Footer */
-        footer {
-            border-top: 1px solid rgba(13, 202, 240, 0.1);
-        }
-        
-        footer a:hover {
-            color: #0dcaf0 !important;
-        }
-        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .diagnostic-modal {
@@ -512,6 +548,10 @@
             .hero-title-bold {
                 font-size: 2rem;
             }
+            
+            .content-section {
+                padding: 60px 20px;
+            }
         }
     </style>
 </head>
@@ -519,8 +559,16 @@
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
+    <!-- PARALLAX BACKGROUNDS (Fixed Layers) -->
+    <div class="parallax-wrapper">
+        <div class="parallax-background layer-1" aria-hidden="true"></div>
+        <div class="parallax-background layer-2" aria-hidden="true"></div>
+        <div class="parallax-background layer-3" aria-hidden="true"></div>
+        <div class="parallax-background layer-4" aria-hidden="true"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-custom" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand fw-bold text-white fs-4" href="index.html">ZMPLabs</a>
             <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -535,35 +583,32 @@
                     <li class="nav-item"><a class="nav-link-custom" href="#contact">Contact</a></li>
                 </ul>
             </div>
-            <div class="d-none d-lg-flex align-items-center text-white gap-4">
-                <i class="bi bi-shield-lock text-info fs-5" aria-hidden="true"></i>
-            </div>
         </div>
     </nav>
 
-    <!-- Split Hero Section -->
-    <header class="hero-split">
-        <div class="hero-left">
+    <!-- SECTION 1: HERO (Over Layer 1 - Executive Boardroom) -->
+    <section class="content-section section-bg-transparent hero-split" id="heroSection">
+        <div class="hero-left container-fluid">
             <div>
                 <p class="tagline-accent mb-3">Security by Invisibility</p>
                 <h1 class="hero-title-bold text-uppercase mb-4">
                     Processing Client Data Without <span class="text-info">Risking Confidentiality?</span>
                 </h1>
-                <p class="fs-5 text-high-contrast mb-5">
+                <p class="fs-5 text-high-contrast mb-5" style="max-width: 540px;">
                     Stop pasting PHI, legal discovery materials, or sensitive financial records into public cloud AI tools. Process client data safely with fully private, local AI built for regulated industries.
                 </p>
                 
-                <div class="d-flex flex-column flex-md-row gap-3">
+                <div class="d-flex flex-column flex-md-row gap-3 mb-5">
                     <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
                         Start Free Assessment <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                     </button>
-                    <a href="#process" class="btn-outline-cyan">
+                    <a href="#about" class="btn-outline-cyan">
                         See How It Works
                     </a>
                 </div>
                 
-                <!-- Social Proof - UPDATED with HR & Academic Research -->
-                <div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
+                <!-- Social Proof -->
+                <div class="pt-4 border-top border-secondary border-opacity-25">
                     <p class="small text-secondary mb-3">Trusted by compliance teams at:</p>
                     <div class="d-flex gap-4 flex-wrap align-items-center">
                         <span class="text-secondary small">Legal Firms</span>
@@ -585,7 +630,176 @@
             </video>
             <div class="hero-fade"></div>
         </div>
-    </header>
+    </section>
+
+    <!-- SECTION 2: FEATURES (Over Layer 2 - Tech Abstract) -->
+    <section class="content-section section-bg-dark" id="about">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
+                <h2 class="fw-semibold text-uppercase">Build a Compliance-Proof Workflow</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-cpu text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Unblock Insights</h4>
+                        <p class="text-high-contrast small mb-0">Safely process PHI, financial data, and legal discovery locally without fear of third-party cloud data breaches or data retention policies.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-shield-check text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Zero Cloud Exposure</h4>
+                        <p class="text-high-contrast small mb-0">Keep 100% of your clients' data on your machine. Your work never touches external servers, public APIs, or vendor training pipelines.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-file-earmark-lock text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Regulatory Alignment</h4>
+                        <p class="text-high-contrast small mb-0">Leverage local LLMs while adhering to HIPAA Privacy Rule, SEC Reg S-P, ABA Model Rule 1.6, GDPR, and client NDAs without BAA complexity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PROCESS (Over Layer 3 - Workspace) -->
+    <section class="content-section section-bg-gradient" id="process">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Guided Deployment Protocol</p>
+                <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Setup</h2>
+            </div>
+            <div class="row text-center g-4 justify-content-center">
+                <div class="col-md-3">
+                    <div class="mb-3" aria-hidden="true"><i class="bi bi-search text-info fs-2"></i></div>
+                    <h5 class="text-info fw-bold">01. ASSESS</h5>
+                    <p class="text-high-contrast small">We audit your current AI workflows, identify compliance gaps, and map data flows to regulatory requirements.</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3" aria-hidden="true"><i class="bi bi-box-seam text-info fs-2"></i></div>
+                    <h5 class="text-info fw-bold">02. DEPLOY</h5>
+                    <p class="text-high-contrast small">Containerized open-weight models install on your hardware with optimized performance for your CPU/GPU configuration.</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3" aria-hidden="true"><i class="bi bi-verification text-info fs-2"></i></div>
+                    <h5 class="text-info fw-bold">03. VERIFY</h5>
+                    <p class="text-high-contrast small">Network isolation testing confirms zero outbound telemetry. Memory-only execution validated with Wireshark analysis.</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3" aria-hidden="true"><i class="bi bi-journal-text text-info fs-2"></i></div>
+                    <h5 class="text-info fw-bold">04. DOCUMENT</h5>
+                    <p class="text-high-contrast small">Receive IT & Compliance Governance Policy, threat model documentation, and audit trail templates for internal review.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FAQ (Over Layer 4 - Geometric) -->
+    <section class="content-section section-bg-dark" id="faq">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Technical Questions Addressed</p>
+                <h2 class="fw-semibold text-uppercase">Common Implementation Questions</h2>
+                <p class="text-high-contrast small">Everything your IT and Compliance teams need to know.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion accordion-dark" id="faqAccordion" role="region" aria-label="Frequently Asked Questions">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1-heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                    Does my laptop need expensive custom GPUs to run this?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq1-heading">
+                                <div class="accordion-body">
+                                    No. Modern executive hardware—Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or Windows laptops with NVIDIA RTX 3060+ can run high-performance 7B-13B parameter models comfortably. During setup, we benchmark and configure the exact model size optimized for your RAM capacity and GPU VRAM.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    How can I prove to IT that data never leaves my machine?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq2-heading">
+                                <div class="accordion-body">
+                                    Our Zero-Metadata Protocol ensures prompts and outputs are processed strictly in system RAM, cleared immediately after each session. You can: (1) disconnect WiFi during testing, (2) monitor network traffic with Wireshark, or (3) run the tool in a VM with no network adapter. We also provide signed threat model documentation.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    Do I need coding expertise to operate this?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq3-heading">
+                                <div class="accordion-body">
+                                    Zero coding required. We handle the entire containerized installation during a guided 30-minute setup call. You receive a desktop application interface that works as intuitively as ChatGPT or Claude—paste text, get answers, delete session data with one click.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: FOUNDERS NOTE + CONTACT (Over Layer 1 Again - bookend) -->
+    <section class="content-section section-bg-solid" id="contact">
+        <div class="container">
+            <!-- Founder's Note -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10">
+                    <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px;">
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
+                            <p class="text-info small mb-0 text-uppercase tracking-wide" style="letter-spacing: 2px;">From the Founder</p>
+                        </div>
+                        
+                        <p class="text-high-contrast mb-3" style="line-height: 1.8;">
+                            Like many professionals, I grew frustrated watching sensitive client data flow through third-party cloud services with opaque retention policies. I've seen the aftermath of data leaks—vague breach notifications, hollow credit monitoring offers from companies that failed to protect what was entrusted to them.
+                        </p>
+                        
+                        <p class="text-high-contrast mb-4" style="line-height: 1.8;">
+                            ZMPLabs exists because you shouldn't have to choose between leveraging modern AI capabilities and maintaining fiduciary duty to your clients. Local-first architecture means you control every byte.
+                        </p>
+                        
+                        <div>
+                            <h6 class="fw-bold text-white mb-1">Dr. C. Alan Jones</h6>
+                            <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
+                    <p class="text-high-contrast mb-5">
+                        Book your free 30-minute deployment consultation. We'll assess your current setup and walk through the installation process live.
+                    </p>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
+                            Request Installation Call
+                        </button>
+                        <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan">
+                            <i class="bi bi-envelope me-2" aria-hidden="true"></i>Email Us Directly
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- RIGHT-SIDE DIAGNOSTIC MODAL -->
     <div class="diagnostic-modal-overlay" id="diagnosticOverlay" onclick="closeDiagnosticModal()"></div>
@@ -595,7 +809,6 @@
             <i class="bi bi-x-lg"></i>
         </button>
         
-        <!-- Questionnaire View -->
         <div id="questionnaireView">
             <div class="mb-4">
                 <div class="diagnostic-progress-bar">
@@ -607,8 +820,7 @@
             <h2 class="fw-bold text-uppercase mb-4">Compliance Risk Diagnostic</h2>
             <p class="text-high-contrast mb-4">Answer 3 quick questions to assess your current exposure risk.</p>
 
-            <!-- Question 1 -->
-            <div class="floating-panel p-4" style="opacity: 1; transform: translateY(0);" id="q1">
+            <div class="floating-panel p-4" style="margin: 0 0 20px 0;" id="q1">
                 <p class="fw-semibold mb-3">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
                 <div class="rating-options-row">
                     <div class="rating-option" onclick="selectRating(1, 1)">
@@ -631,8 +843,7 @@
                 </div>
             </div>
 
-            <!-- Question 2 -->
-            <div class="floating-panel p-4" style="opacity: 1; transform: translateY(0);" id="q2">
+            <div class="floating-panel p-4" style="margin: 0 0 20px 0;" id="q2">
                 <p class="fw-semibold mb-3">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
                 <div class="rating-options-row">
                     <div class="rating-option" onclick="selectRating(2, 1)">
@@ -655,9 +866,8 @@
                 </div>
             </div>
 
-            <!-- Question 3 -->
-            <div class="floating-panel p-4" style="opacity: 1; transform: translateY(0);" id="q3">
-                <p class="fw-semibold mb-3">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
+            <div class="floating-panel p-4" style="margin: 0;" id="q3">
+                <p class="fw-semibold mb-3">3. How concerned are you that AI-generated errors might slip past manual review?</p>
                 <div class="rating-options-row">
                     <div class="rating-option" onclick="selectRating(3, 1)">
                         <span class="rating-number">1</span>
@@ -686,7 +896,6 @@
             </div>
         </div>
 
-        <!-- Results View -->
         <div id="resultsView" style="display: none;">
             <div class="mb-4">
                 <div class="diagnostic-progress-bar" style="background: rgba(13, 202, 240, 0.3);">
@@ -698,16 +907,15 @@
             <h2 class="fw-bold text-uppercase mb-2">Your Status:</h2>
             <span id="riskBadge" class="risk-badge risk-badge-high"></span>
             
-            <div class="floating-panel p-4 text-start mt-4" style="opacity: 1; transform: translateY(0);">
-                <p id="riskExplanation" class="text-high-contrast fs-6 mb-4" style="line-height: 1.8;">
-                </p>
+            <div class="floating-panel p-4 text-start mt-4" style="margin: 0;">
+                <p id="riskExplanation" class="text-high-contrast fs-6 mb-4" style="line-height: 1.8;"></p>
                 
                 <hr class="border-secondary border-opacity-25 mb-4">
                 
                 <div class="mb-4">
                     <p class="text-info fw-semibold mb-2">Next Steps:</p>
                     <p class="text-high-contrast small">
-                        Request a 30-minute vulnerability discussion. We'll audit your current workflow and demonstrate how a local deployment closes exposure gaps without disrupting operations.
+                        Request a 30-minute vulnerability discussion. We'll audit your current workflow and demonstrate how a local deployment closes exposure gaps.
                     </p>
                 </div>
                 
@@ -716,7 +924,7 @@
                         <input type="email" id="resultEmail" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary" aria-required="true">
                         <button type="submit" class="btn-cyan-solid px-4">Request Install Slot</button>
                     </div>
-                    <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only. Nothing else.</p>
+                    <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only.</p>
                 </form>
                 
                 <button class="btn-outline-cyan w-100 mt-3" onclick="resetDiagnostic()">
@@ -725,232 +933,16 @@
             </div>
         </div>
     </div>
-    <!-- END RIGHT-SIDE DIAGNOSTIC MODAL -->
-
-    <!-- Features Section (Floating Panel) -->
-    <section id="about" class="container floating-panel">
-        <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
-            <h2 class="fw-semibold text-uppercase">Build a Compliance-Proof Workflow</h2>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="product-card-premium h-100">
-                    <div class="mb-3" aria-hidden="true"><i class="bi bi-cpu text-info fs-3"></i></div>
-                    <h4 class="text-info mb-3">Unblock Insights</h4>
-                    <p class="text-high-contrast small mb-0">Safely process PHI, financial data, and legal discovery locally without fear of third-party cloud data breaches or data retention policies.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card-premium h-100">
-                    <div class="mb-3" aria-hidden="true"><i class="bi bi-shield-check text-info fs-3"></i></div>
-                    <h4 class="text-info mb-3">Zero Cloud Exposure</h4>
-                    <p class="text-high-contrast small mb-0">Keep 100% of your clients' data on your machine. Your work never touches external servers, public APIs, or vendor training pipelines.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card-premium h-100">
-                    <div class="mb-3" aria-hidden="true"><i class="bi bi-file-earmark-lock text-info fs-3"></i></div>
-                    <h4 class="text-info mb-3">Regulatory Alignment</h4>
-                    <p class="text-high-contrast small mb-0">Leverage local LLMs while adhering to HIPAA Privacy Rule, SEC Reg S-P, ABA Model Rule 1.6, GDPR, and client NDAs without BAA complexity.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Setup Timeline (Floating Panel) -->
-    <section id="process" class="container floating-panel">
-        <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Guided Deployment Protocol</p>
-            <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Setup</h2>
-        </div>
-        <div class="row text-center g-4 justify-content-center">
-            <div class="col-md-3">
-                <div class="mb-3" aria-hidden="true"><i class="bi bi-search text-info fs-2"></i></div>
-                <h5 class="text-info fw-bold">01. ASSESS</h5>
-                <p class="text-high-contrast small">We audit your current AI workflows, identify compliance gaps, and map data flows to regulatory requirements.</p>
-            </div>
-            <div class="col-md-3">
-                <div class="mb-3" aria-hidden="true"><i class="bi bi-box-seam text-info fs-2"></i></div>
-                <h5 class="text-info fw-bold">02. DEPLOY</h5>
-                <p class="text-high-contrast small">Containerized open-weight models install on your hardware with optimized performance for your CPU/GPU configuration.</p>
-            </div>
-            <div class="col-md-3">
-                <div class="mb-3" aria-hidden="true"><i class="bi bi-verification text-info fs-2"></i></div>
-                <h5 class="text-info fw-bold">03. VERIFY</h5>
-                <p class="text-high-contrast small">Network isolation testing confirms zero outbound telemetry. Memory-only execution validated with Wireshark analysis.</p>
-            </div>
-            <div class="col-md-3">
-                <div class="mb-3" aria-hidden="true"><i class="bi bi-journal-text text-info fs-2"></i></div>
-                <h5 class="text-info fw-bold">04. DOCUMENT</h5>
-                <p class="text-high-contrast small">Receive IT & Compliance Governance Policy, threat model documentation, and audit trail templates for internal review.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section (Floating Panel) -->
-    <section id="faq" class="container floating-panel">
-        <div class="text-center mb-5">
-            <p class="tagline-accent mb-2">Technical Questions Addressed</p>
-            <h2 class="fw-semibold text-uppercase">Common Implementation Questions</h2>
-            <p class="text-high-contrast small">Everything your IT and Compliance teams need to know.</p>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="accordion accordion-dark" id="faqAccordion" role="region" aria-label="Frequently Asked Questions">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq1-heading">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                                Does my laptop or desktop need expensive custom GPUs to run this?
-                            </button>
-                        </h2>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq1-heading">
-                            <div class="accordion-body">
-                                No. Modern executive hardware—Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or Windows laptops with NVIDIA RTX 3060+ can run high-performance 7B-13B parameter models comfortably. During setup, we benchmark and configure the exact model size optimized for your RAM capacity and GPU VRAM.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq2-heading">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                                How can I prove to IT or Compliance that data never leaves my machine?
-                            </button>
-                        </h2>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq2-heading">
-                            <div class="accordion-body">
-                                Our Zero-Metadata Protocol ensures prompts and outputs are processed strictly in system RAM, cleared immediately after each session. You can: (1) disconnect WiFi during testing, (2) monitor network traffic with Wireshark, or (3) run the tool in a VM with no network adapter. We also provide signed threat model documentation describing the isolation guarantees.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq3-heading">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                                Do I need coding or technical expertise to operate this?
-                            </button>
-                        </h2>
-                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq3-heading">
-                            <div class="accordion-body">
-                                Zero coding required. We handle the entire containerized installation during a guided 30-minute setup call. You receive a desktop application interface that works as intuitively as ChatGPT or Claude—paste text, get answers, delete session data with one click. All complexity is abstracted away.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq4-heading">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                                How do model updates and security patches work?
-                            </button>
-                        </h2>
-                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq4-heading">
-                            <div class="accordion-body">
-                                Monthly security update packages are delivered via encrypted installer. You control when updates are applied—they're offline-capable and take approximately 10 minutes. We notify subscribers of critical vulnerabilities within 48 hours with patch instructions. Version history and changelogs are documented publicly.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="faq5-heading">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                                What happens if my hardware fails? Is there backup/recovery?
-                            </button>
-                        </h2>
-                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq5-heading">
-                            <div class="accordion-body">
-                                The deployment package is portable—we provide a USB-installable backup version and cloud-stored license key. In case of hardware failure, you restore to replacement hardware within 2 hours. Session data is never persisted by default (memory-only), so there's no recovery needed for working documents—you maintain your own document backups as usual.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Founder's Note Section (Floating Panel) -->
-    <section class="container floating-panel">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0;">
-                    <div class="mb-4">
-                        <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
-                        <p class="text-info small mb-0 text-uppercase tracking-wide" style="letter-spacing: 2px;">From the Founder</p>
-                    </div>
-                    
-                    <p class="text-high-contrast mb-3" style="line-height: 1.8;">
-                        Like many professionals, I grew frustrated watching sensitive client data flow through third-party cloud services with opaque retention policies. I've seen the aftermath of data leaks—vague breach notifications, hollow credit monitoring offers from companies that failed to protect what was entrusted to them.
-                    </p>
-                    
-                    <p class="text-high-contrast mb-3" style="line-height: 1.8;">
-                        My background combines public policy research with practical cybersecurity implementation. During doctoral research focused on systemic barriers in institutional access, I learned how structural vulnerabilities disproportionately impact marginalized communities. Those insights transferred directly to understanding workforce data-handling vulnerabilities.
-                    </p>
-
-                    <p class="text-high-contrast mb-4" style="line-height: 1.8;">
-                        ZMPLabs exists because you shouldn't have to choose between leveraging modern AI capabilities and maintaining fiduciary duty to your clients. Local-first architecture means you control every byte. No more apology letters for breaches you couldn't prevent. No more wondering if your vendor's "secure" infrastructure actually protects what matters.
-                    </p>
-                    
-                    <div>
-                        <h6 class="fw-bold text-white mb-1">Dr. C. Alan Jones</h6>
-                        <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Install CTA Section -->
-    <section id="contact" class="container floating-panel text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
-                <p class="text-high-contrast mb-5">
-                    Book your free 30-minute deployment consultation. We'll assess your current setup and walk through the installation process live.
-                </p>
-                <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                    <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
-                        Request Installation Call
-                    </button>
-                    <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan">
-                        <i class="bi bi-envelope me-2" aria-hidden="true"></i>Email Us Directly
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Legacy Email Modal (kept for backward compatibility) -->
-    <div class="modal fade" id="installModal" tabindex="-1" aria-labelledby="installModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-3">
-                <div class="modal-header">
-                    <h5 class="modal-title text-info fw-bold text-uppercase" id="installModalLabel">Private Setup Slot Request</h5>
-                    <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <h4 class="mb-3">Schedule Your 30-Minute Install Call</h4>
-                    <p class="text-secondary small mb-4">We only need your email. We'll respond within 24 business hours to coordinate your local deployment.</p>
-                    <form id="contactForm" onsubmit="handleLegacySubmit(event)">
-                        <div class="mb-3">
-                            <label for="legacyEmailInput" class="visually-hidden">Email address</label>
-                            <input type="email" id="legacyEmailInput" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary text-center py-3" aria-required="true">
-                        </div>
-                        <button type="submit" class="btn-cyan-solid w-100 py-3">Submit Request</button>
-                    </form>
-                    <p class="text-secondary small mt-3 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your data stays confidential. No spam, ever.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- END MODAL -->
 
     <!-- Footer -->
     <footer class="py-4 text-center">
         <div class="container">
             <p class="mb-2">ZMPLabs &copy; 2026 | Zero Metadata Architecture</p>
             <p class="mb-2">
-                <a href="#" class="text-secondary text-decoration-none small" aria-label="Privacy Policy">Privacy Policy</a>
+                <a href="#" class="text-secondary text-decoration-none small">Privacy Policy</a>
                 <span class="text-secondary mx-2">|</span>
-                <a href="#" class="text-secondary text-decoration-none small" aria-label="Terms of Service">Terms of Service</a>
+                <a href="#" class="text-secondary text-decoration-none small">Terms of Service</a>
             </p>
             <p class="text-secondary small mb-0">
                 <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a>
@@ -962,215 +954,138 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Diagnostic state
-        const diagnosticState = {
-            q1: 0,
-            q2: 0,
-            q3: 0
-        };
+        const diagnosticState = { q1: 0, q2: 0, q3: 0 };
 
-        let currentQuestion = 1;
-
-        // OPEN RIGHT-SIDE MODAL
+        // Open/Close Modal
         function openDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.add('active');
             document.getElementById('diagnosticOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            
-            // Reset to questionnaire view
+            document.body.style.overflow = 'hidden';
             document.getElementById('questionnaireView').style.display = 'block';
             document.getElementById('resultsView').style.display = 'none';
-            currentQuestion = 1;
-            updateStepCounter();
+            diagnosticState.q1 = 0;
+            diagnosticState.q2 = 0;
+            diagnosticState.q3 = 0;
+            document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('analyzeBtn').disabled = true;
             updateProgress();
         }
 
-        // CLOSE MODAL
         function closeDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.remove('active');
             document.getElementById('diagnosticOverlay').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // UPDATE STEP COUNTER TEXT
-        function updateStepCounter() {
-            document.getElementById('stepCounter').textContent = `Question ${currentQuestion} / 3`;
-        }
-
-        // UPDATE PROGRESS BAR
-        function updateProgress() {
-            const answered = Object.values(diagnosticState).filter(v => v > 0).length;
-            const percentage = (answered / 3) * 100;
-            document.getElementById('progressFill').style.width = percentage + '%';
-        }
-
-        // SELECT RATING
         function selectRating(questionNum, value) {
             diagnosticState['q' + questionNum] = value;
-            
-            // Visual feedback
             const questionDiv = document.getElementById('q' + questionNum);
             const options = questionDiv.querySelectorAll('.rating-option');
             options.forEach(opt => opt.classList.remove('selected'));
             options[value - 1].classList.add('selected');
-            
             updateProgress();
             checkAnalysisReady();
         }
 
-        // CHECK IF READY TO ANALYZE
+        function updateProgress() {
+            const answered = Object.values(diagnosticState).filter(v => v > 0).length;
+            document.getElementById('progressFill').style.width = ((answered / 3) * 100) + '%';
+        }
+
         function checkAnalysisReady() {
             const allAnswered = Object.values(diagnosticState).every(v => v > 0);
             document.getElementById('analyzeBtn').disabled = !allAnswered;
         }
 
-        // ANALYZE RISK AND SHOW RESULTS
         function analyzeRisk() {
             const totalScore = diagnosticState.q1 + diagnosticState.q2 + diagnosticState.q3;
-            
-            // Hide questionnaire, show results
             document.getElementById('questionnaireView').style.display = 'none';
             document.getElementById('resultsView').style.display = 'block';
             
-            // Set status badge and explanation based on score
             const badgeEl = document.getElementById('riskBadge');
             const expEl = document.getElementById('riskExplanation');
             
             if (totalScore >= 9) {
-                // HIGH RISK (9-15)
                 badgeEl.textContent = 'HIGH EXPOSURE RISK';
                 badgeEl.className = 'risk-badge risk-badge-high';
-                expEl.innerHTML = `It looks like your team is moving fast and adopting AI, which is great for productivity but currently leaves your firm exposed to data leaks and compliance audits. You shouldn't have to choose between innovation and security. Let's sit down for a brief chat about how a local, air-gapped deployment can keep your team moving while completely protecting your license and client data.`;
+                expEl.innerHTML = `It looks like your team is moving fast and adopting AI, which is great for productivity but currently leaves your firm exposed to data leaks and compliance audits. You shouldn't have to choose between innovation and security.`;
             } else if (totalScore >= 6) {
-                // MODERATE RISK (6-8)
                 badgeEl.textContent = 'MODERATE EXPOSURE RISK';
                 badgeEl.className = 'risk-badge risk-badge-medium';
-                expEl.innerHTML = `You've clearly put thought into your baseline AI protections, but relying on public cloud APIs still leaves a frustrating gray area when it comes to true auditability. We help firms eliminate that gray area. Let's schedule a quick discussion to explore how a local AI deployment can close those remaining gaps without disrupting your current workflow.`;
+                expEl.innerHTML = `You've clearly put thought into your baseline AI protections, but relying on public cloud APIs still leaves a frustrating gray area when it comes to true auditability.`;
             } else {
-                // LOW RISK (3-5)
                 badgeEl.textContent = 'LOW EXPOSURE RISK';
                 badgeEl.className = 'risk-badge risk-badge-low';
-                expEl.innerHTML = `Great news—it looks like your firm is taking data privacy seriously and maintaining a strong security posture. Because AI regulations are evolving at lightning speed, it never hurts to have a second set of eyes on your architecture. If you'd ever like to map out potential blind spots or just talk shop about the future of local AI, I'd love to connect.`;
+                expEl.innerHTML = `Great news—it looks like your firm is taking data privacy seriously and maintaining a strong security posture.`;
             }
         }
 
-        // HANDLE RESULT SUBMIT
         function handleResultSubmit(event) {
             event.preventDefault();
             const email = document.getElementById('resultEmail').value;
-            
-            alert(`Thank you! We've received your request at ${email}. We'll contact you within 24 business hours.`);
+            alert(`Thank you! We've received your request at ${email}.`);
             document.getElementById('resultEmailForm').reset();
         }
 
-        // RESET DIAGNOSTIC
         function resetDiagnostic() {
             diagnosticState.q1 = 0;
             diagnosticState.q2 = 0;
             diagnosticState.q3 = 0;
-            currentQuestion = 1;
-            
             document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
             document.getElementById('analyzeBtn').disabled = true;
             updateProgress();
-            updateStepCounter();
-            
             document.getElementById('questionnaireView').style.display = 'block';
             document.getElementById('resultsView').style.display = 'none';
         }
 
-        // HANDLE LEGACY MODAL SUBMIT
-        function handleLegacySubmit(event) {
-            event.preventDefault();
-            const email = document.getElementById('legacyEmailInput').value;
-            
-            alert(`Thank you! We've received your request at ${email}. We'll contact you within 24 business hours.`);
-            document.getElementById('contactForm').reset();
-            
-            const modal = bootstrap.Modal.getInstance(document.getElementById('installModal'));
-            modal.hide();
-        }
-
-        // SCROLL ANIMATIONS & PROGRESS
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.floating-panel').forEach(panel => {
-            observer.observe(panel);
-        });
-
+        // Parallax background visibility based on scroll position
         window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar-custom');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-            
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
+            const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             const progressBar = document.querySelector('.scroll-progress');
-            if (progressBar) {
-                progressBar.style.width = scrollPercent + '%';
-            }
-        });
+            if (progressBar) progressBar.style.width = scrollPercent + '%';
 
-        // SMOOTH SCROLL FOR ANCHORS
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+            // Show/hide parallax layers based on viewport position
+            const windowHeight = window.innerHeight;
+            const sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < windowHeight && rect.bottom > 0;
                 
-                e.preventDefault();
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const headerHeight = document.querySelector('.navbar-custom').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                if (isVisible) {
+                    section.classList.add('visible');
                     
-                    const navbarCollapse = document.querySelector('.navbar-collapse');
-                    if (navbarCollapse.classList.contains('show')) {
-                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-                        bsCollapse.hide();
+                    // Activate corresponding background layer
+                    const layers = document.querySelectorAll('.parallax-background');
+                    layers.forEach(layer => layer.style.opacity = '0.25');
+                    if (layers[index]) {
+                        layers[index].style.opacity = '0.35';
                     }
                 }
             });
         });
 
-        // ESC KEY TO CLOSE MODAL
+        // ESC key closes modal
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('diagnosticModal').classList.contains('active')) {
-                closeDiagnosticModal();
-            }
+            if (e.key === 'Escape') closeDiagnosticModal();
         });
 
-        // INIT FIRST PANEL VISIBLE
-        window.addEventListener('load', () => {
-            document.querySelector('.floating-panel')?.classList.add('visible');
-        });
-
-        // KEYBOARD NAVIGATION
-        document.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    button.click();
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            document.querySelector('.content-section')?.classList.add('visible');
         });
     </script>
 </body>
