@@ -10,41 +10,42 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-        /* Digital Vault Parallax Background */
+        /* Shadow Network Parallax Background */
         body { 
             font-family: 'Inter', sans-serif; 
             color: #ffffff; 
             background-color: #050505;
-            background-image: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.85)), url('https://images.unsplash.com/photo-1614036417651-1d473c6e4e7a?q=80&w=2070&auto=format&fit=crop');
+            /* Using a dark, high-tech network nodes background */
+            background-image: linear-gradient(rgba(7, 10, 14, 0.88), rgba(7, 10, 14, 0.88)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
         
-        /* Floating Panels */
+        /* Floating Panels - Slight transparency & subtle cyan edge */
         .floating-panel {
-            background-color: #0b0c10;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-top: 1px solid rgba(13, 202, 240, 0.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            background-color: rgba(11, 12, 16, 0.93);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 202, 240, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(13, 202, 240, 0.03);
             margin-bottom: 80px;
             padding: 60px 40px;
             border-radius: 4px;
         }
         
         /* Navbar */
-        .navbar-custom { background-color: #0b0c10; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
+        .navbar-custom { background-color: #0b0c10; border-bottom: 1px solid rgba(13, 202, 240, 0.1); padding: 20px 0; }
         .nav-link-custom { color: #aaaaaa !important; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0 15px !important; transition: color 0.2s ease; }
         .nav-link-custom:hover, .nav-link-custom.active { color: #0dcaf0 !important; }
         
         /* Split Screen Hero */
-        .hero-split { display: flex; min-height: 85vh; background-color: #0b0c10; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 80px;}
-        .hero-left { flex: 1; display: flex; align-items: center; padding: 5% 8%; background-color: #0b0c10; z-index: 2; }
+        .hero-split { display: flex; min-height: 85vh; background-color: transparent; border-bottom: 1px solid rgba(13, 202, 240, 0.1); margin-bottom: 80px;}
+        .hero-left { flex: 1; display: flex; align-items: center; padding: 5% 8%; background-color: rgba(11, 12, 16, 0.95); z-index: 2; }
         .hero-right { flex: 1; position: relative; overflow: hidden; display: none; }
         @media (min-width: 992px) { .hero-right { display: block; } }
-        .bg-video-element { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); opacity: 0.3; object-fit: cover; }
-        .hero-fade { position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, #0b0c10 0%, transparent 100%); }
+        .bg-video-element { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); opacity: 0.25; object-fit: cover; }
+        .hero-fade { position: absolute; top:0; left:0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(11, 12, 16, 0.95) 0%, transparent 100%); }
         
         /* Typography & Buttons */
         .tagline-accent { font-size: 1rem; color: #0dcaf0; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
@@ -54,17 +55,17 @@
         .btn-cyan-solid:hover { background: #00b8e6; color: #0b0c10; }
         
         /* Product Cards */
-        .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .product-card-premium { background: rgba(18, 20, 28, 0.7); border: 1px solid rgba(13,202,240,0.1); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         
         /* Accordion Dark Theme */
-        .accordion-dark .accordion-item { background-color: #12141c; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 15px; border-radius: 0; }
-        .accordion-dark .accordion-button { background-color: #12141c; color: #ffffff; font-weight: 600; font-size: 1.1rem; padding: 22px 25px; border-radius: 0 !important; box-shadow: none; }
-        .accordion-dark .accordion-button:not(.collapsed) { background-color: #181b26; color: #0dcaf0; border-bottom: 1px solid rgba(13, 202, 240, 0.2); }
+        .accordion-dark .accordion-item { background-color: rgba(18, 20, 28, 0.7); border: 1px solid rgba(13, 202, 240, 0.1); margin-bottom: 15px; border-radius: 0; }
+        .accordion-dark .accordion-button { background-color: transparent; color: #ffffff; font-weight: 600; font-size: 1.1rem; padding: 22px 25px; border-radius: 0 !important; box-shadow: none; }
+        .accordion-dark .accordion-button:not(.collapsed) { background-color: rgba(24, 27, 38, 0.9); color: #0dcaf0; border-bottom: 1px solid rgba(13, 202, 240, 0.2); }
         .accordion-dark .accordion-button::after { filter: invert(1); }
-        .accordion-dark .accordion-body { background-color: #12141c; color: #c5cbd3; font-size: 0.95rem; line-height: 1.7; padding: 25px; }
+        .accordion-dark .accordion-body { background-color: transparent; color: #c5cbd3; font-size: 0.95rem; line-height: 1.7; padding: 25px; }
 
         /* Modal Styling */
-        .modal-content { background-color: #12141c; border: 1px solid rgba(13,202,240,0.3); border-radius: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .modal-content { background-color: #12141c; border: 1px solid rgba(13,202,240,0.4); border-radius: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); }
         .btn-close-custom { filter: invert(1); opacity: 0.5; }
     </style>
@@ -231,7 +232,7 @@
     <section class="container floating-panel">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div style="background-color: #12141c; border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0;">
                     <div class="mb-4">
                         <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
                         <p class="text-info small mb-0 text-uppercase tracking-wide" style="letter-spacing: 2px;">From the Founder</p>
@@ -279,7 +280,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small" style="background-color: #0b0c10;">
+    <footer class="py-4 border-top border-info border-opacity-10 text-center text-secondary small" style="background-color: rgba(5, 5, 5, 0.95);">
         <div class="container">
             <p class="mb-0">ZMPLabs &copy; 2026 | Zero Metadata. Your data stays local. | <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a></p>
         </div>
