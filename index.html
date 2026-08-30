@@ -10,7 +10,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0b0c10; color: #ffffff; }
+        /* Digital Vault Parallax Background */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #ffffff; 
+            background-color: #050505;
+            background-image: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.85)), url('https://images.unsplash.com/photo-1614036417651-1d473c6e4e7a?q=80&w=2070&auto=format&fit=crop');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Floating Panels */
+        .floating-panel {
+            background-color: #0b0c10;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(13, 202, 240, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin-bottom: 80px;
+            padding: 60px 40px;
+            border-radius: 4px;
+        }
         
         /* Navbar */
         .navbar-custom { background-color: #0b0c10; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
@@ -18,7 +39,7 @@
         .nav-link-custom:hover, .nav-link-custom.active { color: #0dcaf0 !important; }
         
         /* Split Screen Hero */
-        .hero-split { display: flex; min-height: 85vh; background-color: #0b0c10; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .hero-split { display: flex; min-height: 85vh; background-color: #0b0c10; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 80px;}
         .hero-left { flex: 1; display: flex; align-items: center; padding: 5% 8%; background-color: #0b0c10; z-index: 2; }
         .hero-right { flex: 1; position: relative; overflow: hidden; display: none; }
         @media (min-width: 992px) { .hero-right { display: block; } }
@@ -35,7 +56,7 @@
         /* Product Cards */
         .product-card-premium { background: #12141c; border: 1px solid rgba(255,255,255,0.06); padding: 40px 30px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         
-        /* Accordion Dark Theme for FAQ Section */
+        /* Accordion Dark Theme */
         .accordion-dark .accordion-item { background-color: #12141c; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 15px; border-radius: 0; }
         .accordion-dark .accordion-button { background-color: #12141c; color: #ffffff; font-weight: 600; font-size: 1.1rem; padding: 22px 25px; border-radius: 0 !important; box-shadow: none; }
         .accordion-dark .accordion-button:not(.collapsed) { background-color: #181b26; color: #0dcaf0; border-bottom: 1px solid rgba(13, 202, 240, 0.2); }
@@ -95,8 +116,8 @@
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section id="about" class="container py-5 my-5">
+    <!-- Features Section (Floating Panel) -->
+    <section id="about" class="container floating-panel">
         <div class="text-center mb-5">
             <p class="tagline-accent mb-2">Compliance & Privacy Standards</p>
             <h2 class="fw-semibold text-uppercase">Build a Compliance-Proof Workflow</h2>
@@ -126,8 +147,8 @@
         </div>
     </section>
 
-    <!-- Setup Timeline -->
-    <section class="container py-5 my-5 border-top border-secondary border-opacity-10">
+    <!-- Setup Timeline (Floating Panel) -->
+    <section class="container floating-panel">
         <div class="text-center mb-5">
             <p class="tagline-accent mb-2">Guided Setup Protocol</p>
             <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Deployment</h2>
@@ -152,54 +173,52 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-5 my-5 bg-black bg-opacity-40 border-top border-bottom border-secondary border-opacity-10">
-        <div class="container">
-            <div class="text-center mb-5">
-                <p class="tagline-accent mb-2">Objection Buster</p>
-                <h2 class="fw-semibold text-uppercase">Common Questions Addressed</h2>
-                <p class="text-high-contrast small">Everything you and your IT department need to know about local AI installation.</p>
-            </div>
+    <!-- FAQ Section (Floating Panel) -->
+    <section id="faq" class="container floating-panel">
+        <div class="text-center mb-5">
+            <p class="tagline-accent mb-2">Objection Buster</p>
+            <h2 class="fw-semibold text-uppercase">Common Questions Addressed</h2>
+            <p class="text-high-contrast small">Everything you and your IT department need to know about local AI installation.</p>
+        </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="accordion accordion-dark" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faq1-heading">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
-                                    Does my laptop or desktop need expensive custom GPUs to run this?
-                                </button>
-                            </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    No. Modern executive hardware—such as Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or modern Windows laptops with dedicated GPUs—can run high-performance local open-weight models effortlessly. During our setup call, we benchmark and configure the exact model size optimized for your specific hardware.
-                                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="accordion accordion-dark" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1-heading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                                Does my laptop or desktop need expensive custom GPUs to run this?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                No. Modern executive hardware—such as Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or modern Windows laptops with dedicated GPUs—can run high-performance local open-weight models effortlessly. During our setup call, we benchmark and configure the exact model size optimized for your specific hardware.
                             </div>
                         </div>
+                    </div>
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faq2-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
-                                    How can I prove to my IT or Compliance Officer that data never leaves my machine?
-                                </button>
-                            </h2>
-                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Our deployment operates under the Zero-Metadata Protocol (ZMP). Prompts and outputs are processed strictly in system RAM and destroyed upon session closure, completely bypassing persistent disk logging. You can literally disconnect your Wi-Fi or run the tool in an air-gapped environment to verify that no outbound API calls or telemetry exist.
-                                </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2-heading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
+                                How can I prove to my IT or Compliance Officer that data never leaves my machine?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our deployment operates under the Zero-Metadata Protocol (ZMP). Prompts and outputs are processed strictly in system RAM and destroyed upon session closure, completely bypassing persistent disk logging. You can literally disconnect your Wi-Fi or run the tool in an air-gapped environment to verify that no outbound API calls or telemetry exist.
                             </div>
                         </div>
+                    </div>
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faq3-heading">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
-                                    Do I or my team need coding or technical expertise to operate this?
-                                </button>
-                            </h2>
-                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Zero technical expertise is required. We handle the entire containerized installation on a guided 30-minute setup call. You are left with an intuitive desktop interface that feels as familiar and simple to use as ChatGPT or Claude.
-                                </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3-heading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
+                                Do I or my team need coding or technical expertise to operate this?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Zero technical expertise is required. We handle the entire containerized installation on a guided 30-minute setup call. You are left with an intuitive desktop interface that feels as familiar and simple to use as ChatGPT or Claude.
                             </div>
                         </div>
                     </div>
@@ -208,10 +227,10 @@
         </div>
     </section>
 
-    <!-- Founder's Note Section -->
-    <section class="container py-5 my-3">
+    <!-- Founder's Note Section (Floating Panel) -->
+    <section class="container floating-panel">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div style="background-color: #12141c; border-left: 4px solid #0dcaf0; padding: 40px; border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
                     <div class="mb-4">
                         <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
@@ -260,7 +279,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small">
+    <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small" style="background-color: #0b0c10;">
         <div class="container">
             <p class="mb-0">ZMPLabs &copy; 2026 | Zero Metadata. Your data stays local. | <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a></p>
         </div>
