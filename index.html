@@ -66,17 +66,17 @@
             min-height: 100%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 0.18;
+            opacity: 0.25; /* Slightly brightened to see the team collaboration */
         }
         
-        /* Dark overlay on top of video */
+        /* Dark overlay on top of video with a subtle cyan tint */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(5, 5, 8, 0.92) 0%, rgba(7, 10, 14, 0.88) 100%);
+            background: linear-gradient(135deg, rgba(5, 8, 12, 0.90) 0%, rgba(7, 10, 14, 0.92) 100%);
             z-index: -1;
         }
         
@@ -86,7 +86,7 @@
             z-index: 2;
             padding: 100px 40px;
             background: rgba(5, 5, 5, 0.7);
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
         }
         
         .content-section.transparent-bg {
@@ -552,8 +552,8 @@
     <!-- CONTINUOUS BACKGROUND VIDEO -->
     <div class="video-background" aria-hidden="true">
         <video autoplay loop muted playsinline>
-            <!-- Professional office/corporate setting video -->
-            <source src="https://videos.pexels.com/video-files/3196324/3196324-hd_1920_1080_25fps.mp4" type="video/mp4">
+            <!-- Professional corporate team collaboration video -->
+            <source src="https://cdn.pixabay.com/video/2019/03/28/22370-327311146_large.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay"></div>
@@ -753,6 +753,10 @@
                             Like many professionals, I grew frustrated watching sensitive client data flow through third-party cloud services with opaque retention policies. I've seen the aftermath of data leaks—vague breach notifications, hollow credit monitoring offers from companies that failed to protect what was entrusted to them.
                         </p>
                         
+                        <p class="text-high-contrast mb-3" style="line-height: 1.8;">
+                            My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people[cite: 1].
+                        </p>
+                        
                         <p class="text-high-contrast mb-4" style="line-height: 1.8;">
                             ZMPLabs exists because you shouldn't have to choose between leveraging modern AI capabilities and maintaining fiduciary duty to your clients. Local-first architecture means you control every byte.
                         </p>
@@ -765,19 +769,21 @@
                 </div>
             </div>
 
-            <!-- Contact CTA - WITH TWO BUTTONS SIDE BY SIDE -->
+            <!-- Contact CTA - WITH THREE BUTTONS SIDE BY SIDE -->
             <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
+                <div class="col-lg-10 text-center">
                     <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
                     <p class="text-high-contrast mb-5">
                         Book your free 30-minute deployment consultation. We'll assess your current setup and walk through the installation process live.
                     </p>
-                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                        <!-- SECOND START FREE ASSESSMENT BUTTON ADDED HERE -->
-                        <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
+                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                        <button type="button" class="btn-cyan-solid w-100" style="max-width: 280px;" onclick="openDiagnosticModal()">
                             Start Free Assessment
                         </button>
-                        <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
+                        <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan w-100 d-flex align-items-center justify-content-center" style="max-width: 280px; height: 54px;">
+                            Email Us Directly
+                        </a>
+                        <button type="button" class="btn-cyan-solid w-100" style="max-width: 280px;" onclick="openDiagnosticModal()">
                             Request Installation Call <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -992,11 +998,11 @@
             } else if (totalScore >= 6) {
                 badgeEl.textContent = 'MODERATE EXPOSURE RISK';
                 badgeEl.className = 'risk-badge risk-badge-medium';
-                expEl.innerHTML = `You've clearly put thought into your baseline AI protections, but relying on public cloud APIs still leaves a frustrating gray area when it comes to true auditability.`;
+                expEl.innerHTML = `You've clearly put thought into your baseline AI protections, but relying on public cloud APIs still leaves a frustrating gray area when it comes to true auditability. We help firms eliminate that gray area.`;
             } else {
                 badgeEl.textContent = 'LOW EXPOSURE RISK';
                 badgeEl.className = 'risk-badge risk-badge-low';
-                expEl.innerHTML = `Great news—it looks like your firm is taking data privacy seriously and maintaining a strong security posture.`;
+                expEl.innerHTML = `Great news—it looks like your firm is taking data privacy seriously and maintaining a strong security posture. Because AI regulations are evolving at lightning speed, it never hurts to have a second set of eyes on your architecture.`;
             }
         }
 
