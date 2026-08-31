@@ -66,7 +66,7 @@
             min-height: 100%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 0.25; /* Slightly brightened to see the team collaboration */
+            opacity: 0.25; 
         }
         
         /* Dark overlay on top of video with a subtle cyan tint */
@@ -163,6 +163,7 @@
             position: relative; 
             overflow: hidden; 
             display: none; 
+            background-color: rgba(0,0,0,0.5); /* Deepen background behind right video */
         }
         
         @media (min-width: 992px) { 
@@ -176,7 +177,7 @@
             min-width: 100%; 
             min-height: 100%; 
             transform: translate(-50%, -50%); 
-            opacity: 0.25; 
+            opacity: 0.45; /* Brightened the right side video so it shows up clearly */
             object-fit: cover; 
         }
         
@@ -186,7 +187,7 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, transparent 100%); 
+            background: linear-gradient(90deg, rgba(5, 5, 5, 1) 0%, transparent 100%); 
         }
         
         /* Typography & Buttons */
@@ -416,7 +417,7 @@
             line-height: 1.6;
         }
         
-        /* Question Cards - all visible at once */
+        /* Question Cards */
         .diagnostic-question-card {
             background: rgba(18, 20, 28, 0.5);
             border: 1px solid rgba(13, 202, 240, 0.15);
@@ -609,14 +610,15 @@
             </div>
         </div>
         <div class="hero-right">
+            <!-- Updated to a live stock video link to ensure it plays immediately -->
             <video autoplay loop muted playsinline class="bg-video-element" aria-hidden="true">
-                <source src="images/matrix-loop.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2019/02/16/21434-318357774_large.mp4" type="video/mp4">
             </video>
             <div class="hero-fade"></div>
         </div>
     </section>
 
-    <!-- FEATURES SECTION (formerly About) -->
+    <!-- FEATURES SECTION -->
     <section class="content-section" id="features">
         <div class="container">
             <div class="text-center mb-5">
@@ -668,7 +670,8 @@
                     <p class="text-high-contrast small">Containerized open-weight models install on your hardware with optimized performance for your CPU/GPU configuration.</p>
                 </div>
                 <div class="col-md-3">
-                    <div class="mb-3" aria-hidden="true"><i class="bi bi-verification text-info fs-2"></i></div>
+                    <!-- Updated to bi-check2-square for the correct 'box checked' icon -->
+                    <div class="mb-3" aria-hidden="true"><i class="bi bi-check2-square text-info fs-2"></i></div>
                     <h5 class="text-info fw-bold">03. VERIFY</h5>
                     <p class="text-high-contrast small">Network isolation testing confirms zero outbound telemetry. Memory-only execution validated with Wireshark analysis.</p>
                 </div>
@@ -685,52 +688,85 @@
     <section class="content-section" id="faq">
         <div class="container">
             <div class="text-center mb-5">
-                <p class="tagline-accent mb-2">Technical Questions Addressed</p>
+                <p class="tagline-accent mb-2">Executive Questions Addressed</p>
                 <h2 class="fw-semibold text-uppercase">Common Implementation Questions</h2>
-                <p class="text-high-contrast small">Everything your IT and Compliance teams need to know.</p>
+                <p class="text-high-contrast small">Everything you need to know before moving your firm to local AI.</p>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="accordion accordion-dark" id="faqAccordion" role="region" aria-label="Frequently Asked Questions">
+                        
+                        <!-- Question 1 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq1-heading">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                                    Does my laptop need expensive custom GPUs to run this?
+                                    Do I need to buy expensive new computers for my team?
                                 </button>
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq1-heading">
                                 <div class="accordion-body">
-                                    No. Modern executive hardware—Apple Silicon MacBooks (M1/M2/M3/M4 with unified memory) or Windows laptops with NVIDIA RTX 3060+ can run high-performance 7B-13B parameter models comfortably. During setup, we benchmark and configure the exact model size optimized for your RAM capacity and GPU VRAM.
+                                    No. Our system is designed to run smoothly on the standard, modern laptops your executives and staff are likely already using, such as Apple MacBooks or recent Windows machines. We optimize the software to match the hardware you already own.
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Question 2 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq2-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                                    How can I prove to IT that data never leaves my machine?
+                                    How is this different from just paying for a "Private" ChatGPT Enterprise account?
                                 </button>
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq2-heading">
                                 <div class="accordion-body">
-                                    Our Zero-Metadata Protocol ensures prompts and outputs are processed strictly in system RAM, cleared immediately after each session. You can: (1) disconnect WiFi during testing, (2) monitor network traffic with Wireshark, or (3) run the tool in a VM with no network adapter. We also provide signed threat model documentation.
+                                    Even "private" cloud accounts require you to send your sensitive data over the internet to another company's servers, exposing you to data breaches and third-party policy changes. Our solution physically keeps your data on your own computer. If your internet goes down, our AI still works. That is true, air-gapped privacy.
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Question 3 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq3-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                                    Do I need coding expertise to operate this?
+                                    Will my team have to learn complicated new software?
                                 </button>
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq3-heading">
                                 <div class="accordion-body">
-                                    Zero coding required. We handle the entire containerized installation during a guided 30-minute setup call. You receive a desktop application interface that works as intuitively as ChatGPT or Claude—paste text, get answers, delete session data with one click.
+                                    Not at all. The interface looks and feels exactly like the popular AI chat tools they are already familiar with. If they know how to type a question into a chat box, they already know how to use this platform safely.
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                    How do I prove to auditors or clients that our data is safe?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq4-heading">
+                                <div class="accordion-body">
+                                    We provide you with clear, plain-English governance policies and documentation. Because the software operates locally and is built without the ability to "phone home" or connect to external internet servers, passing compliance audits and answering client security questionnaires becomes incredibly straightforward.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                    What happens if we need help or the system needs an update?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq5-heading">
+                                <div class="accordion-body">
+                                    We do not just hand you the software and leave. We handle the entire 30-minute remote installation for you to ensure it is set up perfectly. We also offer ongoing strategic support to ensure your firm is always running the latest, most secure AI models available.
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -764,6 +800,14 @@
                         <div>
                             <h6 class="fw-bold text-white mb-1">Dr. C. Alan Jones</h6>
                             <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
+                        </div>
+
+                        <!-- Formal Citation Block added below founder sign-off -->
+                        <div class="mt-4 pt-3 border-top border-info border-opacity-25">
+                            <p class="small text-secondary mb-0" style="font-size: 0.75rem;">
+                                <strong>References:</strong><br>
+                                [1] Jones, C. A. (2022). Benefits and Barriers That African American Men Experience With Financial Assistance (Doctoral dissertation, Walden University).
+                            </p>
                         </div>
                     </div>
                 </div>
