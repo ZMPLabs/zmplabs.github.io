@@ -12,7 +12,7 @@
     <meta property="og:description" content="Process PHI, legal files, and financial data with private local AI. Zero cloud exposure.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zmplabs.github.io">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop">
     
     <title>ZMPLabs - Security by Invisibility</title>
     
@@ -56,6 +56,7 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
+            background-color: #050505;
         }
         
         .video-background video {
@@ -552,9 +553,10 @@
 
     <!-- CONTINUOUS BACKGROUND VIDEO -->
     <div class="video-background" aria-hidden="true">
-        <video autoplay loop muted playsinline>
-            <!-- Professional corporate team collaboration video -->
-            <source src="https://cdn.pixabay.com/video/2019/03/28/22370-327311146_large.mp4" type="video/mp4">
+        <!-- Added a poster image fallback so it is never a black box -->
+        <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop">
+            <!-- Reliable hotlink-friendly corporate meeting video from Mixkit -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-4251-large.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay"></div>
@@ -610,9 +612,9 @@
             </div>
         </div>
         <div class="hero-right">
-            <!-- Updated to a live stock video link to ensure it plays immediately -->
-            <video autoplay loop muted playsinline class="bg-video-element" aria-hidden="true">
-                <source src="https://cdn.pixabay.com/video/2019/02/16/21434-318357774_large.mp4" type="video/mp4">
+            <!-- Added poster image and reliable Mixkit video link -->
+            <video autoplay loop muted playsinline class="bg-video-element" poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" aria-hidden="true">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-4251-large.mp4" type="video/mp4">
             </video>
             <div class="hero-fade"></div>
         </div>
@@ -670,7 +672,6 @@
                     <p class="text-high-contrast small">Containerized open-weight models install on your hardware with optimized performance for your CPU/GPU configuration.</p>
                 </div>
                 <div class="col-md-3">
-                    <!-- Updated to bi-check2-square for the correct 'box checked' icon -->
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-check2-square text-info fs-2"></i></div>
                     <h5 class="text-info fw-bold">03. VERIFY</h5>
                     <p class="text-high-contrast small">Network isolation testing confirms zero outbound telemetry. Memory-only execution validated with Wireshark analysis.</p>
