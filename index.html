@@ -7,6 +7,7 @@
     <meta name="author" content="ZMPLabs">
     <meta name="theme-color" content="#0b0c10">
     
+    <!-- Open Graph for social sharing -->
     <meta property="og:title" content="ZMPLabs - Security by Invisibility">
     <meta property="og:description" content="Process PHI, legal files, and financial data with private local AI. Zero cloud exposure.">
     <meta property="og:type" content="website">
@@ -325,6 +326,51 @@
             border-left: 1px solid rgba(13, 202, 240, 0.2);
             border-right: 1px solid rgba(13, 202, 240, 0.2);
         }
+
+        /* Vertical Pricing Cards Styling */
+        .pricing-card {
+            background: rgba(18, 20, 28, 0.5);
+            border: 1px solid rgba(13,202,240,0.15);
+            padding: 40px 30px;
+            border-radius: 4px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 202, 240, 0.4);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #0dcaf0;
+            background: rgba(18, 20, 28, 0.8);
+            box-shadow: 0 10px 30px rgba(13, 202, 240, 0.1);
+        }
+
+        .pricing-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            flex-grow: 1;
+        }
+
+        .pricing-list li {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #c5cbd3;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .pricing-list li i {
+            color: #0dcaf0;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
         
         /* Accordion Dark Theme */
         .accordion-dark .accordion-item { 
@@ -599,8 +645,10 @@
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
+    <!-- CONTINUOUS BACKGROUND VIDEO -->
     <div class="video-background" aria-hidden="true">
         <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-4251-large.mp4" type="video/mp4">
@@ -608,6 +656,7 @@
     </div>
     <div class="video-overlay"></div>
 
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-custom" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand fw-bold text-white fs-4" href="index.html">ZMPLabs</a>
@@ -627,6 +676,7 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="content-section transparent-bg hero-split" id="heroSection">
         <div class="hero-left container-fluid">
             <div>
@@ -647,6 +697,7 @@
                     </a>
                 </div>
                 
+                <!-- Social Proof -->
                 <div class="pt-4 border-top border-secondary border-opacity-25">
                     <p class="small text-secondary mb-2">On a 30-minute setup call, we replace your vulnerable workflow:</p>
                     <div class="d-flex gap-3 flex-wrap align-items-center">
@@ -664,6 +715,7 @@
         </div>
     </section>
 
+    <!-- FEATURES SECTION (Sales Psychology Applied) -->
     <section class="content-section" id="features">
         <div class="container">
             <div class="text-center mb-5">
@@ -696,6 +748,7 @@
         </div>
     </section>
 
+    <!-- PROCESS SECTION -->
     <section class="content-section" id="process">
         <div class="container">
             <div class="text-center mb-5">
@@ -727,6 +780,7 @@
         </div>
     </section>
 
+    <!-- WHY ZMPLABS SECTION (Comparison Matrix) -->
     <section class="content-section" id="why-zmplabs">
         <div class="container">
             <div class="text-center mb-5">
@@ -750,31 +804,31 @@
                             <td class="fw-bold">Deployment Time</td>
                             <td>Instant</td>
                             <td>4 – 6 Months</td>
-                            <td class="highlight-col text-info fw-bold">30 Minutes</td>
+                            <td class="highlight-col text-white fw-bold">30 Minutes</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Data Exposure Risk</td>
                             <td class="text-danger">High (Cloud Telemetry)</td>
                             <td class="text-success">Zero (Air-Gapped)</td>
-                            <td class="highlight-col text-info fw-bold">Zero (Air-Gapped)</td>
+                            <td class="highlight-col text-white fw-bold">Zero (Air-Gapped)</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Upfront Hardware Cost</td>
                             <td>$0</td>
                             <td>$50,000 – $250,000+ <sup class="text-secondary">[1]</sup></td>
-                            <td class="highlight-col text-info fw-bold">$0 (Leverages existing Mac/RTX)</td>
+                            <td class="highlight-col text-white fw-bold">$0 (Leverages existing Mac/RTX)</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Recurring Fees</td>
                             <td>$36,000+/yr (Per-seat tax) <sup class="text-secondary">[1]</sup></td>
                             <td>$75k–$150k Retainers <sup class="text-secondary">[1, 2]</sup></td>
-                            <td class="highlight-col text-info fw-bold">Flat One-Time Deployment</td>
+                            <td class="highlight-col text-white fw-bold">Flat One-Time Deployment</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Compliance Readiness</td>
                             <td class="text-danger">Complex BAAs Required</td>
                             <td>Lengthy Audit Staging</td>
-                            <td class="highlight-col text-info fw-bold">Instant HIPAA & ABA Alignment</td>
+                            <td class="highlight-col text-white fw-bold">Instant HIPAA & ABA Alignment</td>
                         </tr>
                     </tbody>
                 </table>
@@ -788,6 +842,7 @@
         </div>
     </section>
 
+    <!-- PRICING SECTION (Vertical Cards Layout) -->
     <section class="content-section" id="pricing">
         <div class="container">
             <div class="text-center mb-5">
@@ -796,7 +851,8 @@
                 <p class="text-high-contrast small">Eliminate unpredictable cloud token fees with a single, transparent deployment investment.</p>
             </div>
 
-            <div style="background: rgba(13, 202, 240, 0.05); border: 1px solid rgba(13, 202, 240, 0.3); border-radius: 8px; padding: 30px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: space-between; align-items: center;" class="flex-md-row">
+            <!-- Free Executive Install Call-Out -->
+            <div style="background: rgba(13, 202, 240, 0.05); border: 1px solid rgba(13, 202, 240, 0.3); border-radius: 4px; padding: 30px; margin-bottom: 40px; display: flex; flex-direction: column; justify-content: space-between; align-items: center;" class="flex-md-row">
                 <div class="mb-3 mb-md-0 text-center text-md-start">
                     <span class="badge bg-info text-dark mb-2 fw-bold" style="letter-spacing: 1px;">EXECUTIVE INCENTIVE</span>
                     <h3 class="fw-bold mb-2">Free Executive Diagnostic & Install</h3>
@@ -807,71 +863,81 @@
                 </button>
             </div>
 
-            <div class="table-responsive">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 40%;">Feature</th>
-                            <th style="width: 20%; text-align: center;">Tier 1: Solo Founder<br><span class="text-secondary small fw-normal">(Free)</span></th>
-                            <th style="width: 20%; text-align: center;" class="highlight-col-header">Tier 2: Core Team<br><span class="text-white small fw-normal">($2,500)</span></th>
-                            <th style="width: 20%; text-align: center;">Tier 3: Enterprise ZMP<br><span class="text-secondary small fw-normal">($5,000)</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="fw-bold">Executive Users Supported</td>
-                            <td class="text-center text-high-contrast">1 <span class="small text-secondary fst-italic">(Founder/Solo)</span></td>
-                            <td class="highlight-col text-center text-high-contrast fw-bold">Up to 5 Executives</td>
-                            <td class="text-center text-high-contrast">Up to 5 Executives</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Secure Local AI Installation</td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                            <td class="highlight-col text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Core ZMP Bandwidth Prompt</td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                            <td class="highlight-col text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Executive Workflow Training</td>
-                            <td class="text-center text-secondary">—</td>
-                            <td class="highlight-col text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">"Copy-Paste" AI Gov. Policy</td>
-                            <td class="text-center text-secondary">—</td>
-                            <td class="highlight-col text-center text-info"><i class="bi bi-check-lg fs-4"></i> <span class="small text-secondary fst-italic ms-1">(Handoff)</span></td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i> <span class="small text-secondary fst-italic ms-1">(Handoff)</span></td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Custom Role Prompts</td>
-                            <td class="text-center text-secondary">—</td>
-                            <td class="highlight-col text-center text-secondary">—</td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i> <span class="small text-secondary fst-italic ms-1">(Dept Engineered)</span></td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">1-Year ZMPLabs Playbook</td>
-                            <td class="text-center text-secondary">—</td>
-                            <td class="highlight-col text-center text-secondary">—</td>
-                            <td class="text-center text-info"><i class="bi bi-check-lg fs-4"></i> <span class="small text-secondary fst-italic ms-1">(Audit Guides)</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="text-center mt-5">
-                <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
-                    Schedule Your Deployment <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
-                </button>
+            <!-- Vertical Pricing Cards -->
+            <div class="row g-4 justify-content-center">
+                <!-- Card 1: Diagnostic -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <p class="tagline-accent mb-1">DIAGNOSTIC</p>
+                        <h3 class="fw-bold mb-3">Executive Audit</h3>
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">$1,500</span> <span class="text-secondary">/ one-time</span>
+                        </div>
+                        <p class="text-high-contrast small mb-4">Complete audit of your firm's current cloud AI vulnerabilities and regulatory mapping.</p>
+                        
+                        <ul class="pricing-list">
+                            <li><i class="bi bi-check2"></i> Workflow Threat Model Audit</li>
+                            <li><i class="bi bi-check2"></i> HIPAA / ABA / SEC Gap Analysis</li>
+                            <li><i class="bi bi-check2"></i> Hardware Readiness Verification</li>
+                            <li><i class="bi bi-check2"></i> Compliance Roadmap Deliverable</li>
+                        </ul>
+                        
+                        <button class="btn-outline-cyan w-100 mt-auto" onclick="openDiagnosticModal()">Schedule Audit</button>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Recommended -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card featured">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <p class="tagline-accent mb-0">RECOMMENDED</p>
+                            <span class="badge bg-info text-dark" style="font-size: 0.7rem; font-weight: 700;">MOST POPULAR</span>
+                        </div>
+                        <h3 class="fw-bold mb-3">Partner Setup</h3>
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">$4,500</span> <span class="text-secondary">/ single seat</span>
+                        </div>
+                        <p class="text-high-contrast small mb-4">White-glove 48-hour turnaround with a 60-minute setup session for key decision makers.</p>
+                        
+                        <ul class="pricing-list">
+                            <li><i class="bi bi-check2"></i> Everything in Audit Package</li>
+                            <li><i class="bi bi-check2"></i> Guaranteed 48-Hour Full Turnaround</li>
+                            <li><i class="bi bi-check2"></i> 60-Minute Guided Setup Call</li>
+                            <li><i class="bi bi-check2"></i> Local Air-Gapped Model Configuration</li>
+                            <li><i class="bi bi-check2"></i> Wireshark Zero-Telemetry Verification</li>
+                            <li><i class="bi bi-check2"></i> IT Governance & Policy Document</li>
+                        </ul>
+                        
+                        <button class="btn-cyan-solid w-100 mt-auto" onclick="openDiagnosticModal()">Book Partner Setup</button>
+                    </div>
+                </div>
+                
+                <!-- Card 3: Enterprise -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <p class="tagline-accent mb-1">ENTERPRISE</p>
+                        <h3 class="fw-bold mb-3">Firm Fleet</h3>
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">Custom</span> <span class="text-secondary">/ fleet rollout</span>
+                        </div>
+                        <p class="text-high-contrast small mb-4">Full containerized deployment across all executive and team laptops across the organization.</p>
+                        
+                        <ul class="pricing-list">
+                            <li><i class="bi bi-check2"></i> Free Executive Install Included</li>
+                            <li><i class="bi bi-check2"></i> Multi-Seat Batch Deployment</li>
+                            <li><i class="bi bi-check2"></i> Custom Open-Weight Model Tuning</li>
+                            <li><i class="bi bi-check2"></i> Quarterly Model Update Retainer</li>
+                            <li><i class="bi bi-check2"></i> Dedicated Executive Support Line</li>
+                        </ul>
+                        
+                        <button class="btn-outline-cyan w-100 mt-auto" onclick="openDiagnosticModal()">Contact Enterprise Team</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- FAQ SECTION -->
     <section class="content-section" id="faq">
         <div class="container">
             <div class="text-center mb-5">
@@ -884,6 +950,7 @@
                 <div class="col-lg-10">
                     <div class="accordion accordion-dark" id="faqAccordion" role="region" aria-label="Frequently Asked Questions">
                         
+                        <!-- Question 1 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq1-heading">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
@@ -897,6 +964,7 @@
                             </div>
                         </div>
 
+                        <!-- Question 2 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq2-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
@@ -910,6 +978,7 @@
                             </div>
                         </div>
 
+                        <!-- Question 3 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq3-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
@@ -923,6 +992,7 @@
                             </div>
                         </div>
                         
+                        <!-- Question 4 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq4-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
@@ -936,6 +1006,7 @@
                             </div>
                         </div>
 
+                        <!-- Question 5 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faq5-heading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
@@ -955,8 +1026,10 @@
         </div>
     </section>
 
+    <!-- CONTACT SECTION WITH FOUNDERS NOTE -->
     <section class="content-section" id="contact">
         <div class="container">
+            <!-- Founder's Note -->
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-10">
                     <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px;">
@@ -982,6 +1055,7 @@
                             <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
                         </div>
 
+                        <!-- Formal Citation Block added below founder sign-off -->
                         <div class="mt-4 pt-3 border-top border-info border-opacity-25">
                             <p class="small text-secondary mb-0" style="font-size: 0.75rem;">
                                 <strong>References:</strong><br>
@@ -992,6 +1066,7 @@
                 </div>
             </div>
 
+            <!-- Contact CTA -->
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
                     <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
@@ -1014,6 +1089,7 @@
         </div>
     </section>
 
+    <!-- RIGHT-SIDE DIAGNOSTIC MODAL -->
     <div class="diagnostic-modal-overlay" id="diagnosticOverlay" onclick="closeDiagnosticModal()"></div>
     
     <div class="diagnostic-modal" id="diagnosticModal">
@@ -1028,6 +1104,7 @@
                 <p class="diagnostic-subtitle">Answer 3 quick questions to assess your current exposure risk.</p>
             </div>
 
+            <!-- Question 1 -->
             <div class="diagnostic-question-card" id="q1">
                 <p class="question-number">QUESTION 1</p>
                 <p class="question-text">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
@@ -1052,6 +1129,7 @@
                 </div>
             </div>
 
+            <!-- Question 2 -->
             <div class="diagnostic-question-card" id="q2">
                 <p class="question-number">QUESTION 2</p>
                 <p class="question-text">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
@@ -1076,6 +1154,7 @@
                 </div>
             </div>
 
+            <!-- Question 3 -->
             <div class="diagnostic-question-card" id="q3">
                 <p class="question-number">QUESTION 3</p>
                 <p class="question-text">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
@@ -1140,6 +1219,8 @@
             </button>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="py-4 text-center">
         <div class="container">
             <p class="mb-2">ZMPLabs &copy; 2026 | Zero Metadata Architecture</p>
@@ -1154,6 +1235,7 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Diagnostic state
