@@ -67,7 +67,7 @@
             min-height: 100%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 0.25; 
+            opacity: 0.20; 
         }
         
         /* Dark overlay on top of video with a subtle cyan tint */
@@ -81,7 +81,7 @@
             z-index: -1;
         }
         
-        /* Content sections - semi-transparent so video shows through */
+        /* Content sections */
         .content-section {
             position: relative;
             z-index: 2;
@@ -106,7 +106,7 @@
             transform: translateY(0);
         }
         
-        /* Floating Panels (for card grids) */
+        /* Floating Panels */
         .floating-panel {
             background-color: rgba(11, 12, 16, 0.7);
             backdrop-filter: blur(10px);
@@ -164,7 +164,7 @@
             position: relative; 
             overflow: hidden; 
             display: none; 
-            background-color: rgba(0,0,0,0.5); /* Deepen background behind right video */
+            background-color: rgba(0,0,0,0.5); 
         }
         
         @media (min-width: 992px) { 
@@ -178,7 +178,7 @@
             min-width: 100%; 
             min-height: 100%; 
             transform: translate(-50%, -50%); 
-            opacity: 0.45; /* Brightened the right side video so it shows up clearly */
+            opacity: 0.65; 
             object-fit: cover; 
         }
         
@@ -264,7 +264,7 @@
             border-color: #0dcaf0;
         }
         
-        /* Product Cards */
+        /* Product & Pricing Cards */
         .product-card-premium { 
             background: rgba(18, 20, 28, 0.5); 
             border: 1px solid rgba(13,202,240,0.1); 
@@ -278,6 +278,20 @@
         .product-card-premium:hover {
             transform: translateY(-5px);
             border-color: rgba(13, 202, 240, 0.3);
+        }
+
+        .pricing-card-highlight {
+            border: 2px solid #0dcaf0 !important;
+            background: rgba(13, 202, 240, 0.05) !important;
+            box-shadow: 0 0 30px rgba(13, 202, 240, 0.15) !important;
+        }
+
+        .pricing-banner {
+            background: linear-gradient(135deg, rgba(13, 202, 240, 0.25) 0%, rgba(11, 12, 16, 0.9) 100%);
+            border: 2px solid #0dcaf0;
+            padding: 35px 25px;
+            box-shadow: 0 0 30px rgba(13, 202, 240, 0.2);
+            margin-bottom: 40px;
         }
         
         /* Accordion Dark Theme */
@@ -327,7 +341,7 @@
             color: #0dcaf0 !important;
         }
         
-        /* RIGHT-SIDE DIAGNOSTIC MODAL - OPTIMIZED FOR ALL QUESTIONS VISIBLE */
+        /* RIGHT-SIDE DIAGNOSTIC MODAL */
         .diagnostic-modal-overlay {
             position: fixed;
             top: 0;
@@ -551,12 +565,10 @@
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <!-- CONTINUOUS BACKGROUND VIDEO -->
+    <!-- CONTINUOUS BACKGROUND VIDEO (Local Relative Path Fix) -->
     <div class="video-background" aria-hidden="true">
-        <!-- Added a poster image fallback so it is never a black box -->
-        <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop">
-            <!-- Reliable hotlink-friendly corporate meeting video from Mixkit -->
-            <source src="hero-bg.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline>
+            <source src="meeting.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay"></div>
@@ -573,6 +585,7 @@
                     <li class="nav-item"><a class="nav-link-custom active" href="index.html" aria-current="page">Home</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="#pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#contact">Contact</a></li>
                 </ul>
@@ -612,9 +625,9 @@
             </div>
         </div>
         <div class="hero-right">
-            <!-- Added poster image and reliable Mixkit video link -->
-            <video autoplay loop muted playsinline class="bg-video-element" poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" aria-hidden="true">
-                <source src="hero-bg.mp4" type="video/mp4">
+            <!-- Replaced broken image placeholder with local relative video path -->
+            <video autoplay loop muted playsinline class="bg-video-element" aria-hidden="true">
+                <source src="meeting.mp4" type="video/mp4">
             </video>
             <div class="hero-fade"></div>
         </div>
@@ -680,6 +693,101 @@
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-journal-text text-info fs-2"></i></div>
                     <h5 class="text-info fw-bold">04. DOCUMENT</h5>
                     <p class="text-high-contrast small">Receive IT & Compliance Governance Policy, threat model documentation, and audit trail templates for internal review.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION (Placed right after Process) -->
+    <section class="content-section" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Transparent Investment</p>
+                <h2 class="fw-semibold text-uppercase">Deployment & Support Packages</h2>
+                <p class="text-high-contrast small">Zero recurring per-seat fees. Flat-rate air-gapped installation.</p>
+            </div>
+
+            <!-- Top Banner (Inspired by mockup: Prominent Offer) -->
+            <div class="pricing-banner text-center">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 text-lg-start mb-3 mb-lg-0">
+                        <span class="badge bg-info text-dark text-uppercase fw-bold mb-2">Executive Incentive</span>
+                        <h3 class="fw-bold text-white text-uppercase mb-2">Free Executive Install Included</h3>
+                        <p class="text-high-contrast mb-0">Get 1 Managing Partner / C-Suite installation completely free when you reserve any Firm Fleet Deployment package.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
+                            Claim Executive Offer <i class="bi bi-arrow-up-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Pricing Tiers -->
+            <div class="row g-4 align-items-stretch">
+                <!-- Tier 1: Executive Audit -->
+                <div class="col-lg-4">
+                    <div class="product-card-premium d-flex flex-column justify-content-between">
+                        <div>
+                            <p class="text-info fw-bold mb-1">DIAGNOSTIC</p>
+                            <h3 class="fw-bold text-white mb-3">Executive Audit</h3>
+                            <div class="display-6 fw-bold text-white mb-3">$1,500 <span class="fs-6 text-secondary fw-normal">/ one-time</span></div>
+                            <p class="text-high-contrast small mb-4">Complete audit of your firm's current cloud AI vulnerabilities and regulatory mapping.</p>
+                            <hr class="border-secondary border-opacity-25 mb-4">
+                            <ul class="list-unstyled text-high-contrast small mb-4">
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Workflow Threat Model Audit</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>HIPAA / ABA / SEC Gap Analysis</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Executive Hardware Readiness Audit</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Compliance Roadmap Deliverable</li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn-outline-cyan w-100" onclick="openDiagnosticModal()">Schedule Audit</button>
+                    </div>
+                </div>
+
+                <!-- Tier 2: Partner Deployment (Featured) -->
+                <div class="col-lg-4">
+                    <div class="product-card-premium pricing-card-highlight d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="text-info fw-bold mb-0">RECOMMENDED</p>
+                                <span class="badge bg-info text-dark fw-bold">MOST POPULAR</span>
+                            </div>
+                            <h3 class="fw-bold text-white mb-3">Partner Setup</h3>
+                            <div class="display-6 fw-bold text-white mb-3">$4,500 <span class="fs-6 text-secondary fw-normal">/ single seat</span></div>
+                            <p class="text-high-contrast small mb-4">White-glove 30-minute installation tailored for Managing Partners and key decision makers.</p>
+                            <hr class="border-secondary border-opacity-25 mb-4">
+                            <ul class="list-unstyled text-high-contrast small mb-4">
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i><strong>Everything in Audit Package</strong></li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>30-Minute Remote Installation Call</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Local Air-Gapped Model Configuration</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Wireshark Zero-Telemetry Verification</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>IT Governance & Policy Document</li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn-cyan-solid w-100" onclick="openDiagnosticModal()">Book Partner Setup</button>
+                    </div>
+                </div>
+
+                <!-- Tier 3: Firm Fleet -->
+                <div class="col-lg-4">
+                    <div class="product-card-premium d-flex flex-column justify-content-between">
+                        <div>
+                            <p class="text-info fw-bold mb-1">ENTERPRISE</p>
+                            <h3 class="fw-bold text-white mb-3">Firm Fleet</h3>
+                            <div class="display-6 fw-bold text-white mb-3">Custom <span class="fs-6 text-secondary fw-normal">/ fleet rollout</span></div>
+                            <p class="text-high-contrast small mb-4">Full containerized deployment across all executive and team laptops across the organization.</p>
+                            <hr class="border-secondary border-opacity-25 mb-4">
+                            <ul class="list-unstyled text-high-contrast small mb-4">
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i><strong>Free Executive Install Included</strong></li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Multi-Seat Batch Deployment</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Custom Open-Weight Model Tuning</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Quarterly Model Update Retainer</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Dedicated Executive Support Line</li>
+                            </ul>
+                        </div>
+                        <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan w-100 text-center">Contact Enterprise Team</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -791,7 +899,7 @@
                         </p>
                         
                         <p class="text-high-contrast mb-3" style="line-height: 1.8;">
-                            My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people[cite: 1].
+                            My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people.
                         </p>
                         
                         <p class="text-high-contrast mb-4" style="line-height: 1.8;">
@@ -803,7 +911,7 @@
                             <p class="text-secondary small mb-0">Founder, ZMPLabs</p>
                         </div>
 
-                        <!-- Formal Citation Block added below founder sign-off -->
+                        <!-- Formal Citation Block -->
                         <div class="mt-4 pt-3 border-top border-info border-opacity-25">
                             <p class="small text-secondary mb-0" style="font-size: 0.75rem;">
                                 <strong>References:</strong><br>
@@ -814,7 +922,7 @@
                 </div>
             </div>
 
-            <!-- Contact CTA - WITH THREE BUTTONS SIDE BY SIDE -->
+            <!-- Contact CTA -->
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
                     <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
@@ -837,7 +945,7 @@
         </div>
     </section>
 
-    <!-- RIGHT-SIDE DIAGNOSTIC MODAL - ALL QUESTIONS VISIBLE AT ONCE -->
+    <!-- RIGHT-SIDE DIAGNOSTIC MODAL -->
     <div class="diagnostic-modal-overlay" id="diagnosticOverlay" onclick="closeDiagnosticModal()"></div>
     
     <div class="diagnostic-modal" id="diagnosticModal">
