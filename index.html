@@ -70,7 +70,7 @@
             opacity: 0.20; 
         }
         
-        /* Dark overlay on top of video with a subtle cyan tint */
+        /* Dark overlay on top of video */
         .video-overlay {
             position: fixed;
             top: 0;
@@ -384,9 +384,53 @@
             right: 0;
         }
         
-        .diagnostic-close-btn {
+        /* CENTERED POP-OUT ARCHITECTURE BRIEF MODAL */
+        .brief-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(8px);
+            padding: 20px;
+        }
+        
+        .brief-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .brief-modal {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            max-height: 85vh;
+            background: rgba(11, 12, 16, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 202, 240, 0.3);
+            box-shadow: 0 0 50px rgba(13, 202, 240, 0.15), 0 20px 50px rgba(0,0,0,0.9);
+            overflow-y: auto;
+            padding: 45px 40px;
+            border-radius: 4px;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brief-modal-overlay.active .brief-modal {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
             position: absolute;
-            top: 25px;
+            top: 20px;
             right: 25px;
             background: transparent;
             border: none;
@@ -399,50 +443,17 @@
             z-index: 10;
         }
         
-        .diagnostic-close-btn:hover {
+        .modal-close-btn:hover {
             color: #0dcaf0;
         }
-        
-        .diagnostic-content {
-            flex: 1;
-            padding-right: 10px;
-        }
-        
-        /* Progress bar at top */
-        .diagnostic-header {
-            margin-bottom: 35px;
-        }
-        
-        .diagnostic-progress-line {
-            width: 60px;
-            height: 3px;
-            background: #0dcaf0;
-            margin-bottom: 20px;
-        }
-        
-        .diagnostic-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .diagnostic-subtitle {
-            color: #aaaaaa;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        /* Question Cards */
+
+        /* Question Cards & Ratings */
         .diagnostic-question-card {
             background: rgba(18, 20, 28, 0.5);
             border: 1px solid rgba(13, 202, 240, 0.15);
             padding: 25px;
             margin-bottom: 20px;
             transition: border-color 0.2s ease;
-        }
-        
-        .diagnostic-question-card:hover {
-            border-color: rgba(13, 202, 240, 0.25);
         }
         
         .question-number {
@@ -477,12 +488,7 @@
             min-height: 70px;
         }
         
-        .rating-option:hover {
-            border-color: #0dcaf0;
-            background: rgba(13, 202, 240, 0.1);
-        }
-        
-        .rating-option.selected {
+        .rating-option:hover, .rating-option.selected {
             border-color: #0dcaf0;
             background: rgba(13, 202, 240, 0.2);
         }
@@ -500,64 +506,18 @@
             line-height: 1.2;
         }
         
-        .analyze-btn-container {
-            margin-top: 25px;
-            text-align: right;
-        }
-        
-        /* Results View */
-        .risk-badge {
-            display: inline-block;
-            padding: 10px 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        
-        .risk-badge-high {
-            background: rgba(220, 53, 69, 0.2);
-            border: 2px solid #dc3545;
-            color: #dc3545;
-        }
-        
-        .risk-badge-medium {
-            background: rgba(255, 193, 7, 0.2);
-            border: 2px solid #ffc107;
-            color: #ffc107;
-        }
-        
-        .risk-badge-low {
-            background: rgba(40, 167, 69, 0.2);
-            border: 2px solid #28a745;
-            color: #28a745;
-        }
-        
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .hero-split {
                 flex-direction: column;
                 min-height: auto;
             }
-            
-            .hero-right {
-                display: none !important;
-            }
-            
-            .hero-left {
-                padding: 40px 20px;
-            }
-            
-            .diagnostic-modal {
-                max-width: 100%;
-            }
-            
-            .hero-title-bold {
-                font-size: 2rem;
-            }
-            
-            .content-section {
-                padding: 60px 20px;
-            }
+            .hero-right { display: none !important; }
+            .hero-left { padding: 40px 20px; }
+            .diagnostic-modal { max-width: 100%; }
+            .hero-title-bold { font-size: 2rem; }
+            .content-section { padding: 60px 20px; }
+            .brief-modal { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -565,7 +525,7 @@
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <!-- CONTINUOUS BACKGROUND VIDEO (Local Relative Path Fix) -->
+    <!-- CONTINUOUS BACKGROUND VIDEO -->
     <div class="video-background" aria-hidden="true">
         <video autoplay loop muted playsinline>
             <source src="meeting.mp4" type="video/mp4">
@@ -609,23 +569,24 @@
                     <button type="button" class="btn-cyan-solid" onclick="openDiagnosticModal()">
                         Start Free Assessment <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
                     </button>
-                    <a href="#features" class="btn-outline-cyan">
+                    <!-- Triggers the Architecture Brief Centered Modal -->
+                    <button type="button" class="btn-outline-cyan" onclick="openBriefModal()">
                         Read Architecture Brief
-                    </a>
+                    </button>
                 </div>
                 
                 <!-- Social Proof -->
                 <div class="pt-4 border-top border-secondary border-opacity-25">
-                    <p class="small text-secondary mb-2">On a 30-minute setup call, we replace your vulnerable workflow:</p>
+                    <p class="small text-secondary mb-2">Bypass the 4–6 month enterprise queue. Deploy in 48 hours:</p>
                     <div class="d-flex gap-3 flex-wrap align-items-center">
                         <span class="text-secondary small">• Zero metadata</span>
+                        <span class="text-secondary small">• 60-min live setup call</span>
                         <span class="text-secondary small">• Your data stays local</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="hero-right">
-            <!-- Replaced broken image placeholder with local relative video path -->
             <video autoplay loop muted playsinline class="bg-video-element" aria-hidden="true">
                 <source src="meeting.mp4" type="video/mp4">
             </video>
@@ -666,39 +627,40 @@
         </div>
     </section>
 
-    <!-- PROCESS SECTION -->
+    <!-- PROCESS SECTION (Updated to 48-Hour Workflow & 60-Min Call) -->
     <section class="content-section" id="process">
         <div class="container">
             <div class="text-center mb-5">
                 <p class="tagline-accent mb-2">Guided Deployment Protocol</p>
-                <h2 class="fw-semibold text-uppercase">30-Minute White-Glove Setup</h2>
+                <h2 class="fw-semibold text-uppercase">48-Hour White-Glove Turnaround</h2>
+                <p class="text-high-contrast small">Requires just 60 minutes of your active calendar time.</p>
             </div>
             <div class="row text-center g-4 justify-content-center">
                 <div class="col-md-3">
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-search text-info fs-2"></i></div>
-                    <h5 class="text-info fw-bold">01. ASSESS</h5>
-                    <p class="text-high-contrast small">We audit your current AI workflows, identify compliance gaps, and map data flows to regulatory requirements.</p>
+                    <h5 class="text-info fw-bold">01. ASSESS (Day 1)</h5>
+                    <p class="text-high-contrast small">Pre-flight hardware audit and compliance mapping. We verify your specs before touching anything.</p>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-box-seam text-info fs-2"></i></div>
-                    <h5 class="text-info fw-bold">02. DEPLOY</h5>
-                    <p class="text-high-contrast small">Containerized open-weight models install on your hardware with optimized performance for your CPU/GPU configuration.</p>
+                    <h5 class="text-info fw-bold">02. STAGE (Day 1)</h5>
+                    <p class="text-high-contrast small">Asynchronous pre-configuration of containerized open-weight models optimized for your hardware.</p>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-check2-square text-info fs-2"></i></div>
-                    <h5 class="text-info fw-bold">03. VERIFY</h5>
-                    <p class="text-high-contrast small">Network isolation testing confirms zero outbound telemetry. Memory-only execution validated with Wireshark analysis.</p>
+                    <h5 class="text-info fw-bold">03. DEPLOY (Day 2 - 60 Mins)</h5>
+                    <p class="text-high-contrast small">Live white-glove setup call. Network isolation testing confirms zero outbound telemetry with Wireshark validation.</p>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3" aria-hidden="true"><i class="bi bi-journal-text text-info fs-2"></i></div>
-                    <h5 class="text-info fw-bold">04. DOCUMENT</h5>
-                    <p class="text-high-contrast small">Receive IT & Compliance Governance Policy, threat model documentation, and audit trail templates for internal review.</p>
+                    <h5 class="text-info fw-bold">04. DOCUMENT (Day 2)</h5>
+                    <p class="text-high-contrast small">Receive IT & Compliance Governance Policy, threat model documentation, and audit trail templates.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRICING SECTION (Placed right after Process) -->
+    <!-- PRICING SECTION -->
     <section class="content-section" id="pricing">
         <div class="container">
             <div class="text-center mb-5">
@@ -707,7 +669,6 @@
                 <p class="text-high-contrast small">Zero recurring per-seat fees. Flat-rate air-gapped installation.</p>
             </div>
 
-            <!-- Top Banner (Inspired by mockup: Prominent Offer) -->
             <div class="pricing-banner text-center">
                 <div class="row align-items-center">
                     <div class="col-lg-8 text-lg-start mb-3 mb-lg-0">
@@ -723,9 +684,8 @@
                 </div>
             </div>
 
-            <!-- 3 Pricing Tiers -->
             <div class="row g-4 align-items-stretch">
-                <!-- Tier 1: Executive Audit -->
+                <!-- Tier 1 -->
                 <div class="col-lg-4">
                     <div class="product-card-premium d-flex flex-column justify-content-between">
                         <div>
@@ -737,7 +697,7 @@
                             <ul class="list-unstyled text-high-contrast small mb-4">
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Workflow Threat Model Audit</li>
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>HIPAA / ABA / SEC Gap Analysis</li>
-                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Executive Hardware Readiness Audit</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Hardware Readiness Verification</li>
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Compliance Roadmap Deliverable</li>
                             </ul>
                         </div>
@@ -745,7 +705,7 @@
                     </div>
                 </div>
 
-                <!-- Tier 2: Partner Deployment (Featured) -->
+                <!-- Tier 2 -->
                 <div class="col-lg-4">
                     <div class="product-card-premium pricing-card-highlight d-flex flex-column justify-content-between">
                         <div>
@@ -755,11 +715,12 @@
                             </div>
                             <h3 class="fw-bold text-white mb-3">Partner Setup</h3>
                             <div class="display-6 fw-bold text-white mb-3">$4,500 <span class="fs-6 text-secondary fw-normal">/ single seat</span></div>
-                            <p class="text-high-contrast small mb-4">White-glove 30-minute installation tailored for Managing Partners and key decision makers.</p>
+                            <p class="text-high-contrast small mb-4">White-glove 48-hour turnaround with a 60-minute setup session for key decision makers.</p>
                             <hr class="border-secondary border-opacity-25 mb-4">
                             <ul class="list-unstyled text-high-contrast small mb-4">
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i><strong>Everything in Audit Package</strong></li>
-                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>30-Minute Remote Installation Call</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Guaranteed 48-Hour Full Turnaround</li>
+                                <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>60-Minute Guided Setup Call</li>
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Local Air-Gapped Model Configuration</li>
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Wireshark Zero-Telemetry Verification</li>
                                 <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>IT Governance & Policy Document</li>
@@ -769,7 +730,7 @@
                     </div>
                 </div>
 
-                <!-- Tier 3: Firm Fleet -->
+                <!-- Tier 3 -->
                 <div class="col-lg-4">
                     <div class="product-card-premium d-flex flex-column justify-content-between">
                         <div>
@@ -815,7 +776,7 @@
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq1-heading">
                                 <div class="accordion-body">
-                                    No. Our system is designed to run smoothly on the standard, modern laptops your executives and staff are likely already using, such as Apple MacBooks or recent Windows machines. We optimize the software to match the hardware you already own.
+                                    No. Our system is designed to run smoothly on the standard, modern laptops your executives and staff are likely already using—such as Apple MacBooks (M1/M2/M3/M4) or recent Windows laptops with dedicated NVIDIA RTX GPUs. We optimize the software to match the hardware you already own.
                                 </div>
                             </div>
                         </div>
@@ -843,7 +804,7 @@
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq3-heading">
                                 <div class="accordion-body">
-                                    Not at all. The interface looks and feels exactly like the popular AI chat tools they are already familiar with. If they know how to type a question into a chat box, they already know how to use this platform safely.
+                                    Not at all. The interface looks and feels exactly like the popular AI chat tools they are already familiar with. Zero coding or technical expertise is required. If they know how to type a question into a chat box, they already know how to use this platform safely.
                                 </div>
                             </div>
                         </div>
@@ -871,7 +832,7 @@
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion" role="tabpanel" aria-labelledby="faq5-heading">
                                 <div class="accordion-body">
-                                    We do not just hand you the software and leave. We handle the entire 30-minute remote installation for you to ensure it is set up perfectly. We also offer ongoing strategic support to ensure your firm is always running the latest, most secure AI models available.
+                                    We handle the entire 60-minute remote installation call for you after our pre-flight staging. We also offer optional ongoing model update retainers to ensure your firm is always running the latest, most secure open-weight AI models available.
                                 </div>
                             </div>
                         </div>
@@ -899,7 +860,7 @@
                         </p>
                         
                         <p class="text-high-contrast mb-3" style="line-height: 1.8;">
-                            My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people.
+                            My background is rooted in public policy and advocacy. During my doctoral research at Walden University, I studied how policy design impacts marginalized groups, specifically focusing on the benefits and barriers African American men experience with financial assistance programs[cite: 1]. Earning my Ph.D. in Public Policy and Administration taught me how deeply systemic vulnerabilities can impact real people[cite: 1].
                         </p>
                         
                         <p class="text-high-contrast mb-4" style="line-height: 1.8;">
@@ -965,23 +926,11 @@
                 <p class="question-number">QUESTION 1</p>
                 <p class="question-text">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
                 <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(1, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Very Easy</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Nearly Impossible</span>
-                    </div>
+                    <div class="rating-option" onclick="selectRating(1, 1)"><span class="rating-number">1</span><span class="rating-label">Very Easy</span></div>
+                    <div class="rating-option" onclick="selectRating(1, 2)"><span class="rating-number">2</span></div>
+                    <div class="rating-option" onclick="selectRating(1, 3)"><span class="rating-number">3</span></div>
+                    <div class="rating-option" onclick="selectRating(1, 4)"><span class="rating-number">4</span></div>
+                    <div class="rating-option" onclick="selectRating(1, 5)"><span class="rating-number">5</span><span class="rating-label">Nearly Impossible</span></div>
                 </div>
             </div>
 
@@ -990,23 +939,11 @@
                 <p class="question-number">QUESTION 2</p>
                 <p class="question-text">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
                 <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(2, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Very Easy</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Highly Challenging</span>
-                    </div>
+                    <div class="rating-option" onclick="selectRating(2, 1)"><span class="rating-number">1</span><span class="rating-label">Very Easy</span></div>
+                    <div class="rating-option" onclick="selectRating(2, 2)"><span class="rating-number">2</span></div>
+                    <div class="rating-option" onclick="selectRating(2, 3)"><span class="rating-number">3</span></div>
+                    <div class="rating-option" onclick="selectRating(2, 4)"><span class="rating-number">4</span></div>
+                    <div class="rating-option" onclick="selectRating(2, 5)"><span class="rating-number">5</span><span class="rating-label">Highly Challenging</span></div>
                 </div>
             </div>
 
@@ -1015,23 +952,11 @@
                 <p class="question-number">QUESTION 3</p>
                 <p class="question-text">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
                 <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(3, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Not Concerned</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Very Concerned</span>
-                    </div>
+                    <div class="rating-option" onclick="selectRating(3, 1)"><span class="rating-number">1</span><span class="rating-label">Not Concerned</span></div>
+                    <div class="rating-option" onclick="selectRating(3, 2)"><span class="rating-number">2</span></div>
+                    <div class="rating-option" onclick="selectRating(3, 3)"><span class="rating-number">3</span></div>
+                    <div class="rating-option" onclick="selectRating(3, 4)"><span class="rating-number">4</span></div>
+                    <div class="rating-option" onclick="selectRating(3, 5)"><span class="rating-number">5</span><span class="rating-label">Very Concerned</span></div>
                 </div>
             </div>
 
@@ -1053,9 +978,7 @@
             
             <div style="background: rgba(18, 20, 28, 0.5); border: 1px solid rgba(13, 202, 240, 0.15); padding: 25px; margin: 25px 0;">
                 <p id="riskExplanation" class="text-high-contrast mb-4" style="line-height: 1.7;"></p>
-                
                 <hr class="border-secondary border-opacity-25 mb-3">
-                
                 <p class="text-info fw-semibold mb-2">Next Steps:</p>
                 <p class="text-high-contrast small">
                     Request a 30-minute vulnerability discussion. We'll audit your current workflow and demonstrate how a local deployment closes exposure gaps.
@@ -1075,7 +998,97 @@
             </button>
         </div>
     </div>
-    <!-- END MODAL -->
+
+    <!-- CENTERED POP-OUT ARCHITECTURE BRIEF MODAL -->
+    <div class="brief-modal-overlay" id="briefOverlay" onclick="closeBriefModal()">
+        <div class="brief-modal" onclick="event.stopPropagation()">
+            <!-- X Close Button in top right corner -->
+            <button class="modal-close-btn" onclick="closeBriefModal()" aria-label="Close Architecture Brief">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <!-- Document Header -->
+            <div class="border-bottom border-info border-opacity-25 pb-3 mb-4">
+                <p class="tagline-accent mb-1" style="font-size: 0.8rem;">Technical Specification</p>
+                <h3 class="fw-bold text-white text-uppercase mb-1">ZMPLabs Architecture Brief</h3>
+                <p class="text-info small mb-0">Secure AI for Compliance-Restricted Workflows</p>
+            </div>
+
+            <!-- Brief Content Body -->
+            <div class="text-high-contrast small" style="line-height: 1.8;">
+                
+                <!-- Threat Model -->
+                <div class="mb-4">
+                    <h5 class="text-white fw-bold mb-2">1. The Threat Model: Cloud AI Vulnerabilities</h5>
+                    <p class="mb-0">
+                        Consumer and public cloud AI models introduce massive legal liabilities for regulated industries[cite: 1]. Public cloud interfaces operate with persistent data retention to train future generative models and monitor user behavior[cite: 1]. Pasting unredacted client financial records, patient diagnostics, or legal briefs into these systems actively breaks data residency rules and exposes firms to catastrophic data leaks and compliance breaches[cite: 1].
+                    </p>
+                </div>
+
+                <!-- ZMP Architecture -->
+                <div class="mb-4">
+                    <h5 class="text-white fw-bold mb-2">2. The ZMP Architecture: Zero-Metadata Processing</h5>
+                    <p class="mb-2">ZMP (Zero-Metadata Protocol) is a local-first enterprise architecture designed to eliminate third-party cloud exposure entirely[cite: 1]:</p>
+                    <ul class="list-unstyled ps-3 border-start border-info border-opacity-25 mb-0">
+                        <li class="mb-2"><strong>• Local Execution:</strong> AI model weights run directly and securely on existing executive hardware[cite: 1].</li>
+                        <li class="mb-2"><strong>• Memory-Only Processing:</strong> Prompts and outputs are processed strictly in system RAM and destroyed upon session closure[cite: 1].</li>
+                        <li class="mb-2"><strong>• Zero Persistent Logging:</strong> Completely bypasses persistent disk logging; no query history is stored or transmitted[cite: 1].</li>
+                        <li class="mb-0"><strong>• Zero-Code Interface:</strong> Intuitive desktop chat UI requiring zero coding or technical expertise.</li>
+                    </ul>
+                </div>
+
+                <!-- Regulatory Alignment -->
+                <div class="mb-4">
+                    <h5 class="text-white fw-bold mb-2">3. Regulatory Mapping & Frameworks</h5>
+                    <p class="mb-2">Maintains strict adherence to mandatory professional codes and privacy frameworks[cite: 1]:</p>
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <div class="p-2 border border-secondary border-opacity-25 bg-black bg-opacity-25">
+                                <strong class="text-info">• HIPAA & HITECH:</strong> Processes PHI locally without requiring third-party Business Associate Agreements (BAAs)[cite: 1].
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-2 border border-secondary border-opacity-25 bg-black bg-opacity-25">
+                                <strong class="text-info">• ABA Model Rule 1.6:</strong> Preserves attorney-client privilege by eliminating third-party server transmissions[cite: 1].
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-2 border border-secondary border-opacity-25 bg-black bg-opacity-25">
+                                <strong class="text-info">• SEC Reg S-P & IRC 7216:</strong> Safeguards non-public financial records and taxpayer data locally[cite: 1].
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-2 border border-secondary border-opacity-25 bg-black bg-opacity-25">
+                                <strong class="text-info">• GDPR & CCPA / CPRA:</strong> Enforces absolute data residency with zero cross-border telemetry.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deployment Specs -->
+                <div class="mb-4">
+                    <h5 class="text-white fw-bold mb-2">4. Deployment Specifications & SLA</h5>
+                    <ul class="list-unstyled ps-3 border-start border-info border-opacity-25 mb-0">
+                        <li class="mb-2"><strong>• 48-Hour Turnaround:</strong> Bypasses traditional 4-to-6-month enterprise infrastructure lead times.</li>
+                        <li class="mb-2"><strong>• 60-Minute Live Call:</strong> Pre-flight staging allows live installation and Wireshark isolation testing in 60 minutes.</li>
+                        <li class="mb-2"><strong>• Hardware Scope:</strong> Apple Silicon (M1/M2/M3/M4) or Windows laptops with discrete NVIDIA RTX 3060+ GPUs[cite: 1]. Zero new server hardware required.</li>
+                        <li class="mb-0"><strong>• Compliance Handoff:</strong> Includes a finalized, custom IT Governance Policy ready for immediate compliance review[cite: 1].</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer Actions -->
+            <div class="border-top border-info border-opacity-25 pt-4 mt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <button type="button" class="btn-cyan-solid w-100 w-md-auto" onclick="closeBriefModal(); openDiagnosticModal();">
+                    Schedule Pre-Flight Assessment <i class="bi bi-arrow-up-right ms-1"></i>
+                </button>
+                <button type="button" class="btn-outline-cyan w-100 w-md-auto" onclick="closeBriefModal()">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="py-4 text-center">
@@ -1095,31 +1108,38 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Diagnostic state
         const diagnosticState = { q1: 0, q2: 0, q3: 0 };
 
-        // Open Modal
+        // Diagnostic Modal Controls
         function openDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.add('active');
             document.getElementById('diagnosticOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             document.getElementById('questionnaireView').style.display = 'block';
             document.getElementById('resultsView').style.display = 'none';
-            diagnosticState.q1 = 0;
-            diagnosticState.q2 = 0;
-            diagnosticState.q3 = 0;
+            diagnosticState.q1 = 0; diagnosticState.q2 = 0; diagnosticState.q3 = 0;
             document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
             document.getElementById('analyzeBtn').disabled = true;
         }
 
-        // Close Modal
         function closeDiagnosticModal() {
             document.getElementById('diagnosticModal').classList.remove('active');
             document.getElementById('diagnosticOverlay').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // Select Rating
+        // Architecture Brief Centered Pop-Out Controls
+        function openBriefModal() {
+            document.getElementById('briefOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBriefModal() {
+            document.getElementById('briefOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Diagnostic Rating Controls
         function selectRating(questionNum, value) {
             diagnosticState['q' + questionNum] = value;
             const questionDiv = document.getElementById('q' + questionNum);
@@ -1129,13 +1149,11 @@
             checkAnalysisReady();
         }
 
-        // Check If Ready
         function checkAnalysisReady() {
             const allAnswered = Object.values(diagnosticState).every(v => v > 0);
             document.getElementById('analyzeBtn').disabled = !allAnswered;
         }
 
-        // Analyze Risk
         function analyzeRisk() {
             const totalScore = diagnosticState.q1 + diagnosticState.q2 + diagnosticState.q3;
             document.getElementById('questionnaireView').style.display = 'none';
@@ -1167,16 +1185,14 @@
         }
 
         function resetDiagnostic() {
-            diagnosticState.q1 = 0;
-            diagnosticState.q2 = 0;
-            diagnosticState.q3 = 0;
+            diagnosticState.q1 = 0; diagnosticState.q2 = 0; diagnosticState.q3 = 0;
             document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
             document.getElementById('analyzeBtn').disabled = true;
             document.getElementById('questionnaireView').style.display = 'block';
             document.getElementById('resultsView').style.display = 'none';
         }
 
-        // Scroll animations
+        // Scroll animations & Keyboard Listeners
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             const progressBar = document.querySelector('.scroll-progress');
@@ -1191,9 +1207,12 @@
             });
         });
 
-        // ESC key closes modal
+        // ESC key closes both modals
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeDiagnosticModal();
+            if (e.key === 'Escape') {
+                closeDiagnosticModal();
+                closeBriefModal();
+            }
         });
 
         // Smooth scroll
