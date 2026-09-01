@@ -650,8 +650,9 @@
 
     <!-- CONTINUOUS BACKGROUND VIDEO -->
     <div class="video-background" aria-hidden="true">
-        <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-4251-large.mp4" type="video/mp4">
+        <!-- Reverted back to the local matrix-loop video and removed the static poster -->
+        <video autoplay loop muted playsinline>
+            <source src="images/matrix-loop.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay"></div>
@@ -708,8 +709,9 @@
             </div>
         </div>
         <div class="hero-right">
-            <video autoplay loop muted playsinline class="bg-video-element" poster="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" aria-hidden="true">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-4251-large.mp4" type="video/mp4">
+            <!-- Reverted back to the local matrix-loop video and removed the static poster -->
+            <video autoplay loop muted playsinline class="bg-video-element" aria-hidden="true">
+                <source src="images/matrix-loop.mp4" type="video/mp4">
             </video>
             <div class="hero-fade"></div>
         </div>
