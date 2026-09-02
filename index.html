@@ -511,7 +511,7 @@
             color: #0dcaf0 !important;
         }
         
-        /* RIGHT-SIDE DIAGNOSTIC MODAL - OPTIMIZED FOR ALL QUESTIONS VISIBLE */
+        /* RIGHT-SIDE DIAGNOSTIC MODAL */
         .diagnostic-modal-overlay {
             position: fixed;
             top: 0;
@@ -998,7 +998,7 @@
                         <div class="mb-4">
                             <span class="fs-1 fw-bold">$4,500</span> <span class="text-secondary">/ single seat</span>
                         </div>
-                        <p class="text-high-contrast small mb-4">White-glove 48-hour turnaround with a 60-minute setup session for key decision makers.</p>
+                        <p class="text-high-contrast small mb-4">White-glove turnaround with a 60-minute setup session for key decision makers.</p>
                         
                         <ul class="pricing-list">
                             <li><i class="bi bi-check2"></i> Guaranteed 48-Hour Turnaround</li>
@@ -1016,9 +1016,9 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="pricing-card">
                         <p class="tagline-accent mb-1">ENTERPRISE</p>
-                        <h3 class="fw-bold mb-3">Firm Fleet</h3>
+                        <h3 class="fw-bold mb-3">Enterprise Rollout</h3>
                         <div class="mb-4">
-                            <span class="fs-1 fw-bold">Custom</span> <span class="text-secondary">/ fleet rollout</span>
+                            <span class="fs-1 fw-bold">$15k+</span> <span class="text-secondary">/ starting</span>
                         </div>
                         <p class="text-high-contrast small mb-4">Full containerized deployment across all executive and team laptops across the organization.</p>
                         
@@ -1026,10 +1026,13 @@
                             <li><i class="bi bi-check2"></i> Guaranteed 48-Hour Initial Rollout</li>
                             <li><i class="bi bi-check2"></i> Free Executive Install Included</li>
                             <li><i class="bi bi-check2"></i> Multi-Seat Batch Deployment via MDM</li>
+                            <li><i class="bi bi-check2"></i> Active Directory / SSO Integration</li>
                             <li><i class="bi bi-check2"></i> Fleet-Wide Hardware Benchmarking</li>
+                            <li><i class="bi bi-check2"></i> On-Premises Vector Database (RAG)</li>
                             <li><i class="bi bi-check2"></i> Custom Open-Weight Model Tuning</li>
                             <li><i class="bi bi-check2"></i> Department-Specific System Prompts</li>
                             <li><i class="bi bi-check2"></i> Local API Endpoint Configuration</li>
+                            <li><i class="bi bi-check2"></i> White-Labeled UI for Your Firm</li>
                             <li><i class="bi bi-check2"></i> Quarterly Model Update Retainer</li>
                             <li><i class="bi bi-check2"></i> Same-Day Priority Support SLA</li>
                         </ul>
@@ -1174,9 +1177,6 @@
                         <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan w-100 d-flex align-items-center justify-content-center" style="max-width: 280px; height: 54px;">
                             Email Us Directly
                         </a>
-                        <button type="button" class="btn-cyan-solid w-100" style="max-width: 280px;" onclick="openDiagnosticModal()">
-                            Request Installation Call <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1296,15 +1296,11 @@
                 </p>
             </div>
             
-            <form id="resultEmailForm" onsubmit="handleResultSubmit(event)" class="mb-3">
-                <div class="input-group">
-                    <input type="email" id="resultEmail" required placeholder="you@company.com" class="form-control bg-transparent text-white border-secondary" aria-required="true">
-                    <button type="submit" class="btn-cyan-solid px-4">Request Install Slot</button>
-                </div>
-                <p class="text-secondary small mt-2 mb-0"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Your email only. Nothing else.</p>
-            </form>
+            <a href="https://calendar.proton.me/bookings#5U7mR4fkgizsqSg7qj_mLozkBemfllCFChHcqgjFHpA=" target="_blank" class="btn-cyan-solid w-100 mb-3 text-center text-decoration-none">
+                Let's find you a time slot <i class="bi bi-calendar-event ms-2"></i>
+            </a>
             
-            <button class="btn-outline-cyan w-100 mt-3" onclick="resetDiagnostic()">
+            <button class="btn-outline-cyan w-100" onclick="resetDiagnostic()">
                 Retake Assessment
             </button>
         </div>
@@ -1388,13 +1384,6 @@
                 badgeEl.className = 'risk-badge risk-badge-low';
                 expEl.innerHTML = `Great news—it looks like your firm is taking data privacy seriously and maintaining a strong security posture. Because AI regulations are evolving at lightning speed, it never hurts to have a second set of eyes on your architecture.`;
             }
-        }
-
-        function handleResultSubmit(event) {
-            event.preventDefault();
-            const email = document.getElementById('resultEmail').value;
-            alert(`Thank you! We've received your request at ${email}.`);
-            document.getElementById('resultEmailForm').reset();
         }
 
         function resetDiagnostic() {
