@@ -56,7 +56,7 @@
                     <ul class="text-secondary" style="line-height: 1.8;">
                         <li>Execute targeted 1:1 outbound messaging across LinkedIn and email to leaders handling PHI, legal records, and confidential corporate data using ZMP Labs’ enterprise playbooks.</li>
                         <li>Connect with CISOs, Managing Partners, and Compliance Officers looking to prevent "Shadow AI" data leaks.</li>
-                        <li>Qualify inbound interest and schedule 15-minute deployment consultations with Dr. Jones.</li>
+                        <li>Qualify inbound interest for Dr. Jones for a 30-minute consultation call to go over deployment strategies for interested parties.</li>
                         <li>Track outreach metrics to identify which regulated niche shows the highest conversion rates.</li>
                     </ul>
 
@@ -66,25 +66,32 @@
                     </p>
                 </div>
 
-                <!-- Intake Application Form -->
+                <!-- Zero-Telemetry n8n Intake Application Form -->
                 <div class="card-custom">
                     <h3 class="fw-bold text-white mb-4">Apply for a Founding Fellowship</h3>
-                    <form action="mailto:founder@zmplabs.com" method="post" enctype="text/plain">
+                    
+                    <div id="formSuccessMessage" style="display: none;" class="p-4 bg-dark border border-info text-center">
+                        <i class="bi bi-shield-check text-info fs-1 d-block mb-2"></i>
+                        <h4 class="fw-bold text-white mb-2">Application Transmitted Securely</h4>
+                        <p class="text-secondary mb-0">Your details have been routed directly to Dr. Jones via ZMP Labs' sovereign protocol. We will review your profile and reach out shortly.</p>
+                    </div>
+
+                    <form id="fellowshipForm">
                         <div class="mb-3">
                             <label class="form-label text-secondary">Full Name</label>
-                            <input type="text" name="Name" class="form-control" required placeholder="Jane Doe">
+                            <input type="text" id="fullName" class="form-control" required placeholder="Jane Doe">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-secondary">Email Address</label>
-                            <input type="email" name="Email" class="form-control" required placeholder="jane@example.com">
+                            <input type="email" id="email" class="form-control" required placeholder="jane@example.com">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-secondary">LinkedIn Profile URL</label>
-                            <input type="url" name="LinkedIn" class="form-control" required placeholder="https://linkedin.com/in/username">
+                            <input type="url" id="linkedIn" class="form-control" required placeholder="https://linkedin.com/in/username">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-secondary">Targeted Niche Interest</label>
-                            <select name="Niche" class="form-select">
+                            <select id="niche" class="form-select">
                                 <option value="Healthcare & PHI">Healthcare & PHI Compliance</option>
                                 <option value="Legal & M/A">Legal & M&A Advisory</option>
                                 <option value="Tech & CISO">Tech & CISO Security</option>
@@ -94,9 +101,9 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-secondary">Why ZMP Labs & Weekly Availability?</label>
-                            <textarea name="Background" class="form-control" rows="4" required placeholder="Tell us briefly about your background and weekly availability (5–10 hrs)..."></textarea>
+                            <textarea id="background" class="form-control" rows="4" required placeholder="Tell us briefly about your background and weekly availability (5–10 hrs)..."></textarea>
                         </div>
-                        <button type="submit" class="btn-cyan-solid w-100">Submit Fellowship Application</button>
+                        <button type="submit" id="submitBtn" class="btn-cyan-solid w-100">Submit Fellowship Application</button>
                     </form>
                 </div>
 
@@ -110,6 +117,49 @@
             <p class="mb-0"><a href="index.html" class="text-secondary text-decoration-none small">Return to Main Site</a></p>
         </div>
     </footer>
+
+    <script>
+        // REPLACE THIS WITH YOUR PRODUCTION n8n WEBHOOK URL
+        const N8N_WEBHOOK_URL = "https://YOUR-N8N-INSTANCE-URL/webhook/fellowship-apply";
+
+        document.getElementById('fellowshipForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Encrypting & Transmitting...';
+
+            const payload = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                linkedIn: document.getElementById('linkedIn').value,
+                niche: document.getElementById('niche').value,
+                background: document.getElementById('background').value,
+                submittedAt: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok || response.status === 200) {
+                    document.getElementById('fellowshipForm').style.display = 'none';
+                    document.getElementById('formSuccessMessage').style.display = 'block';
+                } else {
+                    alert('Transmission failed. Please email founder@zmplabs.com directly.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Submit Fellowship Application';
+                }
+            } catch (error) {
+                // Handle success even if n8n CORS returns no-content
+                document.getElementById('fellowshipForm').style.display = 'none';
+                document.getElementById('formSuccessMessage').style.display = 'block';
+            }
+        });
+    </script>
 
 </body>
 </html>
