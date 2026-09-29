@@ -18,6 +18,7 @@
         .form-control, .form-select { background-color: rgba(5, 5, 5, 0.8); border: 1px solid rgba(13, 202, 240, 0.3); color: #ffffff; padding: 12px; border-radius: 0; }
         .form-control:focus, .form-select:focus { background-color: rgba(5, 5, 5, 0.9); border-color: #0dcaf0; color: #ffffff; box-shadow: 0 0 10px rgba(13, 202, 240, 0.3); }
         footer { border-top: 1px solid rgba(13, 202, 240, 0.1); background: rgba(5, 5, 5, 0.95); }
+        footer a:hover { color: #0dcaf0 !important; }
     </style>
 </head>
 <body>
@@ -40,33 +41,33 @@
                 <div class="text-center mb-5">
                     <p class="text-info small text-uppercase fw-bold" style="letter-spacing: 3px;">Join the Lab</p>
                     <h1 class="fw-bold text-uppercase display-5">Founding Fellowship Program</h1>
-                    <p class="text-secondary fs-5">Enterprise Growth & Outreach for Regulated Industries</p>
+                    <p class="text-secondary fs-5">Business Development & Outreach Fellowship</p>
                 </div>
 
                 <div class="card-custom">
                     <h3 class="fw-bold text-info mb-3">Role Overview</h3>
                     <p style="line-height: 1.8;">
-                        ZMP Labs is expanding its go-to-market initiative for our zero-telemetry AI vault. In high-stakes fields—such as healthcare, legal services, M&A advisory, finance, and corporate compliance—professionals are under immense pressure to adopt AI, but face massive risks when uploading PHI, privileged client files, or unreleased financials into cloud LLMs. We empower these firms to <strong>process client data safely with a fully private, local AI built for regulated industries.</strong>
+                        ZMP Labs helps businesses use powerful AI without sending private files to the cloud. In fields like healthcare, law, and finance, professionals want to use AI to speed up their work, but uploading sensitive patient data or private financial files to public tools like ChatGPT creates major privacy and legal risks. We empower these teams to <strong>process data safely using private AI software that runs 100% offline on local computers.</strong>
                     </p>
                     <p style="line-height: 1.8;">
-                        In this role, you will work directly with founder Dr. C. Alan Jones to introduce our local-first AI vault to decision-makers across healthcare, legal, and financial tech sectors.
+                        As a fellow, you will work directly with founder Dr. C. Alan Jones to reach out to business executives and introduce our private AI solutions across healthcare, legal, and finance sectors.
                     </p>
 
                     <h4 class="fw-bold text-white mt-4 mb-3">What You Will Do</h4>
                     <ul class="text-secondary" style="line-height: 1.8;">
-                        <li>Execute targeted 1:1 outbound messaging across LinkedIn and email to leaders handling PHI, legal records, and confidential corporate data using ZMP Labs’ enterprise playbooks.</li>
-                        <li>Connect with CISOs, Managing Partners, and Compliance Officers looking to prevent "Shadow AI" data leaks.</li>
-                        <li>Screen inbound interest and book 30‑minute deployment consultations on Dr. Jones’s calendar.</li>
-                        <li>Track outreach metrics to identify which regulated niche shows the highest conversion rates.</li>
+                        <li>Send direct messages on LinkedIn and email to executives in healthcare, legal, and finance using our step-by-step outreach playbooks.</li>
+                        <li>Connect with business owners, managing partners, and security leads who need safe, private AI tools for their teams.</li>
+                        <li>Screen interested prospects and book 30-minute deployment consultations on Dr. Jones's calendar.</li>
+                        <li>Keep track of your messaging results to see which industry responds best.</li>
                     </ul>
 
                     <h4 class="fw-bold text-white mt-4 mb-3">Structure & Performance Commission</h4>
                     <p style="line-height: 1.8;" class="text-secondary">
-                        This is a flexible, project-based Founding Fellowship (5–10 hours/week) designed to give you real-world enterprise GTM experience and high-value portfolio credentials. Fellows earn a <strong>15% performance revenue share ($375 per signed $2,500 Founding Partner LOI/pilot)</strong> upon contract execution, with opportunities for extended advisory roles as ZMP Labs scales.
+                        This is a flexible, part-time project (5–10 hours/week) designed to give you real-world business development experience and valuable portfolio credentials for your resume. Fellows earn a <strong>15% performance commission ($375 for every signed $2,500 client pilot)</strong>, with opportunities for ongoing roles as ZMP Labs scales.
                     </p>
                 </div>
 
-                <!-- Zero-Telemetry n8n Intake Application Form -->
+                <!-- Intake Application Form -->
                 <div class="card-custom">
                     <h3 class="fw-bold text-white mb-4">Apply for a Founding Fellowship</h3>
                     
@@ -90,18 +91,18 @@
                             <input type="url" id="linkedIn" class="form-control" required placeholder="https://linkedin.com/in/username">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label text-secondary">Targeted Niche Interest</label>
+                            <label class="form-label text-secondary">Which Industry Interests You Most?</label>
                             <select id="niche" class="form-select">
-                                <option value="Healthcare & PHI">Healthcare & PHI Compliance</option>
-                                <option value="Legal & M/A">Legal & M&A Advisory</option>
-                                <option value="Tech & CISO">Tech & CISO Security</option>
-                                <option value="Financial Services">Financial Services</option>
-                                <option value="Other">Other Regulated Sector</option>
+                                <option value="Healthcare & Medical Privacy">Healthcare & Medical Privacy</option>
+                                <option value="Law Firms & Legal Services">Law Firms & Legal Services</option>
+                                <option value="Technology & Cybersecurity">Technology & Cybersecurity</option>
+                                <option value="Finance & Accounting">Finance & Accounting</option>
+                                <option value="Other Business Sector">Other Business Sector</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label text-secondary">Why ZMP Labs & Weekly Availability?</label>
-                            <textarea id="background" class="form-control" rows="4" required placeholder="Tell us briefly about your background and weekly availability (5–10 hrs)..."></textarea>
+                            <label class="form-label text-secondary">Why Are You Interested & What Is Your Weekly Availability?</label>
+                            <textarea id="background" class="form-control" rows="4" required placeholder="Tell us briefly about your background and how many hours/week you can dedicate (5–10 hrs)..."></textarea>
                         </div>
                         <button type="submit" id="submitBtn" class="btn-cyan-solid w-100">Submit Fellowship Application</button>
                     </form>
@@ -113,8 +114,17 @@
 
     <footer class="py-4 text-center">
         <div class="container">
-            <p class="mb-2">ZMPLabs &copy; 2026 | Zero Metadata Architecture</p>
-            <p class="mb-0"><a href="index.html" class="text-secondary text-decoration-none small">Return to Main Site</a></p>
+            <p class="mb-2 text-white fw-semibold">ZMPLabs &copy; 2026 | Zero Metadata Architecture</p>
+            <p class="mb-2">
+                <a href="privacy.html" class="text-secondary text-decoration-none small">Privacy Policy</a>
+                <span class="text-secondary mx-2">|</span>
+                <a href="terms.html" class="text-secondary text-decoration-none small">Terms of Service</a>
+                <span class="text-secondary mx-2">|</span>
+                <a href="fellowship.html" class="text-secondary text-decoration-none small">Founding Fellowships</a>
+            </p>
+            <p class="text-secondary small mb-0">
+                <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a>
+            </p>
         </div>
     </footer>
 
@@ -154,7 +164,6 @@
                     submitBtn.innerText = 'Submit Fellowship Application';
                 }
             } catch (error) {
-                // Handle success even if n8n CORS returns no-content
                 document.getElementById('fellowshipForm').style.display = 'none';
                 document.getElementById('formSuccessMessage').style.display = 'block';
             }
