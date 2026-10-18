@@ -19,6 +19,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+    <script>
+        /* Marks that JS is available so the fade-in effect only hides content when JS can reveal it again. */
+        document.documentElement.classList.add('js-enabled');
+    </script>
+
     <style>
         /* Scroll behavior */
         html { 
@@ -93,14 +98,15 @@
             background: transparent;
         }
         
-        /* Fade-in animation for content */
-        .content-section .container {
+        /* Fade-in animation. Only applied when JS is confirmed working,
+           so content can never be stuck invisible. */
+        .js-enabled .content-section .container {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         
-        .content-section.visible .container {
+        .js-enabled .content-section.visible .container {
             opacity: 1;
             transform: translateY(0);
         }
@@ -501,6 +507,43 @@
             padding: 25px; 
         }
 
+        /* Partner Program Term Table */
+        .term-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(18, 20, 28, 0.5);
+            border: 1px solid rgba(13, 202, 240, 0.15);
+        }
+
+        .term-table th, .term-table td {
+            padding: 18px 22px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #c5cbd3;
+            font-size: 0.9rem;
+            vertical-align: top;
+        }
+
+        .term-table th {
+            background: rgba(11, 12, 16, 0.8);
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(13, 202, 240, 0.3);
+        }
+
+        .term-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .term-table td:first-child {
+            color: #ffffff;
+            font-weight: 600;
+            width: 34%;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid rgba(13, 202, 240, 0.1);
@@ -733,6 +776,15 @@
                 padding: 12px 10px;
                 font-size: 0.85rem;
             }
+
+            .term-table th, .term-table td {
+                padding: 12px 10px;
+                font-size: 0.82rem;
+            }
+
+            .term-table td:first-child {
+                width: 42%;
+            }
         }
     </style>
 </head>
@@ -760,7 +812,7 @@
                     <li class="nav-item"><a class="nav-link-custom" href="#why-zmplabs">Why ZMPLabs</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link-custom" href="#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link-custom" href="fellowship.html">Partner Program</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="#partner-program">Partner Program</a></li>
                 </ul>
             </div>
         </div>
@@ -1130,19 +1182,18 @@
 
     <section class="content-section" id="contact">
         <div class="container">
-            <!-- Partner Program Section Header -->
             <div class="text-center mb-5">
-                <p class="tagline-accent mb-2">Revenue Partnerships</p>
-                <h2 class="fw-semibold text-uppercase">Independent Sales Partner Program</h2>
+                <p class="tagline-accent mb-2">About the Company</p>
+                <h2 class="fw-semibold text-uppercase">Who Runs ZMPLabs</h2>
             </div>
 
             <!-- Founder Origin Note -->
-            <div class="row justify-content-center mb-4">
+            <div class="row justify-content-center mb-5">
                 <div class="col-lg-10">
                     <div style="background-color: rgba(18, 20, 28, 0.7); border-left: 4px solid #0dcaf0; padding: 40px;">
                         <div class="mb-4">
                             <h4 class="fw-bold mb-0">A Note on the Origin of ZMPLabs</h4>
-                            <p class="text-info small mb-0 text-uppercase tracking-wide" style="letter-spacing: 2px;">From the Founder</p>
+                            <p class="text-info small mb-0 text-uppercase" style="letter-spacing: 2px;">From the Founder</p>
                         </div>
                         
                         <p class="text-high-contrast mb-3" style="line-height: 1.8;">
@@ -1171,270 +1222,78 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Sales Partner Program Container -->
+    <section class="content-section" id="partner-program">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p class="tagline-accent mb-2">Revenue Partnerships</p>
+                <h2 class="fw-semibold text-uppercase">Independent Sales Partner Program</h2>
+                <p class="text-high-contrast small">Commission-only partnerships for people who already have relationships in healthcare, law, or financial services.</p>
+            </div>
+
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-10">
                     <div style="background: rgba(13, 202, 240, 0.05); border: 1px solid rgba(13, 202, 240, 0.3); border-radius: 4px; padding: 35px;">
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-3">
                             <div>
                                 <span class="badge bg-info text-dark mb-2 fw-bold" style="letter-spacing: 1px;">INDEPENDENT CONTRACTORS</span>
-                                <h4 class="fw-bold text-white mb-1">Sales Partner Program</h4>
+                                <h4 class="fw-bold text-white mb-1">Earn 15% Of Closed Deal Value</h4>
                             </div>
-                            <a href="partner-terms.html" class="btn-cyan-solid text-nowrap">
-                                View Terms & Apply <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
+                            <a href="mailto:founder@zmplabs.com?subject=Sales%20Partner%20Application" class="btn-cyan-solid text-nowrap">
+                                Apply To The Program <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
                             </a>
                         </div>
                         <p class="text-high-contrast small mb-3" style="line-height: 1.7;">
-                            Earn up to $2,250 per closed deal by referring firms to ZMPLabs deployment services. We are recruiting independent sales partners with networks in healthcare, law, or financial services.
+                            You bring the introduction. We handle the technical scoping, the deployment, and the delivery. You get paid when the client pays. There is no base salary, no quota, and no territory to defend.
                         </p>
-                        <div class="d-flex gap-4 flex-wrap align-items-center pt-2 border-top border-secondary border-opacity-25">
-                            <span class="text-secondary small">• Commission-based (no base salary)</span>
-                            <span class="text-secondary small">• 15% of deal value ($375 to $2,250)</span>
-                            <span class="text-secondary small">• Net-30 payment terms</span>
+                        <div class="d-flex gap-4 flex-wrap align-items-center pt-3 border-top border-secondary border-opacity-25">
+                            <span class="text-secondary small">• 15% of contract value</span>
+                            <span class="text-secondary small">• $375 to $2,250 per closed deal</span>
+                            <span class="text-secondary small">• Paid Net-30 after client payment clears</span>
                             <span class="text-secondary small">• 1099 contractor status</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Final Enterprise CTA -->
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h2 class="fw-bold text-uppercase mb-4">Ready to Secure Your Workflow?</h2>
-                    <p class="text-high-contrast mb-5">
-                        Book your free deployment consultation. We will assess your current setup and walk through the target 48-hour deployment process live.
-                    </p>
-                    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                        <button type="button" class="btn-cyan-solid w-100" style="max-width: 280px;" onclick="openDiagnosticModal()">
-                            Start Free Assessment
-                        </button>
-                        <a href="mailto:founder@zmplabs.com" class="btn-outline-cyan w-100 d-flex align-items-center justify-content-center" style="max-width: 280px; height: 54px;">
-                            Email Us Directly
-                        </a>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-cash-coin text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Straightforward Commission</h4>
+                        <p class="text-high-contrast small mb-0">15% of the signed contract value on the Executive Audit, Partner Setup, and Enterprise Rollout packages. Commission is calculated on collected revenue, not on the quoted price, and paid within 30 days of the client clearing payment.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="diagnostic-modal-overlay" id="diagnosticOverlay" onclick="closeDiagnosticModal()"></div>
-    
-    <div class="diagnostic-modal" id="diagnosticModal">
-        <button class="diagnostic-close-btn" onclick="closeDiagnosticModal()" aria-label="Close assessment">
-            <i class="bi bi-x-lg"></i>
-        </button>
-        
-        <div id="questionnaireView" class="diagnostic-content">
-            <div class="diagnostic-header">
-                <div class="diagnostic-progress-line"></div>
-                <h2 class="diagnostic-title">Compliance Risk Diagnostic</h2>
-                <p class="diagnostic-subtitle">Answer 3 quick questions to assess your current exposure risk.</p>
-            </div>
-
-            <div class="diagnostic-question-card" id="q1">
-                <p class="question-number">QUESTION 1</p>
-                <p class="question-text">1. How difficult is it to confidently enforce data security, given how easily employees can independently access and use public AI tools?</p>
-                <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(1, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Very Easy</span>
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-person-check text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Account Registration, Not Territory</h4>
+                        <p class="text-high-contrast small mb-0">Register the specific firms you intend to approach. Approved accounts are yours exclusively for 90 days, renewable once with documented progress. Up to 25 active registrations at a time. First to register wins. Existing clients and inbound leads are excluded.</p>
                     </div>
-                    <div class="rating-option" onclick="selectRating(1, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(1, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Nearly Impossible</span>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card-premium h-100">
+                        <div class="mb-3" aria-hidden="true"><i class="bi bi-clipboard-data text-info fs-3"></i></div>
+                        <h4 class="text-info mb-3">Clear Paperwork Up Front</h4>
+                        <p class="text-high-contrast small mb-0">A written partner agreement, a W-9 before any payment is issued, and a 1099-NEC filed with the IRS by January 31 for anyone paid $600 or more in a calendar year. You handle your own income and self-employment taxes.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="diagnostic-question-card" id="q2">
-                <p class="question-number">QUESTION 2</p>
-                <p class="question-text">2. If a major public AI platform suffered a breach tomorrow, how challenging would it be to definitively prove that zero client data was exposed?</p>
-                <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(2, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Very Easy</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(2, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Highly Challenging</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="diagnostic-question-card" id="q3">
-                <p class="question-number">QUESTION 3</p>
-                <p class="question-text">3. How concerned are you that AI-generated errors or "hallucinations" might slip past manual review and end up in official client communications?</p>
-                <div class="rating-options-grid">
-                    <div class="rating-option" onclick="selectRating(3, 1)">
-                        <span class="rating-number">1</span>
-                        <span class="rating-label">Not Concerned</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 2)">
-                        <span class="rating-number">2</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 3)">
-                        <span class="rating-number">3</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 4)">
-                        <span class="rating-number">4</span>
-                    </div>
-                    <div class="rating-option" onclick="selectRating(3, 5)">
-                        <span class="rating-number">5</span>
-                        <span class="rating-label">Very Concerned</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="analyze-btn-container">
-                <button class="btn-cyan-solid" onclick="analyzeRisk()" id="analyzeBtn" disabled>
-                    Analyze Risk <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-
-        <div id="resultsView" class="diagnostic-content" style="display: none;">
-            <div class="diagnostic-header">
-                <div class="diagnostic-progress-line" style="width: 100%;"></div>
-                <h2 class="diagnostic-title">Assessment Complete</h2>
-            </div>
-            
-            <h2 class="fw-bold text-uppercase mb-3">Your Status:</h2>
-            <span id="riskBadge" class="risk-badge risk-badge-high"></span>
-            
-            <div style="background: rgba(18, 20, 28, 0.5); border: 1px solid rgba(13, 202, 240, 0.15); padding: 25px; margin: 25px 0;">
-                <p id="riskExplanation" class="text-high-contrast mb-4" style="line-height: 1.7;"></p>
-                
-                <hr class="border-secondary border-opacity-25 mb-3">
-                
-                <p class="text-info fw-semibold mb-2">Next Steps:</p>
-                <p class="text-high-contrast small">
-                    Request a vulnerability discussion. We will audit your current workflow and map out your target 48-hour local deployment.
-                </p>
-            </div>
-            
-            <a href="https://calendar.proton.me/bookings#5U7mR4fkgizsqSg7qj_mLozkBemfllCFChHcqgjFHpA=" target="_blank" class="btn-cyan-solid w-100 mb-3 text-center text-decoration-none">
-                Let us find you a time slot <i class="bi bi-calendar-event ms-2"></i>
-            </a>
-            
-            <button class="btn-outline-cyan w-100" onclick="resetDiagnostic()">
-                Retake Assessment
-            </button>
-        </div>
-    </div>
-
-    <footer class="py-4 text-center">
-        <div class="container">
-            <p class="mb-2 text-white fw-semibold">ZMPLabs &copy; 2026 | Minimizing Data Transmission Architecture</p>
-            <p class="mb-2">
-                <a href="privacy.html" class="text-secondary text-decoration-none small">Privacy Policy</a>
-                <span class="text-secondary mx-2">|</span>
-                <a href="terms.html" class="text-secondary text-decoration-none small">Terms of Service</a>
-                <span class="text-secondary mx-2">|</span>
-                <a href="partner-terms.html" class="text-secondary text-decoration-none small">Partner Agreement</a>
-            </p>
-            <p class="text-secondary small mb-0">
-                <a href="mailto:founder@zmplabs.com" class="text-secondary text-decoration-none">founder@zmplabs.com</a>
-            </p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Diagnostic state
-        const diagnosticState = { q1: 0, q2: 0, q3: 0 };
-
-        // Open Modal
-        function openDiagnosticModal() {
-            document.getElementById('diagnosticModal').classList.add('active');
-            document.getElementById('diagnosticOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            document.getElementById('questionnaireView').style.display = 'block';
-            document.getElementById('resultsView').style.display = 'none';
-            diagnosticState.q1 = 0;
-            diagnosticState.q2 = 0;
-            diagnosticState.q3 = 0;
-            document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById('analyzeBtn').disabled = true;
-        }
-
-        // Close Modal
-        function closeDiagnosticModal() {
-            document.getElementById('diagnosticModal').classList.remove('active');
-            document.getElementById('diagnosticOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Select Rating
-        function selectRating(questionNum, value) {
-            diagnosticState['q' + questionNum] = value;
-            const questionDiv = document.getElementById('q' + questionNum);
-            const options = questionDiv.querySelectorAll('.rating-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            options[value - 1].classList.add('selected');
-            checkAnalysisReady();
-        }
-
-        // Check If Ready
-        function checkAnalysisReady() {
-            const allAnswered = Object.values(diagnosticState).every(v => v > 0);
-            document.getElementById('analyzeBtn').disabled = !allAnswered;
-        }
-
-        // Analyze Risk
-        function analyzeRisk() {
-            const totalScore = diagnosticState.q1 + diagnosticState.q2 + diagnosticState.q3;
-            document.getElementById('questionnaireView').style.display = 'none';
-            document.getElementById('resultsView').style.display = 'block';
-            
-            const badgeEl = document.getElementById('riskBadge');
-            const expEl = document.getElementById('riskExplanation');
-            
-            if (totalScore >= 9) {
-                badgeEl.textContent = 'HIGH EXPOSURE RISK';
-                badgeEl.className = 'risk-badge risk-badge-high';
-                expEl.innerHTML = `It looks like your team is moving fast and adopting AI, which is great for productivity but currently leaves your firm exposed to data leaks and compliance audits. You should not have to choose between innovation and security.`;
-            } else if (totalScore >= 6) {
-                badgeEl.textContent = 'MODERATE EXPOSURE RISK';
-                badgeEl.className = 'risk-badge risk-badge-medium';
-                expEl.innerHTML = `You have clearly put thought into your baseline AI protections, but relying on public cloud APIs still leaves a frustrating gray area when it comes to true auditability. We help firms eliminate that gray area.`;
-            } else {
-                badgeEl.textContent = 'LOW EXPOSURE RISK';
-                badgeEl.className = 'risk-badge risk-badge-low';
-                expEl.innerHTML = `Great news, it looks like your firm is taking data privacy seriously and maintaining a strong security posture. Because AI regulations are evolving at lightning speed, it never hurts to have a second set of eyes on your architecture.`;
-            }
-        }
-
-        function resetDiagnostic() {
-            diagnosticState.q1 = 0;
-            diagnosticState.q2 = 0;
-            diagnosticState.q3 = 0;
-            document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById('analyzeBtn').disabled = true;
-            document.getElementById('questionnaireView').style.display = 'block';
-            document.getElementById('resultsView').style.display = 'none';
-        }
-
-        // Scroll animations
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            const progressBar = document.querySelector('.scroll-progress');
-            if (progressBar) progressBar.style.width = scrollPercent +
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10">
+                    <h4 class="fw-bold text-white mb-3">What Partners Agree To</h4>
+                    <div class="table-responsive">
+                        <table class="term-table">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>What It Means</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Exclusive to ZMPLabs</td>
+                                    <td>Partners represent ZMPLabs services only. You may not sell or promote competing local AI, on-premise AI, or AI privacy consulting services during the term
